@@ -6,15 +6,11 @@ import { CreateRoomDTO,UpdateRoomDTO } from '../shared/room.model';
   providedIn: 'root'
 })
 export class RoomService {
-  private url = 'https://localhost:7006/Room/GetAll'; 
-  private urlc = 'https://localhost:7006/Room/AddRoom';
-  private baseurl ='https://localhost:7006/Room/UpdateRoom';
-  private geturl = 'https://localhost:7006/Room/GetRoom';
-  private DeleteUrl ='https://localhost:7006/Room/DeleteRoom';
+  private url = 'https://localhost:7006/Room'; 
   constructor(private httpClient: HttpClient) { }
 
   getRooms(): Observable<any> {
-    return this.httpClient.get<any>(this.url);
+    return this.httpClient.get<any>(this.url+'/GetAll');
   }
   
   createRoom(room: CreateRoomDTO): Observable<any> {
@@ -29,7 +25,7 @@ export class RoomService {
         formData.append('photos', room.photos[i]);
       }
     }
-    return this.httpClient.post<any>(this.urlc, formData);
+    return this.httpClient.post<any>(this.url+'/AddRoom', formData);
   }
  
   updateRoom(id: string, updateRoomDto: UpdateRoomDTO): Observable<any> {
@@ -41,10 +37,10 @@ export class RoomService {
     formData.append('roomStatus', updateRoomDto.roomStatus ? updateRoomDto.roomStatus.toString() : '');
     formData.append('category', updateRoomDto.category ? updateRoomDto.category.toString() : '');
     
-    return this.httpClient.put(`${this.baseurl}/${id}`, formData);
+    return this.httpClient.put(this.url+'/UpdateRoom/'+id, formData);
   }
   getRoomById(id: string): Observable<any> {
-    return this.httpClient.get<any>(`${this.geturl}/${id}`);
+    return this.httpClient.get<any>(this.url+'/GetRoom/'+id);
   }
   RoomDelete (id:string):Observable<number>{
     let httpheaders=new HttpHeaders()
@@ -52,6 +48,6 @@ export class RoomService {
     let options={
       headers:httpheaders
     };
-    return this.httpClient.delete<number>(this.DeleteUrl+"/"+id);
+    return this.httpClient.delete<number>(this.url+"/DeleteRoom/"+id);
   }
 }

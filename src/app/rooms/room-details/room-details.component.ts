@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RoomService } from '../../services/room.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RoomPhotosService } from '../../services/roomphotos.service';
 @Component({
   selector: 'app-room-details',
   standalone: true,
@@ -15,7 +16,9 @@ export class RoomDetailsComponent {
   room: any;
   activePhotoIndex: number = 0;
 
-  constructor(private route: ActivatedRoute, private roomService: RoomService) {}
+  constructor(private route: ActivatedRoute, 
+    private roomService: RoomService,
+    private roomPhotoService:RoomPhotosService) {}
 
   ngOnInit() {
     this.roomId = this.route.snapshot.paramMap.get('id') || '' ;
@@ -27,7 +30,6 @@ export class RoomDetailsComponent {
     this.roomService.getRoomById(this.roomId).subscribe({
       next: (room: any) => {
         this.room = room;
-        // Decode base64 photoContent and ensure photos are properly formatted
         this.room.roomPhotos.forEach((photo: any) => {
           if (photo.photoContent && typeof photo.photoContent === 'string' && photo.photoContent.startsWith('data:image')) {
             return;
@@ -48,13 +50,22 @@ export class RoomDetailsComponent {
       .subscribe({
           next: data => {
               console.log('Delete successful');
-              // Optionally, you can navigate to a different page or perform any other actions upon successful deletion.
           },
           error: error => {
               console.error('There was an error!', error);
-              // Handle error response here
+          }
+      });
+      
+  }
+  DeletePhoto(roomId:string){
+    this.roomPhotoService.DeletePhoto(roomId)
+      .subscribe({
+          next: data => {
+              console.log('Delete successful');
+          },
+          error: error => {
+              console.error('There was an error!', error);
           }
       });
   }
-  
 }
