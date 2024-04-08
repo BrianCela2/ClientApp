@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
-import { CreateRoomDTO,UpdateRoomDTO } from '../../shared/room.model';
+import { CreateRoomDTO,UpdateRoomDTO } from '../shared/room.model';
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
-  private url = 'https://localhost:7006/Room/GetAll'; // Adjust URL as per your backend
+  private url = 'https://localhost:7006/Room/GetAll'; 
   private urlc = 'https://localhost:7006/Room/AddRoom';
   private baseurl ='https://localhost:7006/Room/UpdateRoom';
-  private geturl = 'https://localhost:7006/Room/GetById' // Adjust URL as per your backend
+  private geturl = 'https://localhost:7006/Room/GetRoom';
+  private DeleteUrl ='https://localhost:7006/Room/DeleteRoom';
   constructor(private httpClient: HttpClient) { }
 
   getRooms(): Observable<any> {
@@ -45,5 +46,12 @@ export class RoomService {
   getRoomById(id: string): Observable<any> {
     return this.httpClient.get<any>(`${this.geturl}/${id}`);
   }
-    
+  RoomDelete (id:string):Observable<number>{
+    let httpheaders=new HttpHeaders()
+    .set('Content-type','application/Json');
+    let options={
+      headers:httpheaders
+    };
+    return this.httpClient.delete<number>(this.DeleteUrl+"/"+id);
+  }
 }

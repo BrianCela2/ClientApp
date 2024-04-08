@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { RoomService } from '../services/room.service';
+import { RoomService } from '../../services/room.service';
 import { CreateRoomDTO } from '../../shared/room.model';
 import { FormsModule } from '@angular/forms';
 

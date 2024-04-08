@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { RoomService } from '../services/room.service';
+import { RoomService } from '../../services/room.service';
 import { RoomCategory, UpdateRoomDTO, RoomStatus } from '../../shared/room.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';

@@ -27,4 +27,18 @@ export interface CreateRoomDTO {
     Working = 3,
     Cleaning = 4
   }
+
+    export interface RoomDTO
+    {
+         RoomId:string,
+         RoomNumber:number,
+         Capacity:number,
+         Price :number,
+         roomStatus : RoomStatus ,
+         category: RoomCategory,
+    }
+
+
+
+
   
