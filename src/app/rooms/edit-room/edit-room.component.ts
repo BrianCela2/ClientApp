@@ -21,9 +21,8 @@ export class EditRoomComponent implements OnInit {
     roomStatus: RoomStatus.Available,
     category: RoomCategory.Mini
   };
-  roomStatusOptions: { value: RoomStatus; label: string }[] = []; // Initialize as empty array
-  roomCategoryOptions: { value: RoomCategory; label: string }[] = []; // Initialize as empty array
-
+  roomStatusOptions: { value: RoomStatus; label: string }[] = []; 
+  roomCategoryOptions: { value: RoomCategory; label: string }[] = []; 
   constructor(private route: ActivatedRoute, private roomService: RoomService) {}
 
   ngOnInit(): void {

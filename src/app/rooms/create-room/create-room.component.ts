@@ -36,7 +36,7 @@ export class CreateRoomComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('Room data:', this.room); // Log room data for debugging
+    console.log('Room data:', this.room); 
     this.roomService.createRoom(this.room).subscribe({
       next: (response: any) => {
         console.log('Room created successfully:', response);
