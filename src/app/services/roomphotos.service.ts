@@ -8,8 +8,14 @@ export class RoomPhotosService {
   private url = 'https://localhost:7006/RoomPhoto'; 
 
   constructor(private httpClient: HttpClient) { }
-  DeletePhoto(id:string):Observable<any>{
-    return this.httpClient.delete<any>(this.url+"/"+id);
-
+  deletePhoto(id: string): Observable<number> {
+    return this.httpClient.delete<number>(`${this.url}/${id}`)
+      .pipe(
+        catchError(() => {
+          const error = new Error('Error deleting photo');
+          console.error(error);
+          return throwError(() => error);
+        })
+      );
   }
 }

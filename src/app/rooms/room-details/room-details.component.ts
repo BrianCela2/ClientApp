@@ -35,6 +35,7 @@ export class RoomDetailsComponent {
             return;
           }
           photo.photoContent = `data:image/jpeg;base64,${photo.photoContent}`;
+          console.log(photo);
         });
       },
       error: (error) => {
@@ -45,11 +46,17 @@ export class RoomDetailsComponent {
   setActivePhoto(index: number) {
     this.activePhotoIndex = index;
   }
+  confirmRoomDelete(roomId: string): void {
+    if (window.confirm('Are you sure you want to delete the Room?')) {
+      this.DeleteRoom(roomId);
+    }
+  }
   DeleteRoom(roomId:string){
     this.roomService.RoomDelete(roomId)
       .subscribe({
           next: data => {
-              console.log('Delete successful');
+            this.getRoomDetails();
+            console.log('Delete successful');
           },
           error: error => {
               console.error('There was an error!', error);
@@ -57,15 +64,22 @@ export class RoomDetailsComponent {
       });
       
   }
-  DeletePhoto(roomId:string){
-    this.roomPhotoService.DeletePhoto(roomId)
+  confirmDelete(photoId: string): void {
+    if (window.confirm('Are you sure you want to delete the photo?')) {
+      this.DeletePhoto(photoId);
+    }
+  }
+  DeletePhoto(Id:string){
+    this.roomPhotoService.deletePhoto(Id)
       .subscribe({
           next: data => {
               console.log('Delete successful');
+              this.getRoomDetails();
           },
           error: error => {
               console.error('There was an error!', error);
           }
       });
   }
-}
+  
+} 
