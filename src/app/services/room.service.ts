@@ -50,4 +50,8 @@ export class RoomService {
     };
     return this.httpClient.delete<number>(this.url+"/DeleteRoom/"+id);
   }
+  updateRoomStatus(id: string, status: number): Observable<any> {
+    return this.httpClient.put(`${this.url}/UpdateStatus/${id}?status=${status}`, {});
+  }
+  
 }

@@ -30,4 +30,21 @@ export class RoomListComponent implements OnInit {
   navigateToGet(roomId: number) {
     this.router.navigate(['Room/Get', roomId]);
   }
+  confirmStatusUpdate(roomId: string,status:number): void {
+    if (window.confirm('Are you sure you want to change Status of Room?')) {
+      this.statusUpdate(roomId,status);
+    }
+  }
+  statusUpdate(roomId:string,status:number){
+    this.roomService.updateRoomStatus(roomId,status).subscribe({
+      next: (response) => {
+        console.log('Room updated successfully');
+      },
+      error: (error) => {
+        console.error('Error updating room:', error);
+      },
+      complete: () => {
+      }
+    });
+  }
 }

@@ -27,6 +27,11 @@
           <p class="card-text">Room Number: {{ room.roomNumber }}</p>
         </div>
       </a>
+      <diV style=" display: inline-block;">
+      <a (click)="confirmStatusUpdate(room.roomId,1)" class="btn btn-success" >Available</a>
+      <a (click)="confirmStatusUpdate(room.roomId,2)" class="btn btn-danger" >Busy</a>
+      <a (click)="confirmStatusUpdate(room.roomId,4)" class="btn btn-warning" >Cleaning</a>
+    </diV>
       </div>
     </div>
   </div>
