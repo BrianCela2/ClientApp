@@ -9,8 +9,8 @@ export class RoomService {
   private url = 'https://localhost:7006/Room'; 
   constructor(private httpClient: HttpClient) { }
 
-  getRooms(): Observable<any> {
-    return this.httpClient.get<any>(this.url+'/GetAll');
+  getRooms(): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.url+'/GetRoomPhotos');
   }
   
   createRoom(room: CreateRoomDTO): Observable<any> {

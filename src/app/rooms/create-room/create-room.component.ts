@@ -40,7 +40,6 @@ export class CreateRoomComponent implements OnInit {
     this.roomService.createRoom(this.room).subscribe({
       next: (response: any) => {
         console.log('Room created successfully:', response);
-        this.resetForm();
       },
       error: (error: any) => {
         console.error('Error creating room:', error);

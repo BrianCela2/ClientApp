@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { RoomListComponent } from './rooms/room-list/room-list.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,RoomListComponent,FormsModule],
+  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
