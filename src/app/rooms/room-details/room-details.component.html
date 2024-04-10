@@ -1,0 +1,31 @@
+<div class="container">
+    <h2>Room Details</h2>
+    <div *ngIf="room">
+      <p><strong>Room Number:</strong> {{ room.roomNumber }}</p>
+      <p><strong>Capacity:</strong> {{ room.capacity }}</p>
+      <p><strong>Price:</strong> {{ room.price }}</p>
+      <p><strong>Room Status:</strong> {{ room.roomStatus }}</p>
+      <p><strong>Category:</strong> {{ room.category }}</p>
+      <a (click)="DeleteRoom(room.roomId)">Delete</a>
+<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item" *ngFor="let photo of room.roomPhotos; let i = index" [class.active]="i === activePhotoIndex">
+        <img [src]="photo.photoContent" class="d-block w-100" alt="Room Photo">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" (click)="setActivePhoto((activePhotoIndex - 1 + room.roomPhotos.length) % room.roomPhotos.length)">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" (click)="setActivePhoto((activePhotoIndex + 1) % room.roomPhotos.length)">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+
+  </div>
+    </div>
+    <div *ngIf="!room">
+      <p>Room not found.</p>
+    </div>
+  </div>
+  

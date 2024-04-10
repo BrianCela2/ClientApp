@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { RoomsComponent } from './rooms/rooms.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { RoomListComponent } from './rooms/room-list/room-list.component';
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CommonModule, RoomsComponent, DashboardComponent],
+  imports: [RouterOutlet, CommonModule, RoomListComponent, FormsModule, DashboardComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

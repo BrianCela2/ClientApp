@@ -1,0 +1,38 @@
+<form (ngSubmit)="onSubmit()" #roomForm="ngForm">
+    <div class="form-group">
+      <label for="roomNumber">Room Number:</label>
+      <input type="number" class="form-control" id="roomNumber" name="roomNumber" [(ngModel)]="room.roomNumber" required>
+    </div>
+    <div class="form-group">
+      <label for="capacity">Capacity:</label>
+      <input type="number" class="form-control" id="capacity" name="capacity" [(ngModel)]="room.capacity">
+    </div>
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" class="form-control" id="price" name="price" [(ngModel)]="room.price" required>
+    </div>
+    <div class="form-group">
+      <label for="roomStatus">Room Status:</label>
+      <select class="form-control" id="roomStatus" name="roomStatus" [(ngModel)]="room.roomStatus">
+        <option value="1">Available</option>
+        <option value="2">Busy</option>
+        <option value="3">Working</option>
+        <option value="4">Cleaning</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <select class="form-control" id="category" name="category" [(ngModel)]="room.category">
+        <option value="1">Suit</option>
+        <option value="2">Presidential</option>
+        <option value="3">Mini</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="photos">Upload Image:</label>
+      <input type="file" class="form-control" id="photos" name="photos" multiple (change)="onFileChange($event)">
+    </div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary" [disabled]="!roomForm.valid">Create Room</button>
+    </div>
+  </form>

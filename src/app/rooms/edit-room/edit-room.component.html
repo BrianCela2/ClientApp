@@ -1,0 +1,42 @@
+<div class="container">
+    <h2>Update Room</h2>
+    <form (ngSubmit)="updateRoom()" #roomForm="ngForm">
+      <div class="form-group">
+        <label for="roomNumber">Room Number:</label>
+        <input type="number" class="form-control" id="roomNumber" name="roomNumber" 
+               [ngModel]="updateRoomDto.roomNumber" 
+               (ngModelChange)="updateRoomDto.roomNumber=$event" required>
+      </div>
+      <div class="form-group">
+        <label for="capacity">Capacity:</label>
+        <input type="number" class="form-control" id="capacity" name="capacity" 
+               [ngModel]="updateRoomDto.capacity" 
+               (ngModelChange)="updateRoomDto.capacity=$event">
+      </div>
+      <div class="form-group">
+        <label for="price">Price:</label>
+        <input type="number" class="form-control" id="price" name="price" 
+               [ngModel]="updateRoomDto.price" 
+               (ngModelChange)="updateRoomDto.price=$event" required>
+      </div>
+      <div class="form-group">
+        <label for="roomStatus">Room Status:</label>
+        <select class="form-control" id="roomStatus" name="roomStatus" 
+                [(ngModel)]="updateRoomDto.roomStatus">
+          <option *ngFor="let status of roomStatusOptions" >
+            {{ status.label }}
+          </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="category">Category:</label>
+        <select class="form-control" id="category" name="category" 
+                [(ngModel)]="updateRoomDto.category">
+          <option *ngFor="let category of roomCategoryOptions" >
+            {{ category.label }}
+          </option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled]="!roomForm.valid">Update</button>
+    </form>
+  </div>
