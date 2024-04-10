@@ -18,4 +18,8 @@ export class RoomPhotosService {
         })
       );
   }
+  
+  addPhotoToRoom(formData: FormData, roomId: string): Observable<any> {
+    return this.httpClient.post(this.url, formData);
+  }
 }

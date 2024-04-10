@@ -7,6 +7,12 @@
       <p><strong>Room Status:</strong> {{ room.roomStatus }}</p>
       <p><strong>Category:</strong> {{ room.category }}</p>
       <button (click)="confirmRoomDelete(roomId)">Delete Room</button>
+      <button (click)="chooseFile()">Add Photo</button>
+
+<div *ngIf="showFileInput">
+  <input type="file" #fileInput (change)="onFileSelected($event)">
+  <button (click)="savePhoto()">Save</button>
+</div>
       <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
               <div class="carousel-item" *ngFor="let photo of room.roomPhotos; let i = index" [class.active]="i === activePhotoIndex">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoomService } from '../../services/room.service';
 import { FormsModule } from '@angular/forms';
@@ -15,6 +15,10 @@ export class RoomDetailsComponent {
   roomId!: string;
   room: any;
   activePhotoIndex: number = 0;
+  @ViewChild('fileInput') fileInput!: ElementRef;
+  photos!: File;
+  showFileInput: boolean = false;
+
 
   constructor(private route: ActivatedRoute, 
     private roomService: RoomService,
@@ -81,5 +85,35 @@ export class RoomDetailsComponent {
           }
       });
   }
-  
+  chooseFile() {
+    this.showFileInput = true;
+    this.fileInput.nativeElement.click();
+  }
+
+  onFileSelected(event: any) {
+    this.photos = event.target.files[0];
+  }
+
+  savePhoto() {
+    if (!this.photos) {
+      console.error('No file selected');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('roomId', this.roomId); // Include roomId in FormData
+    formData.append('ImageFile', this.photos);
+
+    this.roomPhotoService.addPhotoToRoom(formData, this.roomId)
+  .subscribe({
+    next: (response) => {
+      console.log('Photo uploaded successfully');
+      this.showFileInput = false;
+    },
+    error: (error) => {
+      console.error('Error uploading photo:', error);
+    }
+  });
+
+  }
 } 
