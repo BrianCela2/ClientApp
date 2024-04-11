@@ -11,30 +11,30 @@
                 <div class="form-group pt-3">
                   <div
                     class="input-field"
-                    [class.error]="(loginForm.controls['email'].touched || loginForm.controls['email'].dirty) && loginForm.hasError('required', 'email') ">
+                    [class.error]="(loginForm.controls['Email'].touched || loginForm.controls['Email'].dirty) && loginForm.hasError('required', 'Email') ">
                     <span class="fa fa-user p-2"> </span>
                     <input
-                      formControlName="email"
+                      formControlName="Email"
                       type="text"
                       placeholder="Email"
                     />
                   </div>
                   <div
                     *ngIf="
-                      loginForm.get('email')?.invalid &&
-                      (loginForm.get('email')?.dirty ||
-                        loginForm.get('email')?.touched)
+                      loginForm.get('Email')?.invalid &&
+                      (loginForm.get('Email')?.dirty ||
+                        loginForm.get('Email')?.touched)
                     "
                   >
                     <small
                       class="text-danger"
-                      *ngIf="loginForm.get('email')?.hasError('required')"
+                      *ngIf="loginForm.get('Email')?.hasError('required')"
                     >
                       This field is required
                     </small>
                     <small
                       class="text-danger"
-                      *ngIf="loginForm.get('email')?.hasError('email')"
+                      *ngIf="loginForm.get('Email')?.hasError('Email')"
                     >
                       Please enter your email address
                     </small>
@@ -43,25 +43,25 @@
                 <div class="form-group pt-3">
                   <div
                     class="input-field"
-                    [class.error]="(loginForm.controls['password'].touched || loginForm.controls['password'].dirty) && loginForm.hasError('required', 'password')">
+                    [class.error]="(loginForm.controls['Password'].touched || loginForm.controls['Password'].dirty) && loginForm.hasError('required', 'Password')">
                     <span class="fa fa-lock p-2"> </span>
                     <input
                       [type]="type"
-                      formControlName="password"
+                      formControlName="Password"
                       placeholder="Password"
                     />
                     <span (click)="showPassword()" class="{{ eyeIcon }}"></span>
                   </div>
                   <div
                     *ngIf="
-                      loginForm.get('password')?.invalid &&
-                      (loginForm.get('password')?.dirty ||
-                        loginForm.get('password')?.touched)
+                      loginForm.get('Password')?.invalid &&
+                      (loginForm.get('Password')?.dirty ||
+                        loginForm.get('Password')?.touched)
                     "
                   >
                     <small
                       class="text-danger"
-                      *ngIf="loginForm.get('password')?.hasError('required')"
+                      *ngIf="loginForm.get('Password')?.hasError('required')"
                     >
                       This field is required
                     </small>
@@ -72,7 +72,7 @@
                 </div>
                 <button
                   type="submit"
-                  (click)="onSubmit()"
+                  (click)="onLogin()"
                   class="btn btn-primary btn-block mt-4 w-100"
                 >
                   Login

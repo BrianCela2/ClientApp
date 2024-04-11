@@ -8,11 +8,12 @@ import {
 } from '@angular/forms';
 import ValidateForm from '../../../helpers/validateForm';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 @Component({
   selector: 'app-signup',
-  imports:[ReactiveFormsModule,CommonModule,RouterModule],
-  standalone:true,
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  standalone: true,
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
 })
@@ -22,18 +23,18 @@ export class SignupComponent implements OnInit {
   eyeIcon: string = 'fa fa-eye-slash';
   signUpForm!: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private auth: AuthService, private router:Router) {}
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      phoneNumber: ['', Validators.required],
-      password: ['', Validators.required],
-      birthday: ['', Validators.required],
-      country: ['', Validators.required],
-      city: ['', Validators.required],
+      FirstName: ['', Validators.required],
+      LastName: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+      PhoneNumber: ['', Validators.required],
+      Password: ['', Validators.required],
+      Birthday: ['', Validators.required],
+      Country: ['', Validators.required],
+      City: ['', Validators.required],
     });
   }
 
@@ -41,6 +42,16 @@ export class SignupComponent implements OnInit {
     if (this.signUpForm.valid) {
       //Send object to database
       console.log(this.signUpForm.value);
+      this.auth.signUp(this.signUpForm.value).subscribe({
+        next: (res) => {
+          this.signUpForm.reset();
+          this.router.navigate(['login'])
+          alert(res.message);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     } else {
       ValidateForm.validateAllFormFields(this.signUpForm);
       //throw error using toaster

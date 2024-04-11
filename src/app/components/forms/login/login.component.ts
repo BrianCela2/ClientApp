@@ -9,10 +9,12 @@ import {
 import ValidateForm from '../../../helpers/validateForm';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+
 @Component({
   selector: 'app-login',
-  imports:[ReactiveFormsModule,CommonModule, RouterModule],
-  standalone:true,
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
+  standalone: true,
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
@@ -21,12 +23,12 @@ export class LoginComponent implements OnInit {
   isText: boolean = false;
   eyeIcon: string = 'fa fa-eye-slash';
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private auth: AuthService) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      Email: ['', [Validators.required, Validators.email]],
+      Password: ['', [Validators.required]],
     });
   }
 
@@ -37,13 +39,21 @@ export class LoginComponent implements OnInit {
       : (this.eyeIcon = 'fa fa-eye-slash');
     this.isText ? (this.type = 'text') : (this.type = 'password');
   }
-  onSubmit() {
+  onLogin() {
     if (this.loginForm.valid) {
-      //Send object to database
       console.log(this.loginForm.value);
+      this.auth.login(this.loginForm.value).subscribe({
+        next: (res) => {
+          console.log(res)
+          this.loginForm.reset();
+          this.auth.storeToken(res);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+      });
     } else {
       ValidateForm.validateAllFormFields(this.loginForm);
-      //throw error using toaster
     }
   }
 }
