@@ -8,8 +8,9 @@ import {
 } from '@angular/forms';
 import ValidateForm from '../../../helpers/validateForm';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { UserRoleService } from '../../../services/user-role.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   isText: boolean = false;
   eyeIcon: string = 'fa fa-eye-slash';
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder, private auth: AuthService) {}
+  constructor(private fb: FormBuilder, private auth: AuthService, private userRole:UserRoleService, private router:Router) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -47,6 +48,9 @@ export class LoginComponent implements OnInit {
           console.log(res)
           this.loginForm.reset();
           this.auth.storeToken(res);
+          const tokenPayload = this.auth.decodeToken();
+          this.userRole.setRole(tokenPayload.role);
+          this.router.navigate(["dashboard"]);
         },
         error: (err) => {
           console.log(err);
