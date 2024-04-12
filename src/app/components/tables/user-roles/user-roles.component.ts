@@ -1,27 +1,49 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { UserRoleService } from '../../../services/user-role.service';
-import { AuthService } from '../../../services/auth.service';
-import { UserService } from '../../../services/user.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-user-roles',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './user-roles.component.html',
   styleUrl: './user-roles.component.css',
+  imports:[CommonModule,FormsModule]
 })
 export class UserRolesComponent implements OnInit {
   public userRoles: any = [];
-  public firstName: string = '';
-  public lastName: string = '';
+  public activeUserRole: any = null; 
 
-  constructor(private user: UserService, private userRole: UserRoleService) {}
+  constructor(private userRoleService: UserRoleService) {}
 
   ngOnInit() {
-    this.userRole.getUserRoleDetails().subscribe((res) => {
+    this.getUserRoles();
+  }
+
+  toggleInput(userRole: any) {
+    this.activeUserRole = this.activeUserRole === userRole ? null : userRole;
+  }
+  
+  
+  getUserRoles() {
+    this.userRoleService.getUserRoleDetails().subscribe((res) => {
       this.userRoles = res.result;
-      console.log(this.userRoles);
+      });
+  }
+
+  addRole(userRole: any) {
+    const userId = userRole.userId;
+    const role = userRole.newRoles 
+    this.userRoleService.addRoleToUser(userId, role).subscribe((res) => {
+      this.getUserRoles();
+    });
+  }
+
+  removeRole(userRole: any) {
+    const userId = userRole.userId; 
+    const role = userRole.roles; 
+    this.userRoleService.removeRoleFromUser(userId, role).subscribe((res) => {
+      this.getUserRoles();
     });
   }
 }

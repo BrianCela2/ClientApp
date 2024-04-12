@@ -1,78 +1,81 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
-    <ng-container >
-      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-        <div class="chartjs-size-monitor">
-          <div class="chartjs-size-monitor-expand">
-            <div class=""></div>
-          </div>
-          <div class="chartjs-size-monitor-shrink">
-            <div class=""></div>
-          </div>
-        </div>
-        <div
-          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
-        >
-          <h1 class="h2">Dashboard</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group me-2">
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                Share
-              </button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">
-                Export
-              </button>
-            </div>
-            <button
-              type="button"
-              class="btn btn-sm btn-outline-secondary dropdown-toggle"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-calendar align-text-bottom"
-                aria-hidden="true"
+    <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <div class="card mt-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2 class="h4 m-0">Dashboard</h2>
+          <div class="btn-group">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+            <div class="dropdown">
+              <button
+                class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
               >
-                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                <line x1="16" y1="2" x2="16" y2="6"></line>
-                <line x1="8" y1="2" x2="8" y2="6"></line>
-                <line x1="3" y1="10" x2="21" y2="10"></line>
-              </svg>
-              This week
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  class="bi bi-calendar align-text-bottom"
+                  viewBox="0 0 16 16"
+                >
+                  <rect width="16" height="16" rx="2" ry="2"></rect>
+                  <path
+                    fill-rule="evenodd"
+                    d="M11.636 2.364a.5.5 0 0 1 0 .707L10.707 3.5a.5.5 0 0 1-.707 0L9.5 2.793l-1.5 1.5a.5.5 0 1 1-.707-.707l1.146-1.147a.5.5 0 0 1 .708 0l1.5 1.5 1.147-1.147a.5.5 0 0 1 .707 0zm-8 0a.5.5 0 0 0-.707 0L1.5 3.5a.5.5 0 0 0 .707.707l1.147-1.147a.5.5 0 0 0 0-.707L2.793 1.5 4.5.293a.5.5 0 0 0-.707-.707L2.364 1.636zM0 4.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5H0a.5.5 0 0 0-.5.5v2z"
+                  ></path>
+                </svg>
+                This week
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><a class="dropdown-item" href="#">This week</a></li>
+                <li><a class="dropdown-item" href="#">Last week</a></li>
+                <li><a class="dropdown-item" href="#">Next week</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-
-        <h2>User Roles List</h2>
-        <br />
-        <div class="table-responsive">
-          <table class="table table-striped table-sm">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Firstname</th>
-                <th scope="col">Lastname</th>
-                <th scope="col">Role</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let userRole of userRoles; let i = index">
-                <td>{{ i + 1 }}</td>
-                <td>{{ userRole.firstName }}</td>
-                <td>{{ userRole.lastName }}</td>
-                <td>{{ userRole.roles }}</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="card-body">
+          <h3 class="mb-4">User Roles List</h3>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let userRole of userRoles; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ userRole.firstName }}</td>
+                  <td>{{ userRole.lastName }}</td>
+                  <td>{{ userRole.roles }}</td>
+                  <td>
+                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeRole(userRole)">
+                      Delete
+                    </button>
+                    <button type="button" class="btn btn-sm btn-outline-success" (click)="toggleInput(userRole)">
+                      {{ activeUserRole === userRole ? 'Cancel' : 'Add' }}
+                    </button>
+                    <div *ngIf="activeUserRole === userRole" class="mt-2">
+                      <input type="text" class="form-control mb-2" [(ngModel)]="userRole.newRoles" placeholder="Enter role">
+                      <button type="button" class="btn btn-sm btn-primary" (click)="addRole(userRole)">Save</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </main>
-    </ng-container>
+      </div>
+    </div>
   </div>
 </div>
