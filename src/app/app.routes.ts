@@ -1,6 +1,5 @@
-import { RouterModule,Routes } from "@angular/router";
+import { Routes } from "@angular/router";
 import { CreateRoomComponent } from "./rooms/create-room/create-room.component";
-import { NgModule } from "@angular/core";
 import { EditRoomComponent } from "./rooms/edit-room/edit-room.component";
 import { RoomDetailsComponent } from "./rooms/room-details/room-details.component";
 import { RoomListComponent } from "./rooms/room-list/room-list.component";
@@ -15,10 +14,3 @@ export const routes:Routes = [
     {path:'NotificationAllUsers',component:SendNotificationsComponent,title:'Notification'},
     {path:'SearchRooms',component:SearchRoomsComponent,title:'Search'}
 ]
-    @NgModule({
-    imports:[RouterModule.forRoot(routes)],
-    exports:[RouterModule]
-    })
-    export class AppRoutingModule{
-
-}
