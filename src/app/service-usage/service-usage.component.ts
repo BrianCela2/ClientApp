@@ -1,27 +1,30 @@
-// service-usage.component.ts
-
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../dashboard.service';
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'app-service-usage',
   standalone: true,
+  imports: [],
   templateUrl: './service-usage.component.html',
   styleUrls: ['./service-usage.component.css']
 })
 export class ServiceUsageComponent implements OnInit {
-  serviceUsageCount!: number;
+  serviceUsageCount: number = 0;
 
   constructor(private dashboardService: DashboardService) { }
 
-  ngOnInit(): void {
-    this.getServiceUsageCount();
+  ngOnInit() {
+    this.fetchServiceUsageCount();
   }
 
-  getServiceUsageCount(): void {
-    this.dashboardService.getServiceUsageCount().subscribe((count: number) => {
-      this.serviceUsageCount = count;
-    });
+  fetchServiceUsageCount() {
+    this.dashboardService.getServiceUsageCount().subscribe(
+      (data) => {
+        this.serviceUsageCount = data;
+      },
+      (error) => {
+        console.log('Error fetching service usage count:', error);
+      }
+    );
   }
-
 }

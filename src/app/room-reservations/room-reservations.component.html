@@ -1,8 +1,11 @@
-<div>
-  <h3>Room Reservations</h3>
-  <!-- <ul>
-    <li *ngFor="let reservation of roomReservations">
-      {{ reservation | json }}
-    </li>
-  </ul> -->
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Room Reservations</h5>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let reservation of roomReservations">
+        {{ reservation }}
+      </li>
+    </ul>
+  </div>
 </div>
+

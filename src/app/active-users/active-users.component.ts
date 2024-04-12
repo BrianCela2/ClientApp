@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DashboardService } from '../dashboard.service';
-
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'app-active-users',
@@ -9,6 +8,7 @@ import { DashboardService } from '../dashboard.service';
   templateUrl: './active-users.component.html',
   styleUrls: ['./active-users.component.css']
 })
+
 export class ActiveUsersComponent implements OnInit {
   activeUsersCount: number = 0;
 
@@ -29,4 +29,3 @@ export class ActiveUsersComponent implements OnInit {
     );
   }
 }
-
