@@ -1,0 +1,39 @@
+<div>
+  <label for="capacity">Capacity:</label>
+  <input type="number" id="capacity" [(ngModel)]="capacity">
+</div>
+<div>
+  <label for="checkInDate">Check-in Date:</label>
+  <input type="date" id="checkInDate" [(ngModel)]="checkInDate">
+</div>
+<div>
+  <label for="checkOutDate">Check-out Date:</label>
+  <input type="date" id="checkOutDate" [(ngModel)]="checkOutDate">
+</div>
+<button (click)="addSearchParameter()">Add Search Parameter</button>
+<button (click)="searchRooms()">Search</button>
+<!-- Existing HTML code -->
+
+<div class="container">
+  <div *ngFor="let roomList of roomLists; let i = index">
+    <diV></diV>
+    <div *ngFor="let rooms of roomList">
+      <div class="row">
+        <div *ngFor="let room of rooms; let roomIndex = index" class="col-md-4 mb-4">
+          <div class="card mx-auto">
+            <img [src]="'data:image/jpeg;base64,' + room.roomPhotos[0].photoContent" class="d-block w-100" style="height: 200px;" alt="Room Photo">
+            <div class="card-body">
+              <h5 class="card-title">{{ room.category }}</h5>
+              <p class="card-text">Capacity: {{ room.capacity }}</p>
+              <p class="card-text">Price: {{ room.price }}</p>
+              <p class="card-text">Room Number: {{ room.roomNumber }}</p>
+              <button (click)="selectRoom(room.roomId, searchParameters[i].checkInDate, searchParameters[i].checkOutDate)">Select Room</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<button (click)="createReservation()">Create Reservation</button>

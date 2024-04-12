@@ -5,10 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { Subject, takeUntil, timer } from 'rxjs';
 import { SendNotificationsComponent } from './notifications/send-notifications/send-notifications.component';
+import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent],
+  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent,SearchRoomsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

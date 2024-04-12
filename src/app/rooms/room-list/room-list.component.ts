@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { RoomService } from '../../services/room.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
@@ -11,7 +11,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
-  rooms: any[] = [];
+   rooms: any[] = [];
 
   constructor(private roomService: RoomService,private router:Router){}
 
@@ -21,6 +21,7 @@ export class RoomListComponent implements OnInit {
       this.rooms.forEach(room => {
         room.activePhotoIndex = 0; 
       });
+      console.log(this.rooms);
     });
   }
 
@@ -48,3 +49,4 @@ export class RoomListComponent implements OnInit {
     });
   }
 }
+
