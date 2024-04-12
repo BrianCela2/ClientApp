@@ -21,8 +21,8 @@ export class UserRoleService {
   addRoleToUser(request: any) {
     return this.http.post<any>(`${this.baseUrl}UserRole`, request);
   }
-  getUserRoles() {
-    return this.http.get<any>(`${this.baseUrl}UserRole/getUserRoles`);
+  getUserRoleDetails() {
+    return this.http.get<any>(`${this.baseUrl}UserRole/getUserRoleDetails`);
   }
   removeRoleFromUser(userId: string, role: number) {
     return this.http.delete<any>(`${this.baseUrl}UserRole/${userId}/${role}`);
