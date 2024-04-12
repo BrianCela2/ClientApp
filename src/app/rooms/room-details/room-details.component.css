@@ -1,0 +1,16 @@
+.photo-container {
+    position: relative;
+}
+
+.delete-button {
+    position: absolute;
+    bottom: 10px; /* Adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red; /* Example color */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}

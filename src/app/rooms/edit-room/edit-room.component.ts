@@ -4,11 +4,12 @@ import { RoomService } from '../../services/room.service';
 import { RoomCategory, UpdateRoomDTO, RoomStatus } from '../../shared/room.model';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { CreateRoomComponent } from '../create-room/create-room.component';
 
 @Component({
   selector: 'app-edit-room',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,CreateRoomComponent],
   templateUrl: './edit-room.component.html',
   styleUrl: './edit-room.component.css'
 })
