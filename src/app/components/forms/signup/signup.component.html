@@ -1,0 +1,301 @@
+<div class="outer">
+  <div class="container">
+    <div class="row">
+      <div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+        <div class="panel border bg-white">
+          <div class="panel-heading">
+            <h3 class="pt-3 font-weight-bold">Sign up</h3>
+          </div>
+          <div class="panel-body p-3">
+            <form [formGroup]="signUpForm">
+              <div class="form-row">
+                <div class="col-md-6">
+                  <div class="form-group pt-3">
+                    <div
+                      class="input-field"
+                      [class.error]="
+                        (signUpForm.controls['FirstName'].touched ||
+                          signUpForm.controls['FirstName'].dirty) &&
+                        signUpForm.hasError('required', 'FirstName')
+                      "
+                    >
+                      <span class="fa fa-user p-2"> </span>
+                      <input
+                        formControlName="FirstName"
+                        type="text"
+                        class="form-control"
+                        placeholder="First Name"
+                      />
+                    </div>
+                    <div
+                      *ngIf="
+                        signUpForm.get('FirstName')?.invalid &&
+                        (signUpForm.get('FirstName')?.dirty ||
+                          signUpForm.get('FirstName')?.touched)
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="
+                          signUpForm.get('FirstName')?.hasError('required')
+                        "
+                      >
+                        This field is required
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group pt-3">
+                    <div
+                      class="input-field"
+                      [class.error]="
+                        (signUpForm.controls['LastName'].touched ||
+                          signUpForm.controls['LastName'].dirty) &&
+                        signUpForm.hasError('required', 'LastName')
+                      "
+                    >
+                      <span class="fa fa-user p-2"> </span>
+                      <input
+                        formControlName="LastName"
+                        type="text"
+                        class="form-control"
+                        placeholder="Last Name"
+                      />
+                    </div>
+                    <div
+                      *ngIf="
+                        signUpForm.get('LastName')?.invalid &&
+                        (signUpForm.get('LastName')?.dirty ||
+                          signUpForm.get('LastName')?.touched)
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="signUpForm.get('LastName')?.hasError('required')"
+                      >
+                        This field is required
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group pt-3">
+                    <div
+                      class="input-field"
+                      [class.error]="
+                        ((signUpForm.controls['Email'].touched ||
+                          signUpForm.controls['Email'].dirty) &&
+                          signUpForm.hasError('required', 'Email')) ||
+                        signUpForm.get('Email')?.hasError('Email')
+                      "
+                    >
+                      <span class="fa fa-envelope p-2"> </span>
+                      <input
+                        formControlName="Email"
+                        type="email"
+                        class="form-control border-0"
+                        placeholder="Email"
+                      />
+                    </div>
+                    <div
+                      *ngIf="
+                        signUpForm.get('Email')?.invalid &&
+                        (signUpForm.get('Email')?.dirty ||
+                          signUpForm.get('Email')?.touched)
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="signUpForm.get('Email')?.hasError('required')"
+                      >
+                        This field is required
+                      </small>
+                      <small
+                        class="text-danger"
+                        *ngIf="signUpForm.get('Email')?.hasError('Email')"
+                      >
+                        Please enter your email address
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group pt-3">
+                    <div
+                      class="input-field"
+                      [class.error]="
+                        (signUpForm.controls['PhoneNumber'].touched ||
+                          signUpForm.controls['PhoneNumber'].dirty) &&
+                        signUpForm.hasError('required', 'PhoneNumber')
+                      "
+                    >
+                      <span class="fa fa-phone p-2"> </span>
+                      <input
+                        formControlName="PhoneNumber"
+                        type="string"
+                        class="form-control border-0"
+                        placeholder="Phone Number"
+                      />
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="
+                      signUpForm.get('PhoneNumber')?.invalid &&
+                      (signUpForm.get('PhoneNumber')?.dirty ||
+                        signUpForm.get('PhoneNumber')?.touched)
+                    "
+                  >
+                    <small
+                      class="text-danger"
+                      *ngIf="
+                        signUpForm.get('PhoneNumber')?.hasError('required')
+                      "
+                    >
+                      This field is required
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group pt-3">
+                    <div
+                      class="input-field"
+                      [class.error]="
+                        (signUpForm.controls['Password'].touched ||
+                          signUpForm.controls['Password'].dirty) &&
+                        signUpForm.hasError('required', 'Password')
+                      "
+                    >
+                      <span class="fa fa-lock p-2"> </span>
+                      <input
+                        formControlName="Password"
+                        type="password"
+                        class="form-control"
+                        placeholder="Password"
+                      />
+                    </div>
+                    <div
+                      *ngIf="
+                        signUpForm.get('Password')?.invalid &&
+                        (signUpForm.get('Password')?.dirty ||
+                          signUpForm.get('Password')?.touched)
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="signUpForm.get('Password')?.hasError('required')"
+                      >
+                        This field is required
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group pt-3">
+                    <div
+                      class="input-field"
+                      [class.error]="
+                        (signUpForm.controls['Birthday'].touched ||
+                          signUpForm.controls['Birthday'].dirty) &&
+                        signUpForm.hasError('required', 'Birthday')
+                      "
+                    >
+                      <span class="fa fa-calendar-days p-2"> </span>
+                      <input
+                        formControlName="Birthday"
+                        type="date"
+                        class="form-control border-0"
+                        placeholder="Birthday"
+                      />
+                    </div>
+                    <div
+                      *ngIf="
+                        signUpForm.get('Birthday')?.invalid &&
+                        (signUpForm.get('Birthday')?.dirty ||
+                          signUpForm.get('Birthday')?.touched)
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="signUpForm.get('Birthday')?.hasError('required')"
+                      >
+                        This field is required
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group pt-3">
+                    <div
+                      class="input-field"
+                      [class.error]="
+                        (signUpForm.controls['Country'].touched ||
+                          signUpForm.controls['Country'].dirty) &&
+                        signUpForm.hasError('required', 'Country')
+                      "
+                    >
+                      <span class="fa fa-globe p-2"> </span>
+                      <input
+                        formControlName="Country"
+                        type="text"
+                        class="form-control"
+                        placeholder="Country"
+                      />
+                    </div>
+                    <div
+                      *ngIf="
+                        signUpForm.get('Country')?.invalid &&
+                        (signUpForm.get('Country')?.dirty ||
+                          signUpForm.get('Country')?.touched)
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="signUpForm.get('Country')?.hasError('required')"
+                      >
+                        This field is required
+                      </small>
+                    </div>
+                  </div>
+                  <div class="form-group pt-3">
+                    <div
+                      class="input-field"
+                      [class.error]="
+                        (signUpForm.controls['City'].touched ||
+                          signUpForm.controls['City'].dirty) &&
+                        signUpForm.hasError('required', 'City')
+                      "
+                    >
+                      <span class="fa fa-location-dot p-2"> </span>
+                      <input
+                        formControlName="City"
+                        type="text"
+                        class="form-control"
+                        placeholder="City"
+                      />
+                    </div>
+                    <div
+                      *ngIf="
+                        signUpForm.get('City')?.invalid &&
+                        (signUpForm.get('City')?.dirty ||
+                          signUpForm.get('City')?.touched)
+                      "
+                    >
+                      <small
+                        class="text-danger"
+                        *ngIf="signUpForm.get('City')?.hasError('required')"
+                      >
+                        This field is required
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <button
+                (click)="onSignUp()"
+                type="submit"
+                class="btn btn-primary btn-block mt-4 w-100"
+              >
+                Sign Up
+              </button>
+              <div class="text-center pt-4 text-muted">
+                Already have an account?
+                <a id="forget" [routerLink]="['/login']">Login</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

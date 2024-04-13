@@ -1,0 +1,7 @@
+<form (ngSubmit)="SendNotification()">
+  <div>
+    <label for="messageContent">Message Content</label>
+    <input type="text" id="messageContent" name="messageContent" [(ngModel)]="notification.messageContent">
+  </div>
+  <button type="submit">Send Notification</button>
+</form>
