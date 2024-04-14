@@ -14,4 +14,7 @@ export class NotificationService {
   SendNotification(notification: CreateNotificationDTO): Observable<any> {
     return this.httpClient.post<any>(this.url + '/AddNotificationAllUsers', notification);
   }
+  getNotifications(receiverId:string): Observable<any[]> {
+    return this.httpClient.get<any[]>(this.url+'/'+receiverId);
+  }
 }

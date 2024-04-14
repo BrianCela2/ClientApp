@@ -14,8 +14,24 @@
         <a class="nav-link" href="#">Link 3</a>
       </li>
     </ul>
+    
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+        Notifications
+        <span class="badge bg-danger">{{ unreadCount }}</span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+        <li *ngFor="let notification of notifications">
+          <a class="dropdown-item" href="#">
+            {{ notification.messageContent }}
+          </a>
+        </li>
+        <li *ngIf="notification.length === 0">
+          <span class="dropdown-item">No notifications</span>
+        </li>
+      </ul>
+    </div>  
   </div>
-
 </nav>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
@@ -29,4 +45,6 @@
   <li *ngFor="let item of notification">
     Notification: {{item}}
   </li>
-</div><router-outlet />
+</div>
+
+<router-outlet />

@@ -1,3 +1,5 @@
+
+
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
@@ -6,6 +8,8 @@ import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signal
 import { Subject, takeUntil, timer } from 'rxjs';
 import { SendNotificationsComponent } from './notifications/send-notifications/send-notifications.component';
 import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.component';
+import { NotificationService } from './services/notification.service';
+import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -17,15 +21,19 @@ export class AppComponent {
   name = 'ClientApp';
   rooms: any;
   notification: any[] = [];
+  receiverId!:string;
+  notifications:any[]=[];
   private url = 'https://localhost:7006/Notification';
   private hubConnectionBuilder!: HubConnection;
   private destroy$: Subject<void> = new Subject<void>();
-
-  constructor() { }
+  unreadCount:number=0;
+  constructor(private notificationService:NotificationService,private authService:AuthService){}
+  
   ngOnInit(): void {
     console.log('Initializing SignalR connection...');
     this.hubConnectionBuilder = new HubConnectionBuilder()
-      .withUrl('https://localhost:7006/Notify')
+      .withUrl('https://localhost:7006/Notify',{
+        accessTokenFactory: () => this.authService.getToken() || ''})
       .configureLogging(LogLevel.Information)
       .build();
   
@@ -34,9 +42,16 @@ export class AppComponent {
       .then(() => console.log('Connection started.'))
       .catch(err => console.error('Error while connecting to SignalR:', err));
 
-    this.hubConnectionBuilder.on('ReceiveNotificationAllUser', (result: any) => {
+    this.hubConnectionBuilder.on('ReceiveNotification', (result: any) => {
       this.addNotification(result);
       console.log(result);
+    });
+    this.receiverId = this.authService.getUserIdFromToken();
+    this.notificationService.getNotifications(this.receiverId).subscribe(data => {
+      this.notifications = data;
+      this.unreadCount = this.notifications.filter(notification => !notification.isSeen).length;
+
+      console.log(this.notifications);
     });
   }
 

@@ -1,5 +1,6 @@
 <div class="container">
-    <h2>Update Room</h2>
+  <h2>Update Room</h2>
+  <div *ngIf="updateRoomDto.roomId !=''">
     <form (ngSubmit)="updateRoom()" #roomForm="ngForm">
       <div class="form-group">
         <label for="roomNumber">Room Number:</label>
@@ -21,23 +22,25 @@
       </div>
       <div class="form-group">
         <label for="roomStatus">Room Status:</label>
-        <select class="form-control" id="roomStatus" name="roomStatus" 
-                [(ngModel)]="updateRoomDto.roomStatus">
-          <option *ngFor="let status of roomStatusOptions" >
-            {{ status.label }}
-          </option>
-        </select>
+        <div class="select-wrapper">
+          <select class="form-control" id="roomStatus" name="roomStatus" [(ngModel)]="updateRoomDto.roomStatus">
+            <option *ngFor="let status of roomStatusOptions">{{ status.label }}</option>
+          </select>
+        </div>
       </div>
       <div class="form-group">
         <label for="category">Category:</label>
-        <select class="form-control" id="category" name="category" 
-                [(ngModel)]="updateRoomDto.category">
-          <option *ngFor="let category of roomCategoryOptions" >
-            {{ category.label }}
-          </option>
-        </select>
+        <div class="select-wrapper">
+          <select class="form-control" id="category" name="category" [(ngModel)]="updateRoomDto.category">
+            <option *ngFor="let category of roomCategoryOptions">{{ category.label }}</option>
+          </select>
+        </div>
       </div>
+      
       <button type="submit" class="btn btn-primary" [disabled]="!roomForm.valid">Update</button>
     </form>
   </div>
-  
+  <div *ngIf="updateRoomDto.roomId==''">
+    <p>Room not found.</p>
+  </div>
+</div>
