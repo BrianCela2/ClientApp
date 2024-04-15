@@ -17,4 +17,9 @@ export class NotificationService {
   getNotifications(receiverId:string): Observable<any[]> {
     return this.httpClient.get<any[]>(this.url+'/'+receiverId);
   }
+  NotificationsAsSeen(userId: string): Observable<any> {
+    const url = `${this.url}/NotificationsSeen/${userId}`;
+    return this.httpClient.put<any>(url, {});
+}
+
 }

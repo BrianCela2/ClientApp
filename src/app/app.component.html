@@ -15,7 +15,7 @@
       </li>
     </ul>
     
-    <div class="dropdown">
+    <div class="dropdown" (click)="NotificationsToSeen()">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
         Notifications
         <span class="badge bg-danger">{{ unreadCount }}</span>
@@ -26,7 +26,7 @@
             {{ notification.messageContent }}
           </a>
         </li>
-        <li *ngIf="notification.length === 0">
+        <li *ngIf="notifications.length === 0">
           <span class="dropdown-item">No notifications</span>
         </li>
       </ul>
@@ -43,7 +43,9 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <div *ngIf="notification.length>0" class="alert alert-warning" role="alert">
   <li *ngFor="let item of notification">
+    <div *ngIf="userId==item">
     Notification: {{item}}
+  </div>
   </li>
 </div>
 
