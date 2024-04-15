@@ -28,8 +28,10 @@ export class StepOneComponent implements OnInit {
       checkInDate: this.checkInDate,
       checkOutDate: this.checkOutDate
     });
-    // Not resetting form fields here
-    this.searchService.setSearchParameters(this.searchParameters); // Set search parameters in the service
+    this.searchService.setSearchParameters(this.searchParameters); 
   }
-  
+  removeSearchParameter(index: number) {
+    this.searchParameters.splice(index, 1); 
+    this.searchService.setSearchParameters(this.searchParameters);
+  }
 }

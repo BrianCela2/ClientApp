@@ -1,7 +1,10 @@
 <div class="container">
-  <div *ngFor="let parameter of searchParameters" class="room-parameter">
+  <div *ngFor="let parameter of searchParameters; let i = index" class="room-parameter">
     <div class="form-row">
-      <div class="form-group col-md-4">
+      <button class="btn bg-light h-25 font-weight-bolder mt-4" (click)="removeSearchParameter(i)">
+        -
+      </button>
+      <div class="form-group col-md-3">
         <label for="capacity">Capacity:</label>
         <input
           type="number"
@@ -10,7 +13,7 @@
           [(ngModel)]="parameter.capacity"
         />
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="checkInDate">Check-in Date:</label>
         <input
           type="date"
@@ -19,7 +22,7 @@
           [(ngModel)]="parameter.checkInDate"
         />
       </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-3">
         <label for="checkOutDate">Check-out Date:</label>
         <input
           type="date"
