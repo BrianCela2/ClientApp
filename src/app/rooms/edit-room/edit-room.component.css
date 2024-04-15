@@ -1,0 +1,28 @@
+.select-wrapper {
+    position: relative;
+  }
+  .container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px;
+    background-color: #f2f2f2; 
+    box-sizing: border-box;
+  }
+  .select-wrapper select {
+    width: calc(100% + 32px); 
+  }
+  
+  .select-wrapper::after {
+    content: '\25BC'; 
+    font-size: 12px;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
+  .select-wrapper .form-control {
+    padding-right: 30px;
+  }
+  

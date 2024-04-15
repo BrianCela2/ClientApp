@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { RoomService } from '../../services/room.service';
 import { RoomCategory, UpdateRoomDTO, RoomStatus } from '../../shared/room.model';
@@ -24,7 +24,7 @@ export class EditRoomComponent implements OnInit {
   };
   roomStatusOptions: { value: RoomStatus; label: string }[] = []; 
   roomCategoryOptions: { value: RoomCategory; label: string }[] = []; 
-  constructor(private route: ActivatedRoute, private roomService: RoomService) {}
+  constructor(private router:Router,private route: ActivatedRoute, private roomService: RoomService) {}
 
   ngOnInit(): void {
     this.roomId = this.route.snapshot.paramMap.get('id') || '';
@@ -63,5 +63,7 @@ this.roomCategoryOptions = Object.keys(RoomCategory)
       complete: () => {
       }
     });
+    this.router.navigateByUrl('/Room/Get/'+this.roomId);
+
   }
 }
