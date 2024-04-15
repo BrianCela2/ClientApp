@@ -1,0 +1,36 @@
+<div class="container">
+  <div *ngFor="let parameter of searchParameters" class="room-parameter">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="capacity">Capacity:</label>
+        <input
+          type="number"
+          id="capacity"
+          class="form-control"
+          [(ngModel)]="parameter.capacity"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="checkInDate">Check-in Date:</label>
+        <input
+          type="date"
+          id="checkInDate"
+          class="form-control"
+          [(ngModel)]="parameter.checkInDate"
+        />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="checkOutDate">Check-out Date:</label>
+        <input
+          type="date"
+          id="checkOutDate"
+          class="form-control"
+          [(ngModel)]="parameter.checkOutDate"
+        />
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="addSearchParameter()">
+    Add Room
+  </button>
+</div>

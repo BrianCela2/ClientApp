@@ -11,6 +11,7 @@ import { RoomListComponent } from './rooms/room-list/room-list.component';
 import { SendNotificationsComponent } from './notifications/send-notifications/send-notifications.component';
 import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.component';
 import { UserRolesComponent } from './components/tables/user-roles/user-roles.component';
+import { ReservateComponent } from './components/reservate/reservate.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,6 +24,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'userRoles', component: UserRolesComponent },
+  { path: 'steps', component: ReservateComponent },
   { path: 'Room', component: CreateRoomComponent, title: 'Room Create' },
   { path: 'Room/Edit/:id', component: EditRoomComponent, title: 'Room Edit' },
   {
