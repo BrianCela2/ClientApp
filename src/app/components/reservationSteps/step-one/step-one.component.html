@@ -1,9 +1,17 @@
 <div class="container">
-  <div *ngFor="let parameter of searchParameters; let i = index" class="room-parameter">
+  <div
+    *ngFor="let parameter of searchParameters; let i = index"
+    class="room-parameter"
+  >
     <div class="form-row">
-      <button class="btn bg-light h-25 font-weight-bolder mt-4" (click)="removeSearchParameter(i)">
-        -
-      </button>
+      <ng-container *ngIf="searchParameters.length > 1">
+        <button
+          class="btn bg-light h-25 font-weight-bolder mt-4"
+          (click)="removeSearchParameter(i)"
+        >
+          -
+        </button>
+      </ng-container>
       <div class="form-group col-md-3">
         <label for="capacity">Capacity:</label>
         <input
