@@ -23,15 +23,12 @@ export class AppComponent {
   private hubConnectionBuilder!: HubConnection;
   private destroy$: Subject<void> = new Subject<void>();
   userId:string;
-
   constructor(
     private cdr: ChangeDetectorRef,
     private notificationService: NotificationService,
     private authService: AuthService
   ) {
     this.userId = this.authService.getUserIdFromToken();
-    const notification = { receiverId: this.userId, messageContent: "hey" };
-
   }
 
   ngOnInit(): void {
@@ -43,17 +40,10 @@ export class AppComponent {
       .configureLogging(LogLevel.Information)
       .build();
 
-    
-this.hubConnectionBuilder.start().then(() => {
-  this.hubConnectionBuilder.invoke('ReceiveNotification', this.notification)
-    .then(() => {})
-    .catch(error => {
-      console.error('Error invoking method to start receiving notifications:', error);
-    });
-})
-.catch(err => {
-  console.error('Error while connecting to SignalR:', err);
-});
+    this.hubConnectionBuilder
+      .start()
+      .then(() => console.log('Connection started.'))
+      .catch(err => console.error('Error while connecting to SignalR:', err));
 
     this.hubConnectionBuilder.on('ReceiveNotificationAllUser', (result1: any,result2:any) => {
       this.addNotification(result1);
