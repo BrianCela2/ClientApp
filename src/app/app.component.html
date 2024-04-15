@@ -43,9 +43,7 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <div *ngIf="notification.length>0" class="alert alert-warning" role="alert">
   <li *ngFor="let item of notification">
-    <div *ngIf="userId==item">
-    Notification: {{item}}
-  </div>
+    Notification: {{item.messageContent}}
   </li>
 </div>
 
