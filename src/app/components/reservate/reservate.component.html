@@ -1,0 +1,15 @@
+<!-- reservate.component.html -->
+<stepper [steps]="['Step 1', 'Step 2', 'Step 3']" (stepChanged)="onStepChanged($event)">
+  <div stepContent *ngIf="stepIndex === 0">
+    <h2>Choose reservation rooms</h2>
+    <step-one></step-one>
+  </div>
+  <div stepContent *ngIf="stepIndex === 1">
+    <h2>Choose room for each reservation</h2>
+    <step-two></step-two>
+  </div>
+  <div stepContent *ngIf="stepIndex === 2">
+    <h2>Confirm reservation</h2>
+    <step-three></step-three>
+  </div>
+</stepper>

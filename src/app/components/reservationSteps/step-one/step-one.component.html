@@ -1,0 +1,47 @@
+<div class="container">
+  <div
+    *ngFor="let parameter of searchParameters; let i = index"
+    class="room-parameter"
+  >
+    <div class="form-row">
+      <ng-container *ngIf="searchParameters.length > 1">
+        <button
+          class="btn bg-light h-25 font-weight-bolder mt-4"
+          (click)="removeSearchParameter(i)"
+        >
+          -
+        </button>
+      </ng-container>
+      <div class="form-group col-md-3">
+        <label for="capacity">Capacity:</label>
+        <input
+          type="number"
+          id="capacity"
+          class="form-control"
+          [(ngModel)]="parameter.capacity"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="checkInDate">Check-in Date:</label>
+        <input
+          type="date"
+          id="checkInDate"
+          class="form-control"
+          [(ngModel)]="parameter.checkInDate"
+        />
+      </div>
+      <div class="form-group col-md-3">
+        <label for="checkOutDate">Check-out Date:</label>
+        <input
+          type="date"
+          id="checkOutDate"
+          class="form-control"
+          [(ngModel)]="parameter.checkOutDate"
+        />
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="addSearchParameter()">
+    Add Room
+  </button>
+</div>

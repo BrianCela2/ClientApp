@@ -1,0 +1,31 @@
+<div class="container">
+  <div *ngFor="let roomList of roomLists; let i = index">
+    <div>Room {{i+1}}</div>
+    <div *ngFor="let rooms of roomList">
+      <div class="row">
+        <div *ngFor="let room of rooms; let roomIndex = index" class="col-md-4 mb-4">
+          <div class="card mx-auto">
+            <img [src]="'data:image/jpeg;base64,' + room.roomPhotos[0]?.photoContent" class="d-block w-100" style="height: 200px" alt="Room Photo" />
+            <div class="card-body">
+              <h5 class="card-title">{{ room.category }}</h5>
+              <p class="card-text">Capacity: {{ room.capacity }}</p>
+              <p class="card-text">Price: {{ room.price }}</p>
+              <p class="card-text">Room Number: {{ room.roomNumber }}</p>
+              <button class="btn btn-primary" (click)="selectRoom(room.roomId, searchParameters[i].checkInDate, searchParameters[i].checkOutDate)">
+                Select Room
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="container">
+  <button class="btn btn-primary" (click)="searchRooms()">Search Room</button>
+</div> -->
+
+<div class="container">
+  <button class="btn btn-primary" (click)="createReservation()">Create Reservation</button>
+</div>

@@ -17,7 +17,7 @@ export class UserService {
     return this.http.put<any>(`${this.baseUrl}`, request);
   }
 
-  getUserById() {
+  getActualUserById() {
     const userId = this.authService.getUserIdFromToken(); // Get user id from token
     if (userId) {
       return this.http.get<any>(`${this.baseUrl}userId/${userId}`);
