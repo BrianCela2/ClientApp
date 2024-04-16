@@ -30,7 +30,7 @@ export const routes: Routes = [
   { path: 'Room/GetAll', component: RoomListComponent, title: 'All Rooms' },
   { path: 'NotificationAllUsers', component: SendNotificationsComponent, title: 'Notification' },
   { path: 'SearchRooms', component: SearchRoomsComponent, title: 'Search' },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: 'Dashboard', component: DashboardComponent }
 ];
 
 

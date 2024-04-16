@@ -34,7 +34,7 @@ export class AppComponent {
     this.hubConnectionBuilder
       .start()
       .then(() => console.log('Connection started.'))
-      .catch(err => console.error('Error while connecting to SignalR:', err));
+      .catch((err: any) => console.error('Error while connecting to SignalR:', err));
 
     this.hubConnectionBuilder.on('ReceiveNotificationAllUser', (result: any) => {
       this.addNotification(result);
