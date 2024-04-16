@@ -21,16 +21,17 @@
         <span class="badge bg-danger">{{ unreadCount }}</span>
       </button>
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-        <li *ngFor="let notification of notifications">
+        <li *ngFor="let notification of notifications" [class.unread]="!notification.isSeen">
           <a class="dropdown-item" href="#">
-            {{ notification.messageContent }}
+            {{ notification.messageContent }} {{notification.isSeen}}
           </a>
         </li>
         <li *ngIf="notifications.length === 0">
           <span class="dropdown-item">No notifications</span>
         </li>
       </ul>
-    </div>  
+    </div>
+    
   </div>
 </nav>
 
@@ -41,7 +42,7 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<div *ngIf="notification.length>0" class="alert alert-warning" role="alert">
+<div *ngIf="notification.length>0" class="alert alert-success" role="alert">
   <li *ngFor="let item of notification">
     Notification: {{item.messageContent}}
   </li>
