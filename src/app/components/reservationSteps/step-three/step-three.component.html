@@ -19,8 +19,18 @@
         <td>{{ service.category }}</td>
         <td>{{ service.openTime }}</td>
         <td>
-          <button (click)="removeService(i)">Remove</button>
-          <button (click)="addService(service.serviceID)">Add</button>
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="removeService(i)"
+          >
+            Remove
+          </button>
+          <button
+            class="btn btn-sm btn-outline-success"
+            (click)="addService(service.serviceID)"
+          >
+            Add
+          </button>
         </td>
       </tr>
     </tbody>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SearchService } from '../../../services/search-service.service';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 })
 export class StepTwoComponent implements OnInit {
   constructor(private searchService: SearchService, private http: HttpClient) {}
+  @Output() onStepCompleted = new EventEmitter();
   selectedRooms: {
     roomId: string;
     checkInDate: string;
@@ -39,6 +40,7 @@ export class StepTwoComponent implements OnInit {
 
   selectRoom(roomId: string, checkInDate: string, checkOutDate: string) {
     this.selectedRooms.push({ roomId, checkInDate, checkOutDate });
+    this.onStepCompleted.emit();
   }
 
   createReservation() {

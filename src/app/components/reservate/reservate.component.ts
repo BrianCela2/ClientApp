@@ -17,21 +17,26 @@ import { StepFourComponent } from '../reservationSteps/step-four/step-four.compo
     StepOneComponent,
     StepTwoComponent,
     StepThreeComponent,
-    StepFourComponent
+    StepFourComponent,
   ],
   standalone: true,
 })
 export class ReservateComponent {
   stepIndex = 0;
-  isCompleted : boolean = false;
+  isCompleted: boolean = false;
   @ViewChild(StepOneComponent) stepOneComponent!: StepOneComponent;
   @ViewChild(StepTwoComponent) stepTwoComponent!: StepTwoComponent;
   @ViewChild(StepThreeComponent) stepThreeComponent!: StepThreeComponent;
 
   onStepChanged(index: number) {
     this.stepIndex = index;
-  } 
-  
+    this.isCompleted = false;
+  }
+
+  onStepCompleted() {
+    this.isCompleted = true;
+  }
+
   onStepNext() {
     if (this.stepIndex === 2 && this.stepTwoComponent) {
       this.stepTwoComponent.createReservation();
@@ -40,5 +45,4 @@ export class ReservateComponent {
       this.stepThreeComponent.addServicesToReservation();
     }
   }
-  
 }

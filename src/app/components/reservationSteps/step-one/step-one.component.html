@@ -40,8 +40,13 @@
         />
       </div>
     </div>
+    <div *ngIf="parameter.error" class="text-danger">{{ parameter.error }}</div>
   </div>
-  <button class="btn btn-primary" (click)="addSearchParameter()">
+  <button class="btn btn-primary" (click)="addSearchParameter()" [disabled]="datesConfirmed">
     Add Room
   </button>
+  <button class="btn btn-primary" (click)="confirmDates()">
+    Confirm dates
+  </button>
+  
 </div>

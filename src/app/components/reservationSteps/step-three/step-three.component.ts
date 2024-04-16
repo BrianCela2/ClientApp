@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SearchService } from '../../../services/search-service.service';
 import { CommonModule } from '@angular/common';
 import { HotelServicesService } from '../../../services/hotel-services.service';
@@ -9,42 +9,46 @@ import { HotelServicesService } from '../../../services/hotel-services.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './step-three.component.html',
-  styleUrl: './step-three.component.css'
+  styleUrl: './step-three.component.css',
 })
-export class StepThreeComponent {
-
-  constructor(private http: HttpClient,private service: HotelServicesService,private searchService: SearchService){}
-  public services:any = [];
-  public selectedServices:any=[];
+export class StepThreeComponent implements OnInit {
+  constructor(
+    private http: HttpClient,
+    private service: HotelServicesService,
+    private searchService: SearchService
+  ) {}
+  @Output() onStepCompleted = new EventEmitter();
+  public services: any = [];
+  public selectedServices: any = [];
 
   ngOnInit() {
-    this.service.getHotelServices()
-    .subscribe(res=>{
-    this.services = res;
-    console.log(res)
+    this.service.getHotelServices().subscribe((res) => {
+      this.services = res;
+      console.log(res);
     });
+    this.onStepCompleted.emit();
   }
 
   addService(serviceId: any) {
     const selectedService = {
-        serviceId: serviceId,
-        dateOfPurchase:  new Date()
+      serviceId: serviceId,
+      dateOfPurchase: new Date(),
     };
     this.selectedServices.push(selectedService);
-}
+  }
 
-  removeService(service:any) {
+  removeService(service: any) {
     const index = this.services.indexOf(service);
     if (index !== -1) {
       this.services.splice(index, 1);
     }
   }
+
   addServicesToReservation() {
     const reservation = this.searchService.getReservation();
 
     reservation.reservationServices = this.selectedServices;
 
     this.searchService.setReservation(reservation);
-
   }
 }
