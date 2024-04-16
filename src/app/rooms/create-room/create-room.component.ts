@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { RoomService } from '../../services/room.service';
 import { CreateRoomDTO } from '../../shared/room.model';
 import { FormsModule } from '@angular/forms';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-room',
@@ -18,7 +19,7 @@ export class CreateRoomComponent implements OnInit {
   room: CreateRoomDTO = { roomNumber: 0, capacity: 0, price: 0,  photos: [] };
   private roomsSubscription: Subscription | undefined;
 
-  constructor(private roomService: RoomService) { }
+  constructor(private router:Router,private roomService: RoomService) { }
 
   ngOnInit(): void {
     this.loadRooms();
@@ -44,7 +45,9 @@ export class CreateRoomComponent implements OnInit {
       error: (error: any) => {
         console.error('Error creating room:', error);
       }
-    });
+    })
+    this.router.navigateByUrl('/Room/GetAll');
+
   }
 
 

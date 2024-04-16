@@ -1,38 +1,46 @@
 <div class="container">
   <h2>Room Details</h2>
-  <div *ngIf="room">
-      <p><strong>Room Number:</strong> {{ room.roomNumber }}</p>
-      <p><strong>Capacity:</strong> {{ room.capacity }}</p>
-      <p><strong>Price:</strong> {{ room.price }}</p>
-      <p><strong>Room Status:</strong> {{ room.roomStatus }}</p>
-      <p><strong>Category:</strong> {{ room.category }}</p>
+  
+  <div *ngIf="room" class="room-details">
+    <p><strong>Room Number:</strong> {{ room.roomNumber }}</p>
+    <p><strong>Capacity:</strong> {{ room.capacity }}</p>
+    <p><strong>Price:</strong> {{ room.price }}</p>
+    <p><strong>Room Status:</strong> {{ room.roomStatus }}</p>
+    <p><strong>Category:</strong> {{ room.category }}</p>
+    
+    <div class="action-buttons">
       <button (click)="confirmRoomDelete(roomId)">Delete Room</button>
       <button (click)="chooseFile()">Add Photo</button>
-
-<div *ngIf="showFileInput">
-  <input type="file" #fileInput (change)="onFileSelected($event)">
-  <button (click)="savePhoto()">Save</button>
-</div>
-      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-          <div class="carousel-inner">
-              <div class="carousel-item" *ngFor="let photo of room.roomPhotos; let i = index" [class.active]="i === activePhotoIndex">
-                  <div class="photo-container">
-                      <img [src]="photo.photoContent" class="d-block w-100" alt="Room Photo">
-                      <button class="delete-button" (click)="confirmDelete(photo.photoId)">Delete</button>
-                    </div>
-              </div>
+    </div>
+    
+    <div *ngIf="showFileInput" class="file-input">
+      <input type="file" #fileInput (change)="onFileSelected($event)">
+      <button (click)="savePhoto()">Save</button>
+    </div>
+    
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item" *ngFor="let photo of room.roomPhotos; let i = index" [class.active]="i === activePhotoIndex">
+          <div class="photo-container">
+            <img [src]="photo.photoContent" class="d-block w-100" alt="Room Photo">
+            <button class="delete-button" (click)="confirmDelete(photo.photoId)">Delete</button>
           </div>
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" (click)="setActivePhoto((activePhotoIndex - 1 + room.roomPhotos.length) % room.roomPhotos.length)">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-          </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" (click)="setActivePhoto((activePhotoIndex + 1) % room.roomPhotos.length)">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-          </button>
+        </div>
       </div>
+      
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" (click)="setActivePhoto((activePhotoIndex - 1 + room.roomPhotos.length) % room.roomPhotos.length)">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" (click)="setActivePhoto((activePhotoIndex + 1) % room.roomPhotos.length)">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
   </div>
+  
   <div *ngIf="!room">
-      <p>Room not found.</p>
+    <p>Room not found.</p>
   </div>
 </div>

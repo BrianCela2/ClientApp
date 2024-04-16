@@ -1,13 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { RoomListComponent } from './rooms/room-list/room-list.component';
 import { FormsModule } from '@angular/forms';
 import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { Subject, takeUntil, timer } from 'rxjs';
 import { SendNotificationsComponent } from './notifications/send-notifications/send-notifications.component';
 import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.component';
+import { NotificationService } from './services/notification.service';
+import { AuthService } from './services/auth.service';
+import { SignalRService } from './services/signal-rservice.service';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -15,30 +16,45 @@ import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.componen
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   name = 'ClientApp';
-  rooms: any;
   notification: any[] = [];
-  private url = 'https://localhost:7006/Notification';
-  private hubConnectionBuilder!: HubConnection;
+  notifications: any[] = [];
+  unreadCount: number = 0;
+  userId: string;
+  connectionId!: string;
   private destroy$: Subject<void> = new Subject<void>();
 
-  constructor() { }
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private signalRService: SignalRService,
+    private authService: AuthService,
+    private notificationService: NotificationService
+  ) {
+    this.userId = this.authService.getUserIdFromToken();
+  }
+
   ngOnInit(): void {
     console.log('Initializing SignalR connection...');
-    this.hubConnectionBuilder = new HubConnectionBuilder()
-      .withUrl('https://localhost:7006/Notify')
-      .configureLogging(LogLevel.Information)
-      .build();
+    this.signalRService.startConnection();
+    this.signalRService.getConnectionId();
 
-    this.hubConnectionBuilder
-      .start()
-      .then(() => console.log('Connection started.'))
-      .catch((err: any) => console.error('Error while connecting to SignalR:', err));
+    this.signalRService.getHubConnection().on('ReceiveNotificationAllUser', (result1: any) => {
+      this.addNotification(result1);
+      this.unreadCount++;
+      console.log(result1);
+    });
+    this.signalRService.getHubConnection().on('ReceiveNotification', (result1: any, connectionId) => {
+      this.addNotification(result1);
+      this.unreadCount++;
+      console.log(result1.messageContent);
+    });
 
-    this.hubConnectionBuilder.on('ReceiveNotificationAllUser', (result: any) => {
-      this.addNotification(result);
-      console.log(result);
+    const receiverId = this.authService.getUserIdFromToken();
+    this.notificationService.getNotifications(receiverId).subscribe(data => {
+      this.notifications = data;
+      this.unreadCount = this.notifications.filter(notification => !notification.isSeen).length;
+      console.log(this.notifications);
     });
   }
 
@@ -63,5 +79,16 @@ export class AppComponent {
     }
   }
 
-
+  NotificationsToSeen(): void {
+    this.notificationService.NotificationsAsSeen(this.userId).subscribe({
+      next: () => {
+        this.unreadCount = 0;
+        console.log('All notifications marked as seen');
+      },
+      error: (error) => {
+        console.log(this.userId);
+        console.error('Error marking notifications as seen:', error);
+      }
+    });
+  }
 }
