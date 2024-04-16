@@ -7,23 +7,29 @@
     <p><strong>Price:</strong> {{ room.price }}</p>
     <p><strong>Room Status:</strong> {{ room.roomStatus }}</p>
     <p><strong>Category:</strong> {{ room.category }}</p>
-    
+    <div *ngIf="role">
+    <div *ngIf="role.includes('Admin')">
     <div class="action-buttons">
+      <button (click)="GoToEdit()">Go to Edit</button>
       <button (click)="confirmRoomDelete(roomId)">Delete Room</button>
       <button (click)="chooseFile()">Add Photo</button>
+      </div>
     </div>
-    
+    </div>
     <div *ngIf="showFileInput" class="file-input">
       <input type="file" #fileInput (change)="onFileSelected($event)">
       <button (click)="savePhoto()">Save</button>
     </div>
-    
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-inner">
         <div class="carousel-item" *ngFor="let photo of room.roomPhotos; let i = index" [class.active]="i === activePhotoIndex">
           <div class="photo-container">
             <img [src]="photo.photoContent" class="d-block w-100" alt="Room Photo">
+            <div *ngIf="role">
+              <div *ngIf="role.includes('Admin')">
             <button class="delete-button" (click)="confirmDelete(photo.photoId)">Delete</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

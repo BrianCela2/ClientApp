@@ -67,7 +67,7 @@ import { SignalRService } from './services/signal-rservice.service';
   
     addNotification(notification: any): void {
       this.notification.unshift(notification);
-      timer(5000)
+      timer(7000)
         .pipe(takeUntil(this.destroy$))
         .subscribe(() => {
           this.removeNotification(notification);

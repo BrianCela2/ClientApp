@@ -23,7 +23,7 @@
       <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
         <li *ngFor="let notification of notifications" [class.unread]="!notification.isSeen">
           <a class="dropdown-item" href="#">
-            {{ notification.messageContent }} {{notification.isSeen}}
+            {{ notification.messageContent }} 
           </a>
         </li>
         <li *ngIf="notifications.length === 0">
@@ -42,10 +42,12 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<div *ngIf="notification.length>0" class="alert alert-success" role="alert">
-  <li *ngFor="let item of notification">
-    Notification: {{item.messageContent}}
-  </li>
+<div class="notification-container">
+  <ul class="notification-list" *ngIf="notification.length > 0">
+    <li *ngFor="let item of notification" class="notification-item">
+      <span class="notification-message">Notification: {{ item.messageContent }}</span>
+    </li>
+  </ul>
 </div>
 
 <router-outlet />

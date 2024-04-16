@@ -12,6 +12,7 @@ import { SendNotificationsComponent } from './notifications/send-notifications/s
 import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.component';
 import { UserRolesComponent } from './components/tables/user-roles/user-roles.component';
 import { ReservateComponent } from './components/reservate/reservate.component';
+import { ReservationsComponent } from './components/tables/reservations/reservations.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -37,6 +38,9 @@ export const routes: Routes = [
     path: 'NotificationAllUsers',
     component: SendNotificationsComponent,
     title: 'Notification',
+    canActivate: [AuthGuard]
   },
   { path: 'SearchRooms', component: SearchRoomsComponent, title: 'Search' },
+  { path: 'Reservations', component: ReservationsComponent, title: 'Reservations',canActivate: [AuthGuard]}
+
 ];
