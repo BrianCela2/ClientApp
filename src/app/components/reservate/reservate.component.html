@@ -1,5 +1,5 @@
 <!-- reservate.component.html -->
-<stepper [steps]="['Step 1', 'Step 2', 'Step 3']"  (stepChanged)="onStepChanged($event)" (nextButtonClicked)="onStepNext()">
+<stepper [steps]="['Step 1', 'Step 2', 'Step 3','Step 4']"  (stepChanged)="onStepChanged($event)" (nextButtonClicked)="onStepNext()">
 
 
   <div stepContent *ngIf="stepIndex === 0">
@@ -11,7 +11,11 @@
     <step-two></step-two>
   </div>
   <div stepContent *ngIf="stepIndex === 2">
-    <h2>Confirm reservation</h2>
+    <h2>Choose extra services</h2>
     <step-three></step-three>
+  </div>
+  <div stepContent *ngIf="stepIndex === 3">
+    <h2>Confirm reservation</h2>
+    <step-four></step-four>
   </div>
 </stepper>

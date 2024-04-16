@@ -1,19 +1,28 @@
 <div class="container">
-    <h2>Reservation Details</h2>
-    <div *ngIf="reservationDTO">
-      <p>Reservation Date: {{ reservationDTO.reservationDate | date }}</p>
-      <p>Reservation Status: {{ reservationDTO.reservationStatus }}</p>
-      <h3>Reserved Rooms:</h3>
-      <ul class="list-group">
-        <li class="list-group-item" *ngFor="let room of reservationDTO.reservationRooms">
-          <p>Room Number: {{ room.roomNumber }}</p>
-          <p>Check-In Date: {{ room.checkInDate }}</p>
-          <p>Check-Out Date: {{ room.checkOutDate }}</p>
-        </li>
-      </ul>
-      <button class="btn btn-primary" (click)="createReservation()">Confirm Reservation</button>
-    </div>
-    <div *ngIf="!reservationDTO">
-      <p>No reservation details available.</p>
-    </div>
+  <h2>Services</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Service Name</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Category</th>
+        <th>Opening Time</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let service of services; let i = index">
+        <td>{{ service.serviceName }}</td>
+        <td>{{ service.description }}</td>
+        <td>{{ service.price }}</td>
+        <td>{{ service.category }}</td>
+        <td>{{ service.openTime }}</td>
+        <td>
+          <button (click)="removeService(i)">Remove</button>
+          <button (click)="addService(service.serviceID)">Add</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

@@ -5,6 +5,7 @@ import { StepperComponent } from '../stepper/stepper.component';
 import { StepTwoComponent } from '../reservationSteps/step-two/step-two.component';
 import { StepThreeComponent } from '../reservationSteps/step-three/step-three.component';
 import { StepOneComponent } from '../reservationSteps/step-one/step-one.component';
+import { StepFourComponent } from '../reservationSteps/step-four/step-four.component';
 
 @Component({
   selector: 'app-reservate',
@@ -16,6 +17,7 @@ import { StepOneComponent } from '../reservationSteps/step-one/step-one.componen
     StepOneComponent,
     StepTwoComponent,
     StepThreeComponent,
+    StepFourComponent
   ],
   standalone: true,
 })
@@ -24,6 +26,7 @@ export class ReservateComponent {
   isCompleted : boolean = false;
   @ViewChild(StepOneComponent) stepOneComponent!: StepOneComponent;
   @ViewChild(StepTwoComponent) stepTwoComponent!: StepTwoComponent;
+  @ViewChild(StepThreeComponent) stepThreeComponent!: StepThreeComponent;
 
   onStepChanged(index: number) {
     this.stepIndex = index;
@@ -32,6 +35,9 @@ export class ReservateComponent {
   onStepNext() {
     if (this.stepIndex === 2 && this.stepTwoComponent) {
       this.stepTwoComponent.createReservation();
+    }
+    if (this.stepIndex === 3 && this.stepThreeComponent) {
+      this.stepThreeComponent.addServicesToReservation();
     }
   }
   

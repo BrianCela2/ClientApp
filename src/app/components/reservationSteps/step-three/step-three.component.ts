@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { SearchService } from '../../../services/search-service.service';
 import { CommonModule } from '@angular/common';
+import { HotelServicesService } from '../../../services/hotel-services.service';
 
 @Component({
   selector: 'step-three',
@@ -12,20 +13,38 @@ import { CommonModule } from '@angular/common';
 })
 export class StepThreeComponent {
 
-  constructor(private http: HttpClient,private searchService: SearchService){}
-  reservationDTO=this.searchService.getReservation()
+  constructor(private http: HttpClient,private service: HotelServicesService,private searchService: SearchService){}
+  public services:any = [];
+  public selectedServices:any=[];
 
-  createReservation() {
-    this.http
-      .post<any>('https://localhost:7006/api/Reservation', this.reservationDTO)
-      .subscribe({
-        next: (response) => {
-          console.log('Reservation created successfully:', response);
-        },
-        error: (error) => {
-          console.error('Error creating reservation:', error);
-          console.log(this.reservationDTO);
-        },
-      });
+  ngOnInit() {
+    this.service.getHotelServices()
+    .subscribe(res=>{
+    this.services = res;
+    console.log(res)
+    });
+  }
+
+  addService(serviceId: any) {
+    const selectedService = {
+        serviceId: serviceId,
+        dateOfPurchase:  new Date()
+    };
+    this.selectedServices.push(selectedService);
+}
+
+  removeService(service:any) {
+    const index = this.services.indexOf(service);
+    if (index !== -1) {
+      this.services.splice(index, 1);
+    }
+  }
+  addServicesToReservation() {
+    const reservation = this.searchService.getReservation();
+
+    reservation.reservationServices = this.selectedServices;
+
+    this.searchService.setReservation(reservation);
+
   }
 }
