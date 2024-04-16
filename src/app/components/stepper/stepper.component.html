@@ -1,7 +1,7 @@
 <div>
   <ng-content select="[stepContent]"></ng-content>
 </div>
-<div class="btn-group" role="group" aria-label="Stepper Buttons">
-  <button type="button" class="btn btn-secondary" (click)="prevStep()" [disabled]="currentStepIndex === 0">Previous</button>
-  <button type="button" class="btn btn-primary" (click)="nextStep()" [disabled]="currentStepIndex === steps.length - 1 || !isCompleted">Next</button>
+<div class="" role="group" aria-label="Stepper Buttons">
+  <button type="button" class="btn btn-secondary" (click)="prevStep()" [disabled]="currentStepIndex === 0">&lt; Go back</button>
+  <button type="button" class="btn btn-success" (click)="nextStep()" [disabled]="currentStepIndex === steps.length - 1 || !isCompleted">Next ></button>
 </div>

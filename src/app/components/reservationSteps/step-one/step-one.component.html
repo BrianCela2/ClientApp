@@ -1,4 +1,8 @@
 <div class="container">
+  <div *ngIf="!searchParameters.length" (click)="addSearchParameter()" class="alert alert-light mt-4 d-flex justify-content-center">
+    + Please add a room
+  </div>
+
   <div
     *ngFor="let parameter of searchParameters; let i = index"
     class="room-parameter"
@@ -12,6 +16,7 @@
           -
         </button>
       </ng-container>
+
       <div class="form-group col-md-3">
         <label for="capacity">Capacity:</label>
         <input
@@ -21,6 +26,7 @@
           [(ngModel)]="parameter.capacity"
         />
       </div>
+
       <div class="form-group col-md-3">
         <label for="checkInDate">Check-in Date:</label>
         <input
@@ -30,6 +36,7 @@
           [(ngModel)]="parameter.checkInDate"
         />
       </div>
+
       <div class="form-group col-md-3">
         <label for="checkOutDate">Check-out Date:</label>
         <input
@@ -40,13 +47,19 @@
         />
       </div>
     </div>
+
     <div *ngIf="parameter.error" class="text-danger">{{ parameter.error }}</div>
   </div>
-  <button class="btn btn-primary" (click)="addSearchParameter()" [disabled]="datesConfirmed">
-    Add Room
-  </button>
-  <button class="btn btn-primary" (click)="confirmDates()">
-    Confirm dates
-  </button>
-  
+  <div class="justify-content-center d-flex">
+    <button
+      class="btn btn-primary"
+      (click)="addSearchParameter()"
+      [disabled]="datesConfirmed"
+    >
+      Add Room
+    </button>
+    <button class="btn btn-success" (click)="confirmDates()">
+      Confirm Dates
+    </button>
+  </div>
 </div>
