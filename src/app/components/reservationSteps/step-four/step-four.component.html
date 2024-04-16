@@ -17,6 +17,13 @@
         <p>Check-Out Date: {{ room.checkOutDate }}</p>
       </li>
     </ul>
+    <h3>Reserved Services:</h3>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let service of serviceDetails">
+        <p>Name: {{ service.serviceName }}</p>
+        <p>Price: {{ service.price }}</p>
+      </li>
+    </ul>
     <p>Total Price: {{ totalPrice }}</p>
     <button class="btn btn-primary" (click)="createReservation()">
       Confirm Reservation

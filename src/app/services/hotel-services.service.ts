@@ -11,5 +11,9 @@ export class HotelServicesService {
 
   getHotelServices() {
     return this.http.get<any>(`${this.baseUrl}hotelservices`);
+  } 
+  
+  getServiceById(id:any){
+    return this.http.get<any>(`${this.baseUrl}hotelservices/${id}`);
   }
 }
