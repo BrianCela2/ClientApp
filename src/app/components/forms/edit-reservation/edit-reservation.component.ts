@@ -4,6 +4,7 @@ import { ReservationService } from '../../../services/reservation.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HotelServicesService } from '../../../services/hotel-services.service';
+import { formatDateTimeToDate } from '../../../helpers/formatDateTimeToDate';
 
 @Component({
   selector: 'app-edit-reservation',
@@ -31,7 +32,11 @@ export class EditReservationComponent {
     this.reservationId = this.route.snapshot.paramMap.get('id') || '';
     this.reservationService.getReservationById(this.reservationId).subscribe({
       next: (response: any) => {
-        this.reservationDTO = response;
+        this.reservationDTO=response;
+        this.reservationDTO.reservationRooms.forEach((room: any) => {
+          room.checkInDate = formatDateTimeToDate(room.checkInDate);
+          room.checkOutDate = formatDateTimeToDate(room.checkOutDate);
+        });
         this.reservationDTO.reservationServices.forEach((service: any) => {
           this.hotelService.getServiceById(service.serviceId).subscribe({
             next: (service) => {
@@ -51,6 +56,7 @@ export class EditReservationComponent {
 
   updateReservation(): void {
     this.reservationDTO.reservationServices = this.selectedServices;
+    console.log('res',this.reservationDTO)
     this.reservationService
       .updateReservation(this.reservationId, this.reservationDTO)
       .subscribe({
@@ -64,7 +70,8 @@ export class EditReservationComponent {
       });
   }
 
-  cancelReservation() {
+  cancelReservation(event: Event) {
+    event.preventDefault()
     this.reservationService
       .updateReservationStatus(this.reservationId)
       .subscribe({
@@ -77,7 +84,8 @@ export class EditReservationComponent {
       });
   }
 
-  addServices() {
+  addServices(event: Event) {
+    event.preventDefault();
     this.hotelService.getHotelServices().subscribe((res) => {
       this.services = res;
       console.log(res);
@@ -85,7 +93,8 @@ export class EditReservationComponent {
     this.displayTable = true;
   }
 
-  addService(serviceId: any) {
+  addService(serviceId: string, event: Event) {
+    event.preventDefault();
     const selectedService = {
       serviceId: serviceId,
       dateOfPurchase: new Date(),
@@ -93,8 +102,9 @@ export class EditReservationComponent {
     this.selectedServices.push(selectedService);
   }
 
-  removeService(service: any) {
-    const index = this.services.indexOf(service);
+  removeService(i: number, event: Event) {
+    event.preventDefault();
+    const index = this.services.indexOf(i);
     if (index !== -1) {
       this.services.splice(index, 1);
     }

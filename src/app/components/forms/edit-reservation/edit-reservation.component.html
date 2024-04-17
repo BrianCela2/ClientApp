@@ -13,7 +13,7 @@
         <div class="form-group">
           <label for="checkInDate{{ i }}">CheckIn Date:</label>
           <input
-            type="datetime"
+            type="date"
             class="form-control"
             id="checkInDate{{ i }}"
             name="checkInDate{{ i }}"
@@ -27,7 +27,7 @@
         <div class="form-group">
           <label for="checkOutDate{{ i }}">CheckOut Date:</label>
           <input
-            type="datetime"
+            type="date"
             class="form-control"
             id="checkOutDate{{ i }}"
             name="checkOutDate{{ i }}"
@@ -66,13 +66,13 @@
             <td>
               <button
                 class="btn btn-sm btn-outline-danger"
-                (click)="removeService(i)"
+                (click)="removeService(i, $event)"
               >
                 Remove
               </button>
               <button
                 class="btn btn-sm btn-outline-success"
-                (click)="addService(service.serviceID)"
+                (click)="addService(service.serviceID, $event)"
               >
                 Add
               </button>
@@ -80,7 +80,7 @@
           </tr>
         </tbody>
       </table>
-      <button class="btn btn-primary" (click)="addServices()">
+      <button class="btn btn-primary" (click)="addServices($event)">
         Add Service
       </button>
       <button
@@ -90,7 +90,7 @@
       >
         Update
       </button>
-      <button class="btn btn-primary" (click)="cancelReservation()">
+      <button class="btn btn-primary" (click)="cancelReservation($event)">
         Cancel
       </button>
     </form>
