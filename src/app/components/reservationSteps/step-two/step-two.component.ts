@@ -38,13 +38,13 @@ export class StepTwoComponent implements OnInit {
     });
   }
 
-  selectRoom(roomId: string, checkInDate: string, checkOutDate: string) {
-    this.selectedRooms = this.selectedRooms.filter(room => room.checkInDate !== checkInDate && room.checkOutDate !== checkOutDate);
-    this.selectedRooms.push({ roomId, checkInDate, checkOutDate });
+  selectRoom(roomId: string, checkInDate: string, checkOutDate: string, index: number) {
+    this.selectedRooms[index] = { roomId, checkInDate, checkOutDate };
     this.onStepCompleted.emit();
   }
-
+  
   createReservation() {
+    console.log(this.selectedRooms)
     const reservationRooms = this.selectedRooms.map((room) => ({
       roomId: room.roomId,
       checkInDate: room.checkInDate,
