@@ -29,6 +29,9 @@ export class ReservationService {
     updateReservationDto.reservationId=id;
     return this.httpClient.put(this.url + '/' + id, updateReservationDto);
   }
+  updateReservationStatus(id: string, status: number): Observable<any> {
+    return this.httpClient.put(`${this.url}/status/${id}?status=${status}`, {});
+  }
 }
 
 

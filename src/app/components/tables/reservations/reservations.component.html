@@ -28,29 +28,38 @@
                 <th scope="col">Total Price</th>
                 <th scope="col">Reservation Date</th>
                 <th scope="col">Reservation Status</th>
-                <th scope="col">User ID</th>
+                <th scope="col">User Email</th>
+                <th scope="col">Reservation Status</th>
               </tr>
             </thead>
             <tbody>
               <ng-container *ngFor="let reservation of reservations; let i = index">
-                <tr (click)="showReservationDetails(reservation)" style="cursor: pointer;">
-                  <td>{{ i + 1 }}</td>
-                  <td>{{ reservation.reservationId }}</td>
-                  <td>{{ reservation.totalPrice }}</td>
-                  <td>{{ reservation.reservationDate | date:'mediumDate' }}</td>
-                  <td>{{ reservation.reservationStatus }}</td>
-                  <td>{{ reservation.userId }}</td>
+                <tr>
+                  <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ i + 1 }}</td>
+                  <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ reservation.reservationId }}</td>
+                  <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ reservation.totalPrice }}</td>
+                  <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ reservation.reservationDate | date:'mediumDate' }}</td>
+                  <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ reservation.reservationStatus }}</td>
+                  <td>{{ reservation.user.email }}</td>
+                  <td *ngIf="reservation.reservationStatus=='Canceled'">
+                    <button (click)="confirmStatusUpdate(reservation.reservationId,1)" class="btn btn-success">Confirmed</button>
+                  </td>
+                  <td *ngIf="reservation.reservationStatus=='Confirmed'">
+                    <button (click)="confirmStatusUpdate(reservation.reservationId,2)" class="btn btn-danger">Canceled</button>
+                  </td>
                 </tr>
                 <tr *ngIf="selectedReservation === reservation" class="bg-light">
-                  <td [attr.colspan]="6">
+                  <td [attr.colspan]="7">
                     <div>
                       <h2 class="text-primary">Details of Selected Reservation</h2>
                       <p><strong>Reservation ID:</strong> {{ reservation.reservationId }}</p>
                       <h3>Rooms</h3>
                       <ul>
-                        <li *ngFor="let room of reservation.reservationRooms">
-                          <p>{{room.roomId}}</p> CheckIn Date: {{ room.checkInDate | date:'mediumDate' }} CheckOut Date: {{ room.checkOutDate | date:'mediumDate' }}
-                        </li>
+                        <li *ngFor="let room of roomsNumbers">
+                          <p>Room Number:{{room.room.roomNumber}}</p>
+                          <p>Check In Date: {{ room.checkInDate | date:'mediumDate' }}</p>
+                          <p>Check Out Date: {{ room.checkOutDate | date:'mediumDate' }}</p>
+                        </li>                    
                       </ul>
                       <h3>Services</h3>
                       <ul>
