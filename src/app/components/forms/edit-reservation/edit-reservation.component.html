@@ -1,29 +1,101 @@
 <div class="container">
-    <h2>Update Reservation</h2>
-    <div *ngIf="reservationDTO.reservationId!=''">
-      <form (ngSubmit)="updateReservation()" #reservationForm="ngForm">
-        <div *ngFor="let reservationRooms of reservationDTO.reservationRooms; let i = index">
-          <p>Room {{i+1}}</p>
-          <div class="form-group">
-            <label for="checkInDate{{i}}">CheckIn Date:</label>
-            <input type="datetime" class="form-control" id="checkInDate{{i}}" name="checkInDate{{i}}"
-                   [ngModel]="reservationRooms.checkInDate " 
-                   (ngModelChange)="reservationDTO.reservationRooms[i].checkInDate = $event" required>
-          </div>  
-          <div class="form-group">
-            <label for="checkOutDate{{i}}">CheckOut Date:</label>
-            <input type="datetime" class="form-control" id="checkOutDate{{i}}" name="checkOutDate{{i}}" 
-                   [ngModel]="reservationRooms.checkOutDate" 
-                   (ngModelChange)="reservationDTO.reservationRooms[i].checkOutDate = $event" required>
-          </div>    
+  <h2>Update Reservation</h2>
+  <h4>Rooms</h4>
+  <div *ngIf="reservationDTO.reservationId != ''">
+    <form (ngSubmit)="updateReservation()" #reservationForm="ngForm">
+      <div
+        *ngFor="
+          let reservationRooms of reservationDTO.reservationRooms;
+          let i = index
+        "
+      >
+        <p>Room {{ i + 1 }}</p>
+        <div class="form-group">
+          <label for="checkInDate{{ i }}">CheckIn Date:</label>
+          <input
+            type="datetime"
+            class="form-control"
+            id="checkInDate{{ i }}"
+            name="checkInDate{{ i }}"
+            [ngModel]="reservationRooms.checkInDate"
+            (ngModelChange)="
+              reservationDTO.reservationRooms[i].checkInDate = $event
+            "
+            required
+          />
         </div>
-        
-        <button type="submit" class="btn btn-primary" [disabled]="!reservationForm.valid">Update</button>
-        <button  class="btn btn-primary" (click)="cancelReservation()">Cancel</button>
-      </form>
-    </div>
-    <div *ngIf="reservationDTO.reservationId==''">
-      <p>Reservation not found.</p>
-    </div>
+        <div class="form-group">
+          <label for="checkOutDate{{ i }}">CheckOut Date:</label>
+          <input
+            type="datetime"
+            class="form-control"
+            id="checkOutDate{{ i }}"
+            name="checkOutDate{{ i }}"
+            [ngModel]="reservationRooms.checkOutDate"
+            (ngModelChange)="
+              reservationDTO.reservationRooms[i].checkOutDate = $event
+            "
+            required
+          />
+        </div>
+      </div>
+      <ul class="list-group">
+        <h4>Services</h4>
+        <li *ngFor="let service of serviceDetails">
+          <p>{{ service.serviceName }}</p>
+        </li>
+      </ul>
+      <table *ngIf="displayTable" class="table">
+        <thead>
+          <tr>
+            <th>Service Name</th>
+            <th>Description</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Opening Time</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let service of services; let i = index">
+            <td>{{ service.serviceName }}</td>
+            <td>{{ service.description }}</td>
+            <td>{{ service.price }}</td>
+            <td>{{ service.category }}</td>
+            <td>{{ service.openTime }}</td>
+            <td>
+              <button
+                class="btn btn-sm btn-outline-danger"
+                (click)="removeService(i)"
+              >
+                Remove
+              </button>
+              <button
+                class="btn btn-sm btn-outline-success"
+                (click)="addService(service.serviceID)"
+              >
+                Add
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="btn btn-primary" (click)="addServices()">
+        Add Service
+      </button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="!reservationForm.valid"
+      >
+        Update
+      </button>
+      <button class="btn btn-primary" (click)="cancelReservation()">
+        Cancel
+      </button>
+    </form>
   </div>
-  
+  <div *ngIf="reservationDTO.reservationId == ''">
+    <p>Reservation not found.</p>
+  </div>
+</div>

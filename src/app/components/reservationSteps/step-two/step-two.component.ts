@@ -39,9 +39,7 @@ export class StepTwoComponent implements OnInit {
   }
 
   selectRoom(roomId: string, checkInDate: string, checkOutDate: string) {
-    // Remove previously selected room for the same search parameter
     this.selectedRooms = this.selectedRooms.filter(room => room.checkInDate !== checkInDate && room.checkOutDate !== checkOutDate);
-    // Add newly selected room
     this.selectedRooms.push({ roomId, checkInDate, checkOutDate });
     this.onStepCompleted.emit();
   }
