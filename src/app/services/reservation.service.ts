@@ -11,7 +11,7 @@ export class ReservationService {
 
   
   GetReservationPrice(request: any) {
-    return this.http.post<any>(`${this.url}/GetReservationPrice`, request);
+    return this.httpClient.post<any>(`${this.url}/GetReservationPrice`, request);
   }
   getReservations(): Observable<any[]> {
     return this.httpClient.get<any[]>(this.url+'/ReservationsServiceRooms');
