@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -50,6 +51,11 @@ export class AuthService {
       return null;
     }
   }
+
+  refreshToken(): Observable<string> {
+    const expiredToken = localStorage.getItem('token');
+    return this.http.post<string>(`${this.baseUrl}refresh-token`, expiredToken);
+}
 
   getUserIdFromToken(){
     if(this.userPayload){

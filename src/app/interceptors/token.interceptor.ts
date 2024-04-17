@@ -1,30 +1,43 @@
-import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
+import { HttpErrorResponse, HttpInterceptorFn,  } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
-import { catchError, throwError } from 'rxjs';
+import { catchError, switchMap, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { inject } from '@angular/core';
 
 export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
   const auth = inject(AuthService);
   const router = inject(Router);
   const myToken = auth.getToken();
+  
   if (myToken) {
     req = req.clone({
       setHeaders: { Authorization: `Bearer ${myToken}` },
     });
-  } else {
-    console.log('No token found.');
   }
 
   return next(req).pipe(
     catchError((err: any) => {
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
-          console.log(err);
-          router.navigate(['login']);
+          return auth.refreshToken().pipe(
+            catchError(refreshError => {
+              router.navigate(['login']);
+              return throwError(refreshError);
+            }),
+            switchMap((newToken: string) => {
+              if (newToken) {
+                req = req.clone({
+                  setHeaders: { Authorization: `Bearer ${newToken}` },
+                });
+                return next(req);
+              } else {
+                router.navigate(['login']);
+                return throwError('Token refresh failed.');
+              }
+            })
+          );
         }
       }
-      console.log(err);
       return throwError(() => new Error('Something went wrong'));
     })
   );

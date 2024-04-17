@@ -3,6 +3,7 @@ import { UserService } from '../../../services/user.service';
 import { AuthService } from '../../../services/auth.service';
 import { UserRoleService } from '../../../services/user-role.service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit {
   public role!:string;
 
   public fullName : string = "";
-  constructor(private user : UserService, private auth: AuthService, private userRole:UserRoleService) { }
+  constructor(private user : UserService, private auth: AuthService, private userRole:UserRoleService, private router:Router) { }
 
   ngOnInit() {
     this.user.getUsers()
@@ -29,15 +30,15 @@ export class DashboardComponent implements OnInit {
 
     this.userRole.getRole()
     .subscribe(val=>{
-      console.log(val)
       const roleFromToken = this.auth.getRoleFromToken();
-      console.log(roleFromToken)
       this.role = val || roleFromToken;
+      console.log('role',this.role)
     })
   }
 
   logout(){
     this.auth.signOut();
+    this.router.navigateByUrl( "/login")
   }
 
 }
