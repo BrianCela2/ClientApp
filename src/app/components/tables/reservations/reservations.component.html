@@ -1,0 +1,69 @@
+<div class="container-fluid" *ngIf="role">
+  <div class="row">
+    <ng-container *ngIf="role.includes('Admin')">
+      <main class="col-md-9 ms-sm-auto col-lg-12 px-md-4">
+        <div class="d-flex justify-content-between align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2 text-primary">Reservations</h1>
+          <div class="btn-toolbar mb-2 mb-md-0">
+            <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar align-text-bottom" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              This week
+            </button>
+          </div>
+        </div>
+
+        <h2 class="text-secondary">Reservation List</h2>
+        <br />
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead class="bg-primary text-white">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Reservation ID</th>
+                <th scope="col">Total Price</th>
+                <th scope="col">Reservation Date</th>
+                <th scope="col">Reservation Status</th>
+                <th scope="col">User ID</th>
+              </tr>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let reservation of reservations; let i = index">
+                <tr (click)="showReservationDetails(reservation)" style="cursor: pointer;">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ reservation.reservationId }}</td>
+                  <td>{{ reservation.totalPrice }}</td>
+                  <td>{{ reservation.reservationDate | date:'mediumDate' }}</td>
+                  <td>{{ reservation.reservationStatus }}</td>
+                  <td>{{ reservation.userId }}</td>
+                </tr>
+                <tr *ngIf="selectedReservation === reservation" class="bg-light">
+                  <td [attr.colspan]="6">
+                    <div>
+                      <h2 class="text-primary">Details of Selected Reservation</h2>
+                      <p><strong>Reservation ID:</strong> {{ reservation.reservationId }}</p>
+                      <h3>Rooms</h3>
+                      <ul>
+                        <li *ngFor="let room of reservation.reservationRooms">
+                          <p>{{room.roomId}}</p> CheckIn Date: {{ room.checkInDate | date:'mediumDate' }} CheckOut Date: {{ room.checkOutDate | date:'mediumDate' }}
+                        </li>
+                      </ul>
+                      <h3>Services</h3>
+                      <ul>
+                        <li *ngFor="let service of reservation.reservationServices">{{ service.serviceId }}</li>
+                      </ul>
+                    </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </ng-container>
+  </div>
+</div>

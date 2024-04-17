@@ -7,7 +7,7 @@ import { AuthService } from './auth.service';
 })
 export class SignalRService {
   private hubConnection!: HubConnection;
-  private connectionId!: Promise<string>; // Change type to Promise<string>
+  private connectionId!: Promise<string>; 
 
   constructor(private authService: AuthService) {}
 
@@ -30,7 +30,7 @@ export class SignalRService {
   }
 
    getConnection(): void {
-    this.connectionId = this.hubConnection.invoke('getconnectionid') 
+    this.connectionId = this.hubConnection.invoke('getconnectionid',this.authService.getUserIdFromToken()) 
       .then((data: string) => {
         console.log('Connection ID:', data);
         return data; 

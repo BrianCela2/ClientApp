@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component,ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { HubConnection, HubConnectionBuilder, LogLevel } from '@microsoft/signalr';
 import { Subject, takeUntil, timer } from 'rxjs';
 import { SendNotificationsComponent } from './notifications/send-notifications/send-notifications.component';
 import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.component';
@@ -44,19 +43,22 @@ import { SignalRService } from './services/signal-rservice.service';
         this.unreadCount++;
         console.log(result1);
       });
-      this.signalRService.getHubConnection().on('ReceiveNotification', (result1: any,connectionId) => {
+      this.signalRService.getHubConnection().on('ReceiveNotification', (result1: any) => {
         this.addNotification(result1);
         this.unreadCount++;
-        console.log(result1.messageContent);
+        console.log(result1);
       });
   
       const receiverId = this.authService.getUserIdFromToken();
+      if(this.authService.isLoggedIn()){
       this.notificationService.getNotifications(receiverId).subscribe(data => {
         this.notifications = data;
         this.unreadCount = this.notifications.filter(notification => !notification.isSeen).length;
         console.log(this.notifications);
+        this.cdr.detectChanges();
       });
     }
+  }
     
     ngOnDestroy(): void {
       this.destroy$.next();
@@ -65,11 +67,12 @@ import { SignalRService } from './services/signal-rservice.service';
   
     addNotification(notification: any): void {
       this.notification.unshift(notification);
-      timer(5000)
+      timer(7000)
         .pipe(takeUntil(this.destroy$))
         .subscribe(() => {
           this.removeNotification(notification);
         });
+        this.notifications.unshift(notification);
     }
   
     removeNotification(notification: any): void {
