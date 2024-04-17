@@ -13,6 +13,7 @@ import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.componen
 import { UserRolesComponent } from './components/tables/user-roles/user-roles.component';
 import { ReservateComponent } from './components/reservate/reservate.component';
 import { ReservationsComponent } from './components/tables/reservations/reservations.component';
+import { EditReservationComponent } from './components/forms/edit-reservation/edit-reservation.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -41,6 +42,8 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   { path: 'SearchRooms', component: SearchRoomsComponent, title: 'Search' },
-  { path: 'Reservations', component: ReservationsComponent, title: 'Reservations',canActivate: [AuthGuard]}
+  { path: 'Reservations', component: ReservationsComponent, title: 'Reservations',canActivate: [AuthGuard]},
+  { path: 'Reservations/Edit/:id', component: EditReservationComponent, title: 'Reservations Edit',canActivate: [AuthGuard]}
+
 
 ];
