@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Reservation, ReservationSample, UpdateReservation } from '../shared/reservation.model';
+import { ReservationRoom } from '../shared/reservationRooms.mode';
 
 @Injectable({
   providedIn: 'root'
@@ -10,23 +12,23 @@ export class ReservationService {
   constructor(private httpClient: HttpClient) { }
 
   
-  GetReservationPrice(request: any) {
+  GetReservationPrice(request: ReservationSample) {
     return this.httpClient.post<any>(`${this.url}/GetReservationPrice`, request);
   }
-  getReservations(): Observable<any[]> {
+  getReservations(): Observable<Reservation[]> {
     return this.httpClient.get<any[]>(this.url+'/ReservationsServiceRooms');
   }
-  getReservationById(id: string): Observable<any> {
+  getReservationById(id: string): Observable<Reservation> {
     return this.httpClient.get<any>(this.url+'/'+id);
   }
   getReservationOfUser(): Observable<any> {
     return this.httpClient.get<any>(this.url+'/GetReservationForUser');
   }
-  getReservationRooms(): Observable<any> {
+  getReservationRooms(): Observable<ReservationRoom[]> {
     return this.httpClient.get<any>(this.url+'/GetReservationsWithRooms');
   }
-  updateReservation(id: string, updateReservationDto: any): Observable<any> {
-    updateReservationDto.reservationId=id;
+  updateReservation(id: string, updateReservationDto: UpdateReservation): Observable<any> {
+    updateReservationDto.ReservationId=id;
     return this.httpClient.put(this.url + '/' + id, updateReservationDto);
   }
   updateReservationStatus(id:string):Observable<any>{

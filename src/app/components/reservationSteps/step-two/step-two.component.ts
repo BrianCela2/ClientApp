@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { SearchService } from '../../../services/search-service.service';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { ReservationStatusEnum } from '../../../shared/reservation.model';
 
 @Component({
   selector: 'step-two',
@@ -15,8 +16,8 @@ export class StepTwoComponent implements OnInit {
   @Output() onStepCompleted = new EventEmitter();
   selectedRooms: {
     roomId: string;
-    checkInDate: string;
-    checkOutDate: string;
+    checkInDate: Date;
+    checkOutDate: Date;
   }[] = [];
   roomLists: any[][] = [];
   searchParameters = this.searchService.getSearchParameters();
@@ -38,7 +39,7 @@ export class StepTwoComponent implements OnInit {
     });
   }
 
-  selectRoom(roomId: string, checkInDate: string, checkOutDate: string, index: number) {
+  selectRoom(roomId: string, checkInDate: Date, checkOutDate: Date, index: number) {
     this.selectedRooms[index] = { roomId, checkInDate, checkOutDate };
     this.onStepCompleted.emit();
   }
@@ -46,15 +47,15 @@ export class StepTwoComponent implements OnInit {
   createReservation() {
     console.log(this.selectedRooms)
     const reservationRooms = this.selectedRooms.map((room) => ({
-      roomId: room.roomId,
-      checkInDate: room.checkInDate,
-      checkOutDate: room.checkOutDate,
+      RoomId: room.roomId,
+      CheckInDate: room.checkInDate,
+      CheckOutDate: room.checkOutDate,
     }));
 
     this.searchService.setReservation ({
-      reservationDate: new Date(),
-      reservationStatus: 'Confirmed',
-      reservationRooms: reservationRooms,
+      ReservationDate: new Date(),
+      ReservationStatus: ReservationStatusEnum.Confirmed,
+      ReservationRooms: reservationRooms,
     });
   }
 }

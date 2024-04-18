@@ -47,7 +47,7 @@ export class StepThreeComponent implements OnInit {
   addServicesToReservation() {
     const reservation = this.searchService.getReservation();
 
-    reservation.reservationServices = this.selectedServices;
+    reservation.ReservationServices = this.selectedServices;
 
     this.searchService.setReservation(reservation);
   }

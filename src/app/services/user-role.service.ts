@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Roles, UserRoleDetail } from '../shared/userRole.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,19 +17,26 @@ export class UserRoleService {
     return this.role.asObservable();
   }
 
-  public setRole(role: any) {
+  public setRole(role: Roles) {
     this.role.next(role);
   }
-  
+
   getUserRoleDetails() {
-    return this.http.get<any>(`${this.baseUrl}UserRole/getUserRoleDetails`);
+    return this.http.get<UserRoleDetail[]>(
+      `${this.baseUrl}UserRole/getUserRoleDetails`
+    );
   }
 
-  addRoleToUser(userId: string, role: any) {
-    return this.http.post<any>(`${this.baseUrl}UserRole`, { userId:userId, roles:role });
+  addRoleToUser(userId: string, role: Roles) {
+    return this.http.post<any>(`${this.baseUrl}UserRole`, {
+      userId: userId,
+      roles: role,
+    });
   }
 
-  removeRoleFromUser(userId: string, role: number) {
-    return this.http.delete<any>(`${this.baseUrl}UserRole/${userId}/${role}`);
+  removeRoleFromUser(userId: string, role: Roles) {
+    return this.http.delete<any>(
+      `${this.baseUrl}UserRole/delete?userId=${userId}&roles=${role}`
+    );
   }
 }

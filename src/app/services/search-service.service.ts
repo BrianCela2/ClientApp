@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Reservation, ReservationSample } from '../shared/reservation.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SearchService {
   searchParameters: any[] = [];
-  reservation:any = {};
+  reservation!:ReservationSample ;
 
   constructor() { }
 
@@ -18,11 +19,11 @@ export class SearchService {
   }
 
   
-  setReservation(params: any) {
+  setReservation(params: ReservationSample) {
     this.reservation = params;
   }
 
-  getReservation(): any {
+  getReservation(): ReservationSample {
     return this.reservation;
   }
 }

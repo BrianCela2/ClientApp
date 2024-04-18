@@ -4,6 +4,7 @@ import { SearchService } from '../../../services/search-service.service';
 import { CommonModule } from '@angular/common';
 import { ReservationService } from '../../../services/reservation.service';
 import { HotelServicesService } from '../../../services/hotel-services.service';
+import { Reservation, ReservationSample } from '../../../shared/reservation.model';
 
 @Component({
   selector: 'step-four',
@@ -14,12 +15,13 @@ import { HotelServicesService } from '../../../services/hotel-services.service';
 })
 export class StepFourComponent implements OnInit {
   constructor(private http: HttpClient,private searchService: SearchService, private reservation:ReservationService, private hotelService:HotelServicesService){}
-  reservationDTO: any; 
-  totalPrice: any;
+  reservationDTO!: ReservationSample; 
+  totalPrice!: number;
   serviceDetails: any[] = [];
 
   ngOnInit(): void {
     this.reservationDTO = this.searchService.getReservation();  
+    console.log(this.reservationDTO)
     this.reservation.GetReservationPrice(this.reservationDTO).subscribe({
       next: (response) => {
         this.totalPrice = response;
@@ -30,10 +32,10 @@ export class StepFourComponent implements OnInit {
       }
     });
     console.log(this.reservationDTO)
-    this.reservationDTO.reservationServices.forEach((service: any) => {
+    this.reservationDTO.ReservationServices?.forEach((service: any) => {
       this.hotelService.getServiceById(service.serviceId).subscribe({
         next: (service) => {
-          this.serviceDetails.push(service); // Push service details to array
+          this.serviceDetails.push(service);
         },
         error: (error) => {
           console.error('Error getting service details:', error);

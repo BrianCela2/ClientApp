@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UserRoleService } from '../../../services/user-role.service';
+import { Login } from '../../../shared/user.model';
 
 @Component({
   selector: 'app-login',
@@ -42,7 +43,6 @@ export class LoginComponent implements OnInit {
   }
   onLogin() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
       this.auth.login(this.loginForm.value).subscribe({
         next: (res) => {
           console.log(res)

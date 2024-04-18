@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
+import { Login, Register } from '../shared/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class AuthService {
     this.userPayload = this.decodeToken();
   }
 
-  signUp(request: any) {
+  signUp(request: Register) {
     return this.http.post<any>(`${this.baseUrl}register`, request);
   }
 
@@ -23,7 +24,7 @@ export class AuthService {
     this.router.navigate(['login']);
   }
 
-  login(request: any) {
+  login(request: Login) {
     return this.http.post<any>(`${this.baseUrl}login`, request, {
       responseType: 'text' as 'json',
     });

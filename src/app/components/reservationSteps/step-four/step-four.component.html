@@ -1,20 +1,20 @@
 <div class="container">
   <h2>Reservation Details</h2>
   <div *ngIf="reservationDTO">
-    <p>Reservation Date: {{ reservationDTO.reservationDate | date }}</p>
-    <p>Reservation Status: {{ reservationDTO.reservationStatus }}</p>
+    <p>Reservation Date: {{ reservationDTO.ReservationDate | date }}</p>
+    <p>Reservation Status: {{ reservationDTO.ReservationStatus }}</p>
     <h3>Reserved Rooms:</h3>
     <ul class="list-group">
       <li
         class="list-group-item"
         *ngFor="
-          let room of reservationDTO.reservationRooms;
+          let room of reservationDTO.ReservationRooms;
           let roomIndex = index
         "
       >
         <p>Room {{ roomIndex + 1 }}</p>
-        <p>Check-In Date: {{ room.checkInDate }}</p>
-        <p>Check-Out Date: {{ room.checkOutDate }}</p>
+        <p>Check-In Date: {{ room.CheckInDate }}</p>
+        <p>Check-Out Date: {{ room.CheckOutDate }}</p>
       </li>
     </ul>
     <h3>Reserved Services:</h3>

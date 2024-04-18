@@ -13,7 +13,7 @@ export class HotelServicesService {
     return this.http.get<any>(`${this.baseUrl}hotelservices`);
   } 
   
-  getServiceById(id:any){
+  getServiceById(id:string){
     return this.http.get<any>(`${this.baseUrl}hotelservices/${id}`);
   }
 }
