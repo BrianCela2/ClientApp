@@ -4,14 +4,13 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil, timer } from 'rxjs';
 import { SendNotificationsComponent } from './notifications/send-notifications/send-notifications.component';
-import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.component';
 import { NotificationService } from './services/notification.service';
 import { AuthService } from './services/auth.service';
 import { SignalRService } from './services/signal-rservice.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent,SearchRoomsComponent],
+  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

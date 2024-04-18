@@ -9,7 +9,6 @@ import { EditRoomComponent } from './rooms/edit-room/edit-room.component';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 import { RoomListComponent } from './rooms/room-list/room-list.component';
 import { SendNotificationsComponent } from './notifications/send-notifications/send-notifications.component';
-import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.component';
 import { UserRolesComponent } from './components/tables/user-roles/user-roles.component';
 import { ReservateComponent } from './components/reservate/reservate.component';
 import { ReservationsComponent } from './components/tables/reservations/reservations.component';
@@ -41,7 +40,6 @@ export const routes: Routes = [
     title: 'Notification',
     canActivate: [AuthGuard]
   },
-  { path: 'SearchRooms', component: SearchRoomsComponent, title: 'Search' },
   { path: 'Reservations', component: ReservationsComponent, title: 'Reservations',canActivate: [AuthGuard]},
   { path: 'Reservations/Edit/:id', component: EditReservationComponent, title: 'Reservations Edit',canActivate: [AuthGuard]}
 
