@@ -28,7 +28,7 @@ export class UserRolesComponent implements OnInit {
   
   getUserRoles() {
     this.userRoleService.getUserRoleDetails().subscribe((res:any) => {
-      this.userRoles = res.result;
+      this.userRoles = res;
       });
   }
 
