@@ -1,7 +1,9 @@
 
 <nav class="navbar navbar-expand-sm bg-light">
-
   <div class="container-fluid">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Hospitality Pro</a>
+
     <!-- Links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -14,40 +16,20 @@
         <a class="nav-link" href="#">Link 3</a>
       </li>
     </ul>
-    
-    <div class="dropdown" (click)="NotificationsToSeen()">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-        Notifications
-        <span class="badge bg-danger">{{ unreadCount }}</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-        <li *ngFor="let notification of notifications" [class.unread]="!notification.isSeen">
-          <a class="dropdown-item" href="#">
-            {{ notification.messageContent }} 
-          </a>
-        </li>
-        <li *ngIf="notifications.length === 0">
-          <span class="dropdown-item">No notifications</span>
-        </li>
-      </ul>
-    </div>
-    
+
+    <!-- Notification List -->
+    <app-notification-list></app-notification-list>
+
+    <!-- Notification Container -->
+  
+
   </div>
 </nav>
-
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <div class="notification-container">
-  <ul class="notification-list" *ngIf="notification.length > 0">
-    <li *ngFor="let item of notification" class="notification-item">
+  <ul class="notification-list" *ngIf="notifications.length > 0">
+    <li *ngFor="let item of notifications" class="notification-item">
       <span class="notification-message">Notification: {{ item.messageContent }}</span>
     </li>
   </ul>
 </div>
-
 <router-outlet />

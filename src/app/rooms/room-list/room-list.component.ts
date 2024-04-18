@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RoomService } from '../../services/room.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { RoomDTO } from '../../shared/room.model';
 
 @Component({
   selector: 'app-room-list',
@@ -25,7 +26,7 @@ export class RoomListComponent implements OnInit {
      room.activePhotoIndex = photoIndex;
    }
  
-   navigateToGet(roomId: number) {
+   navigateToGet(roomId: string) {
      this.router.navigate(['Room/Get', roomId]);
    }
  

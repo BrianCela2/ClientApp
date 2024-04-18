@@ -1,3 +1,5 @@
+import { RoomPhotoDTO } from "./room-photos.model";
+
 export interface CreateRoomDTO {
     roomNumber: number;
     capacity?: number;
@@ -30,12 +32,13 @@ export interface CreateRoomDTO {
 
     export interface RoomDTO
     {
-         RoomId:string,
-         RoomNumber:number,
-         Capacity:number,
-         Price :number,
+         roomId:string,
+         roomNumber:number,
+         capacity:number,
+         price :number,
          roomStatus : RoomStatus ,
          category: RoomCategory,
+         roomPhotos:RoomPhotoDTO[]
     }
 
 
