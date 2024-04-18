@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HotelServicesService } from '../../../services/hotel-services.service';
 import { formatDateTimeToDate } from '../../../helpers/formatDateTimeToDate';
+import { ReservationStatusEnum } from '../../../shared/reservation.model';
 
 @Component({
   selector: 'app-edit-reservation',
@@ -73,7 +74,7 @@ export class EditReservationComponent {
   cancelReservation(event: Event) {
     event.preventDefault()
     this.reservationService
-      .updateReservationStatus(this.reservationId)
+      .updateReservationStatus(this.reservationId,ReservationStatusEnum.Canceled)
       .subscribe({
         next: (response) => {
           console.log('Reservation status updated successfully', response);
