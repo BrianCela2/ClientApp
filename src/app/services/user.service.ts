@@ -11,9 +11,9 @@ export class UserService {
   private baseUrl: string = 'https://localhost:7006/User/';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}getAllUsers`);
-  }
+  getUsers(page: number, pageSize: number, sortField: string, sortOrder: string, searchString: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}getAllUsers?page=${page}&pageSize=${pageSize}&sortField=${sortField}&sortOrder=${sortOrder}&searchString=${searchString}`);
+    }
 
   updateUser(request: any) {
     return this.http.put<any>(`${this.baseUrl}`, request);

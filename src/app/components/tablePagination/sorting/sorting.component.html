@@ -1,0 +1,14 @@
+<div class="d-flex">
+  <div>
+    <select class="form-select" (change)="onSortChange($event)">
+      <option value="FirstName">First Name</option>
+      <option value="LastName">Last Name</option>
+    </select>
+  </div>
+  <div>
+    <select class="form-select" (change)="onOrderChange($event)">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+  </div>
+</div>
