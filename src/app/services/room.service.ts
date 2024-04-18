@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
-import { CreateRoomDTO,UpdateRoomDTO } from '../shared/room.model';
+import { CreateRoomDTO,RoomDTO,UpdateRoomDTO } from '../shared/room.model';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +12,9 @@ export class RoomService {
   getRooms(): Observable<any[]> {
     return this.httpClient.get<any[]>(this.url+'/GetRoomPhotos');
   }
-  
+  getRoomsReservation(id:string) {
+    return this.httpClient.get<any[]>('https://localhost:7006/api/ReservationRoom/GetRoomsReservation/'+id);
+  }
   createRoom(room: CreateRoomDTO): Observable<any> {
     const formData = new FormData();
     formData.append('roomNumber', room.roomNumber.toString());
@@ -41,6 +43,9 @@ export class RoomService {
   }
   getRoomById(id: string): Observable<any> {
     return this.httpClient.get<any>(this.url+'/GetRoom/'+id);
+  }
+  getRoomWithId(id: string): Observable<any> {
+    return this.httpClient.get<any>(this.url+'/GetById/'+id);
   }
   RoomDelete (id:string):Observable<number>{
     let httpheaders=new HttpHeaders()

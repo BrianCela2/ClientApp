@@ -31,8 +31,8 @@ export class ReservationService {
     updateReservationDto.ReservationId=id;
     return this.httpClient.put(this.url + '/' + id, updateReservationDto);
   }
-  updateReservationStatus(id:string):Observable<any>{
-    return this.httpClient.put(`${this.url}/status/${id}`, {reservationId:id,reservationStatus:'canceled'});
+  updateReservationStatus(id: string, status: number): Observable<any> {
+    return this.httpClient.put(`${this.url}/status/${id}?status=${status}`, {});
   }
 }
 

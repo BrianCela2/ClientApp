@@ -1,12 +1,8 @@
 <div class="container">
   <div *ngFor="let roomList of roomLists; let i = index">
-    <div>Room {{ i + 1 }}</div>
-    <div *ngFor="let rooms of roomList">
+    <div>Room {{i+1}}</div>
       <div class="row">
-        <div
-          *ngFor="let room of rooms; let roomIndex = index"
-          class="col-md-4 mb-4"
-        >
+        <div *ngFor="let room of roomList let roomIndex = index" class="col-md-4 mb-4">
           <div class="card mx-auto">
             <img
               [src]="
@@ -37,7 +33,6 @@
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>
