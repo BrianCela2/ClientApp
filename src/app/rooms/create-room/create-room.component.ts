@@ -16,6 +16,16 @@ import { Route, Router } from '@angular/router';
 export class CreateRoomComponent implements OnInit {
   rooms: any[] = [];
   newRoom: any = {}; 
+  public currentPage: number = 1;
+  public pageSize: number = 10;
+  public sortField: string = "Capacity";
+  public sortOrder: string = "asc";
+  sortOptions: { value: string, label: string }[] = [
+    { value: 'Capacity', label: 'Capacity' },
+    { value: 'RoomNumber', label: 'Room Number' },
+    { value: 'Price', label: 'Price' },
+    { value: 'Category', label: 'Category' },
+  ];
   room: CreateRoomDTO = { roomNumber: 0, capacity: 0, price: 0,  photos: [] };
   private roomsSubscription: Subscription | undefined;
 
@@ -26,7 +36,7 @@ export class CreateRoomComponent implements OnInit {
   }
 
   loadRooms(): void {
-    this.roomsSubscription = this.roomService.getRooms().subscribe({
+    this.roomsSubscription = this.roomService.getRooms(this.currentPage, this.pageSize, this.sortField, this.sortOrder).subscribe({
       next: (data: any) => {
         this.rooms = data;
       },

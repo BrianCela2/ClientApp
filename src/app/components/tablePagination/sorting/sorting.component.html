@@ -1,8 +1,7 @@
 <div class="d-flex">
   <div>
     <select class="form-select" (change)="onSortChange($event)">
-      <option value="FirstName">First Name</option>
-      <option value="LastName">Last Name</option>
+      <option *ngFor="let option of sortOptions" [value]="option.value">{{ option.label }}</option>
     </select>
   </div>
   <div>

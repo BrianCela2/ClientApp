@@ -25,6 +25,10 @@ export class DashboardComponent implements OnInit {
   public sortField: string = "FirstName";
   public sortOrder: string = "asc";
   public searchString: string = "";
+  sortOptions: { value: string, label: string }[] = [
+    { value: 'FirstName', label: 'First Name' },
+    { value: 'LastName', label: 'Last Name' }
+  ];
 
   constructor(
     private userService: UserService,
@@ -68,9 +72,5 @@ export class DashboardComponent implements OnInit {
   onSearchChange(searchString: string) {
     this.searchString = searchString;
     this.fetchUsers();
-  }
-  logout() {
-    this.authService.signOut();
-    this.router.navigateByUrl("/login");
   }
 }
