@@ -6,6 +6,7 @@ import { AuthService } from '../../../services/auth.service';
 import { RoomService } from '../../../services/room.service';
 import { RoomDetailsComponent } from '../../../rooms/room-details/room-details.component';
 import { Observable } from 'rxjs';
+import { HotelServicesService } from '../../../services/hotel-services.service';
 
 @Component({
   selector: 'app-reservations',
@@ -19,8 +20,9 @@ public reservations:any=[];
 public role!:string;
 selectedReservation: any;
 roomsNumbers!:any[];
+services!:any[];
 constructor(private reservationService:ReservationService,private userRole:UserRoleService,
-  private authService:AuthService,private cdr:ChangeDetectorRef,private roomService:RoomService){}
+  private authService:AuthService,private cdr:ChangeDetectorRef,private roomService:RoomService,private hotelService:HotelServicesService){}
 ngOnInit() {
   this.reservationService.getReservations()
   .subscribe(res=>{
@@ -44,6 +46,9 @@ showReservationDetails(reservation: any) {
     this.selectedReservation = reservation;
     this.getRoomReservation(reservation.reservationId).subscribe(data => {
       this.roomsNumbers = data;
+    });
+    this.getServicesReservation(reservation.reservationId).subscribe(response => {
+      this.services = response;
     });
   }
 }
@@ -73,5 +78,8 @@ statusUpdate(reservationId: string, status: number) {
 }  
 getRoomReservation(reservationId: any): Observable<any[]> {
   return this.roomService.getRoomsReservation(reservationId);
+}
+getServicesReservation(reservationId:any):Observable<any[]>{
+  return this.hotelService.getServicesReservation(reservationId);
 }
 }

@@ -23,19 +23,18 @@ export class StepTwoComponent implements OnInit {
 
   ngOnInit(): void {
     this.roomLists = [];
-    this.searchParameters.forEach((params, index) => {
+    
       this.http
-        .post<any>('https://localhost:7006/Room/SearchRooms', [params])
+        .post<any>('https://localhost:7006/Room/SearchRooms', this.searchParameters)
         .subscribe({
           next: (response) => {
-            this.roomLists[index] = response;
+            this.roomLists = response;
             console.log('roomList', this.roomLists);
           },
           error: (error) => {
             console.error('Error searching rooms:', error);
           },
         });
-    });
   }
 
   selectRoom(roomId: string, checkInDate: string, checkOutDate: string) {
