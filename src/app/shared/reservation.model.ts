@@ -1,6 +1,5 @@
-import { ReservationService } from "../services/reservation.service";
 import { ReservationRoom } from "./reservationRooms.mode";
-import { CreateReservationService } from "./reservationService.model";
+import { CreateReservationService, ReservationService } from "./reservationService.model";
 
 export interface Reservation {
     ReservationId: string;

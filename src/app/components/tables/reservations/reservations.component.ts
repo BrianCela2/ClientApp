@@ -82,4 +82,22 @@ getRoomReservation(reservationId: any): Observable<any[]> {
 getServicesReservation(reservationId:any):Observable<any[]>{
   return this.hotelService.getServicesReservation(reservationId);
 }
+confirmReservationDelete(reservationId: string): void {
+  if (window.confirm('Are you sure you want to delete the Room?')) {
+    this.DeleteReservation(reservationId);
+  }
+}
+DeleteReservation(reservationId:string){
+  this.reservationService.ReservationDelete(reservationId)
+    .subscribe({
+        next: data => {
+          this.cdr.detectChanges();
+          console.log('Delete successful');
+        },
+        error: error => {
+            console.error('There was an error!', error);
+        }
+    });
+    
+}
 }

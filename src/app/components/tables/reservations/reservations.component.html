@@ -47,6 +47,9 @@
                   <td *ngIf="reservation.reservationStatus=='Confirmed'">
                     <button (click)="confirmStatusUpdate(reservation.reservationId,2)" class="btn btn-danger">Canceled</button>
                   </td>
+                  <td>
+                    <button (click)="confirmReservationDelete(reservation.reservationId)"class="btn btn-danger">Delete Reservation</button>
+                  </td>
                 </tr>
                 <tr *ngIf="selectedReservation === reservation" class="bg-light">
                   <td [attr.colspan]="7">
