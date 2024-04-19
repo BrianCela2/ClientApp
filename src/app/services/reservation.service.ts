@@ -15,8 +15,8 @@ export class ReservationService {
   GetReservationPrice(request: ReservationSample) {
     return this.httpClient.post<any>(`${this.url}/GetReservationPrice`, request);
   }
-  getReservations(page: number, pageSize: number, sortField: string, sortOrder: string, searchString: string): Observable<Reservation[]> {
-    return this.httpClient.get<any[]>(`${this.url}/ReservationsServiceRooms?page=${page}&pageSize=${pageSize}&sortField=${sortField}&sortOrder=${sortOrder}&searchString=${searchString}`);
+  getReservations(page: number, pageSize: number, sortField: string, sortOrder: string, searchString: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.url}/ReservationsServiceRooms?page=${page}&pageSize=${pageSize}&sortField=${sortField}&sortOrder=${sortOrder}&searchString=${searchString}`);
   }
   getReservationById(id: string): Observable<Reservation> {
     return this.httpClient.get<any>(this.url+'/'+id);

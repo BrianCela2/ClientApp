@@ -18,6 +18,7 @@ export class RoomListComponent implements OnInit {
    public pageSize: number = 10;
    public sortField: string = "Capacity";
    public sortOrder: string = "asc";
+   public totalPages!:number ;
    sortOptions: { value: string, label: string }[] = [
      { value: 'Capacity', label: 'Capacity' },
      { value: 'RoomNumber', label: 'Room Number' },
@@ -31,7 +32,8 @@ export class RoomListComponent implements OnInit {
    }
    fetchRooms() {
     this.roomService.getRooms(this.currentPage, this.pageSize, this.sortField, this.sortOrder).subscribe(data => {
-      this.rooms = data.map(room => ({ ...room, activePhotoIndex: 0 }));
+      this.rooms = data.rooms.map((room: any) => ({ ...room, activePhotoIndex: 0 }));
+      this.totalPages =data.totalPages;
     });
   }
 

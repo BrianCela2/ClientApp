@@ -26,13 +26,14 @@ export class ReservationsComponent {
   services!: any[];
 
   public currentPage: number = 1;
+  public totalPages!:number ;
   public pageSize: number = 10;
   public sortField: string = 'ReservationDate';
   public sortOrder: string = 'asc';
   public searchString: string = '';
   sortOptions: { value: string; label: string }[] = [
     { value: 'ReservationDate', label: 'Reservation Date' },
-    { value: 'Price', label: 'Price' },
+    { value: 'TotalPrice', label: 'Price' },
   ];
 
   constructor(
@@ -59,7 +60,8 @@ export class ReservationsComponent {
       .subscribe(res => {
         console.log(res)
         this.cdr.detectChanges();
-        this.reservations = res;
+        this.reservations = res.reservations;
+        this.totalPages =res.totalPages;
       });
   }
   showReservationDetails(reservation: any) {

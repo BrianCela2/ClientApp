@@ -35,6 +35,6 @@
       </div>
     </div>
     <app-sorting (sortChange)="onSortChange($event)" [sortOptions]="sortOptions"></app-sorting>
-    <app-pagination [currentPage]="currentPage" [totalPages]="rooms.length" (pageChange)="onPageChange($event)"></app-pagination>
+    <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChange)="onPageChange($event)"></app-pagination>
   </div>
 </div>

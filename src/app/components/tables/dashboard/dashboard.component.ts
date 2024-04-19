@@ -18,6 +18,7 @@ import { CommonModule } from '@angular/common';
 export class DashboardComponent implements OnInit {
   public users: any = [];
   public role!: string;
+  public totalPages!:number ;
 
   public fullName: string = "";
   public currentPage: number = 1;
@@ -46,7 +47,8 @@ export class DashboardComponent implements OnInit {
     this.userService.getUsers(this.currentPage, this.pageSize, this.sortField, this.sortOrder, this.searchString)
       .subscribe(res => {
         console.log(res)
-        this.users = res;
+        this.users = res.users;
+        this.totalPages =res.totalPages;
       });
   }
 

@@ -1,5 +1,4 @@
 
-  <navbar class="position-fixed top-0 w-100">
     <div class="dropdown" (click)="NotificationsToSeen()">
       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
         Notifications
@@ -16,14 +15,6 @@
         </li>
       </ul>
     </div>
-  </navbar>
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 <div class="notification-container">
   <ul class="notification-list" *ngIf="notification.length > 0">
     <li *ngFor="let item of notification" class="notification-item">
