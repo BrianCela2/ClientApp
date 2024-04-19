@@ -55,10 +55,10 @@ public get reservationStatusEnum(): typeof ReservationStatusEnum {
     this.reservationService.getReservations(this.currentPage, this.pageSize, this.sortField, this.sortOrder, this.searchString)
       .subscribe(res => {
         console.log(res)
-        this.cdr.detectChanges();
         this.reservations = res.reservations;
         this.totalPages =res.totalPages;
       });
+      this.cdr.detectChanges();
   }
 showReservationDetails(reservation: Reservation) {
   if (this.selectedReservation === reservation) {
