@@ -38,7 +38,8 @@ sortOptions: { value: string; label: string }[] = [
 ];
 public get reservationStatusEnum(): typeof ReservationStatusEnum {
   return ReservationStatusEnum; 
-}constructor(private reservationService:ReservationService,private userRole:UserRoleService,
+}
+constructor(private reservationService:ReservationService,private userRole:UserRoleService,
   private authService:AuthService,private cdr:ChangeDetectorRef,private roomService:RoomService,private hotelService:HotelServicesService){}
   ngOnInit() {
     this.fetchReservations()

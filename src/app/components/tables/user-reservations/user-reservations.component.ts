@@ -9,6 +9,7 @@ import { HotelServicesService } from '../../../services/hotel-services.service';
 import { Router } from '@angular/router';
 import { SortingComponent } from '../../tablePagination/sorting/sorting.component';
 import { PaginationComponent } from '../../tablePagination/pagination/pagination.component';
+import { ReservationStatusEnum } from '../../../shared/reservation.model';
 
 @Component({
   selector: 'app-user-reservations',
@@ -34,6 +35,10 @@ export class UserReservationsComponent implements OnInit {
     { value: 'ReservationDate', label: 'ReservationDate' },
     { value: 'TotalPrice', label: 'TotalPrice' },
   ];
+  
+  public get reservationStatusEnum(): typeof ReservationStatusEnum {
+    return ReservationStatusEnum; 
+  }
   constructor(
     private reservationService: ReservationService,
     private userRole: UserRoleService,

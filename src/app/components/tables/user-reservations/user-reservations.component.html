@@ -52,6 +52,7 @@
                   <button
                     (click)="GoToEdit(reservation.reservationId)"
                     class="btn btn-danger"
+                    [disabled]="reservation.reservationStatus==reservationStatusEnum.Canceled"
                   >
                     Edit Dates
                   </button>
