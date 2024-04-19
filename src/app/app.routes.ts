@@ -25,7 +25,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'userRoles', component: UserRolesComponent },
-  { path: 'steps', component: ReservateComponent },
+  { path: 'createReservation', component: ReservateComponent },
   { path: 'Room', component: CreateRoomComponent, title: 'Room Create' },
   { path: 'Room/Edit/:id', component: EditRoomComponent, title: 'Room Edit' },
   {

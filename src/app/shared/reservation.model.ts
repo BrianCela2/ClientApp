@@ -3,13 +3,13 @@ import { ReservationRoom } from "./reservationRooms.mode";
 import { CreateReservationService } from "./reservationService.model";
 
 export interface Reservation {
-    ReservationId: string;
-    TotalPrice: number;
-    ReservationDate: Date | null;
-    ReservationStatus: ReservationStatusEnum;
-    UserId: string;
-    ReservationRooms: ReservationRoom[];
-    ReservationServices?: ReservationService[];
+    reservationId: string;
+    totalPrice: number;
+    reservationDate: Date | null;
+    reservationStatus: ReservationStatusEnum;
+    userId: string;
+    reservationRooms: ReservationRoom[];
+    reservationServices?: ReservationService[];
   }
   export enum ReservationStatusEnum {
     Confirmed = 1,

@@ -7,10 +7,12 @@ import { SendNotificationsComponent } from './notifications/send-notifications/s
 import { NotificationService } from './services/notification.service';
 import { AuthService } from './services/auth.service';
 import { SignalRService } from './services/signal-rservice.service';
+import { NavbarComponent } from './components/navbar/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent],
+  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent,NavbarComponent,FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

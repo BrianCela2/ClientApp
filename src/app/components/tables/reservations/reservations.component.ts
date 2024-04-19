@@ -32,7 +32,7 @@ export class ReservationsComponent {
   public searchString: string = '';
   sortOptions: { value: string; label: string }[] = [
     { value: 'ReservationDate', label: 'Reservation Date' },
-    { value: 'TotalPrice', label: 'Total Price' },
+    { value: 'Price', label: 'Price' },
   ];
 
   constructor(
