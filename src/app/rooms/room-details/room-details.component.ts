@@ -6,6 +6,8 @@ import { CommonModule } from '@angular/common';
 import { RoomPhotosService } from '../../services/roomphotos.service';
 import { UserRoleService } from '../../services/user-role.service';
 import { AuthService } from '../../services/auth.service';
+import { RoomCategory, RoomDTO, RoomStatus } from '../../shared/room.model';
+import { RoomPhotoDTO } from '../../shared/room-photos.model';
 @Component({
   selector: 'app-room-details',
   standalone: true,
@@ -15,7 +17,15 @@ import { AuthService } from '../../services/auth.service';
 })
 export class RoomDetailsComponent {
   roomId!: string;
-  room: any;
+  room: RoomDTO={
+    roomId: '',
+    roomNumber: 0,
+    capacity: 0,
+    price: 0,
+    roomStatus: RoomStatus.Available,
+    category: RoomCategory.Suit,
+    roomPhotos: []
+  };
   role!:string;
   activePhotoIndex: number = 0;
   @ViewChild('fileInput') fileInput!: ElementRef;
@@ -45,15 +55,18 @@ export class RoomDetailsComponent {
 
   getRoomDetails() {
     this.roomService.getRoomById(this.roomId).subscribe({
-      next: (room: any) => {
+      next: (room: RoomDTO) => {
         this.room = room;
-        this.room.roomPhotos.forEach((photo: any) => {
+        console.log(this.room);
+        if (this.room.roomPhotos) {
+        this.room.roomPhotos.forEach((photo: RoomPhotoDTO) => {
           if (photo.photoContent && typeof photo.photoContent === 'string' && photo.photoContent.startsWith('data:image')) {
             return;
           }
           photo.photoContent = `data:image/jpeg;base64,${photo.photoContent}`;
           console.log(photo);
         });
+      }
       },
       error: (error) => {
         console.error('Error fetching room:', error);
@@ -114,7 +127,7 @@ export class RoomDetailsComponent {
     }
 
     const formData = new FormData();
-    formData.append('roomId', this.roomId); // Include roomId in FormData
+    formData.append('roomId', this.roomId); 
     formData.append('ImageFile', this.photos);
 
     this.roomPhotoService.addPhotoToRoom(formData, this.roomId)

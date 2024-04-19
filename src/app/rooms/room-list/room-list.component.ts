@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { SortingComponent } from '../../components/tablePagination/sorting/sorting.component';
 import { PaginationComponent } from '../../components/tablePagination/pagination/pagination.component';
+import { RoomDTO } from '../../shared/room.model';
 
 @Component({
   selector: 'app-room-list',
@@ -42,7 +43,7 @@ export class RoomListComponent implements OnInit {
      room.activePhotoIndex = photoIndex;
    }
  
-   navigateToGet(roomId: number) {
+   navigateToGet(roomId: string) {
      this.router.navigate(['Room/Get', roomId]);
    }
  

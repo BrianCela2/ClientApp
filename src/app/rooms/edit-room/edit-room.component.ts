@@ -37,11 +37,11 @@ this.roomCategoryOptions = Object.keys(RoomCategory)
   .map((key: string) => ({ value: RoomCategory[key as keyof typeof RoomCategory], label: key }));
 
     this.roomService.getRoomById(this.roomId).subscribe({
-      next: (response: any) => {
-        this.updateRoomDto.roomId = response.id;
+      next: (response: UpdateRoomDTO) => {
+        this.updateRoomDto.roomId = this.roomId;
         this.updateRoomDto.roomNumber = response.roomNumber;
         this.updateRoomDto.price = response.price;
-        this.updateRoomDto.capacity = response.capacity || null;
+        this.updateRoomDto.capacity = response.capacity ;
         this.updateRoomDto.roomStatus = response.roomStatus || RoomStatus.Available;
         this.updateRoomDto.category = response.category || RoomCategory.Mini;
         console.log(response);

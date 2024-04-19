@@ -41,11 +41,11 @@ export class RoomService {
     
     return this.httpClient.put(this.url+'/UpdateRoom/'+id, formData);
   }
-  getRoomById(id: string): Observable<any> {
-    return this.httpClient.get<any>(this.url+'/GetRoom/'+id);
+  getRoomById(id: string): Observable<RoomDTO> {
+    return this.httpClient.get<RoomDTO>(this.url+'/GetRoom/'+id);
   }
-  getRoomWithId(id: string): Observable<any> {
-    return this.httpClient.get<any>(this.url+'/GetById/'+id);
+  getRoomWithId(id: string): Observable<RoomDTO> {
+    return this.httpClient.get<RoomDTO>(this.url+'/GetById/'+id);
   }
   RoomDelete (id:string):Observable<number>{
     let httpheaders=new HttpHeaders()

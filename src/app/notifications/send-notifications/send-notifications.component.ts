@@ -17,7 +17,7 @@ export class SendNotificationsComponent {
   SendNotification() {
     console.log('Notification data:', this.notification); 
     this.notificationService.SendNotification(this.notification).subscribe({
-      next: (response: any) => {
+      next: (response: CreateNotificationDTO) => {
         console.log('Notification created successfully:', response);
         this.router.navigateByUrl('/NotificationAllUsers');
       },

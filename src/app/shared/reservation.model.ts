@@ -1,6 +1,6 @@
-import { ReservationService } from "../services/reservation.service";
 import { ReservationRoom } from "./reservationRooms.mode";
-import { CreateReservationService } from "./reservationService.model";
+import { CreateReservationService, ReservationService } from "./reservationService.model";
+import { User } from "./user.model";
 
 export interface Reservation {
     reservationId: string;
@@ -10,15 +10,16 @@ export interface Reservation {
     userId: string;
     reservationRooms: ReservationRoom[];
     reservationServices?: ReservationService[];
+    user:User;
   }
   export enum ReservationStatusEnum {
-    Confirmed = 1,
-    Canceled
+    Confirmed="Confirmed",
+    Canceled ="Canceled"
   }
 
   export interface UpdateReservationStatus {
-    ReservationId: string;
-    ReservationStatus: number;
+    reservationId: string;
+    reservationStatus: number;
   }
 
   export interface UpdateReservation {

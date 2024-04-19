@@ -10,6 +10,7 @@ import { HotelServicesService } from '../../../services/hotel-services.service';
 import { SortingComponent } from '../../tablePagination/sorting/sorting.component';
 import { PaginationComponent } from '../../tablePagination/pagination/pagination.component';
 import { SearchComponent } from '../../tablePagination/search/search.component';
+import { Reservation, ReservationStatusEnum } from '../../../shared/reservation.model';
 
 @Component({
   selector: 'app-reservations',
@@ -19,31 +20,26 @@ import { SearchComponent } from '../../tablePagination/search/search.component';
   styleUrl: './reservations.component.css',
 })
 export class ReservationsComponent {
-  public reservations: any = [];
-  public role!: string;
-  selectedReservation: any;
-  roomsNumbers!: any[];
-  services!: any[];
+public reservations:Reservation[]=[];
+public role!:string;
+selectedReservation?: Reservation;
+roomsNumbers!:any[];
+services!:any[];
 
-  public currentPage: number = 1;
-  public totalPages!:number ;
-  public pageSize: number = 10;
-  public sortField: string = 'ReservationDate';
-  public sortOrder: string = 'asc';
-  public searchString: string = '';
-  sortOptions: { value: string; label: string }[] = [
-    { value: 'ReservationDate', label: 'Reservation Date' },
-    { value: 'TotalPrice', label: 'Price' },
-  ];
-
-  constructor(
-    private reservationService: ReservationService,
-    private userRole: UserRoleService,
-    private authService: AuthService,
-    private cdr: ChangeDetectorRef,
-    private roomService: RoomService,
-    private hotelService: HotelServicesService
-  ) {}
+public currentPage: number = 1;
+public totalPages!:number ;
+public pageSize: number = 10;
+public sortField: string = 'ReservationDate';
+public sortOrder: string = 'asc';
+public searchString: string = '';
+sortOptions: { value: string; label: string }[] = [
+  { value: 'ReservationDate', label: 'Reservation Date' },
+  { value: 'TotalPrice', label: 'Price' },
+];
+public get reservationStatusEnum(): typeof ReservationStatusEnum {
+  return ReservationStatusEnum; 
+}constructor(private reservationService:ReservationService,private userRole:UserRoleService,
+  private authService:AuthService,private cdr:ChangeDetectorRef,private roomService:RoomService,private hotelService:HotelServicesService){}
   ngOnInit() {
     this.fetchReservations()
     this.userRole.getRole().subscribe((val) => {
@@ -64,71 +60,80 @@ export class ReservationsComponent {
         this.totalPages =res.totalPages;
       });
   }
-  showReservationDetails(reservation: any) {
-    if (this.selectedReservation === reservation) {
-      this.selectedReservation = null;
+showReservationDetails(reservation: Reservation) {
+  if (this.selectedReservation === reservation) {
+    this.selectedReservation = undefined;
     } else {
-      this.selectedReservation = reservation;
-      this.getRoomReservation(reservation.reservationId).subscribe((data) => {
-        this.roomsNumbers = data;
-      });
-      this.getServicesReservation(reservation.reservationId).subscribe(
-        (response) => {
-          this.services = response;
+    this.selectedReservation = reservation;
+    this.getRoomReservation(reservation.reservationId).subscribe(data => {
+      this.roomsNumbers = data;
+    });
+    this.getServicesReservation(reservation.reservationId).subscribe(response => {
+      this.services = response;
+    });
+  }
+}
+confirmStatusUpdate(reservationId: string, status: number): void {
+  if (window.confirm('Are you sure you want to change status of Reservation?')) {
+    this.statusUpdate(reservationId, status);
+  }
+}
+statusUpdate(reservationId: string, status: number) {
+  this.reservationService.updateReservationStatus(reservationId, status).subscribe({
+    next: (response) => {
+      console.log('Reservation Status has updated successfully');
+      
+      const index = this.reservations.findIndex((reservation: { reservationId: string; }) => reservation.reservationId === reservationId);
+      if (index !== -1) {
+        if (status == 1) {
+            this.reservations[index].reservationStatus = ReservationStatusEnum.Confirmed;
+        } else {
+            this.reservations[index].reservationStatus = ReservationStatusEnum.Canceled;
         }
-      );
     }
-  }
-  confirmStatusUpdate(reservationId: string, status: number): void {
-    if (
-      window.confirm('Are you sure you want to change status of Reservation?')
-    ) {
-      this.statusUpdate(reservationId, status);
+    
+    },
+    error: (error) => {
+      console.error('Error updating Reservation:', error);
     }
+  });
+}  
+getRoomReservation(reservationId: any): Observable<any[]> {
+  return this.roomService.getRoomsReservation(reservationId);
+}
+getServicesReservation(reservationId:any):Observable<any[]>{
+  return this.hotelService.getServicesReservation(reservationId);
+}
+confirmReservationDelete(reservationId: string): void {
+  if (window.confirm('Are you sure you want to delete the Room?')) {
+    this.DeleteReservation(reservationId);
   }
-  statusUpdate(reservationId: string, status: number) {
-    this.reservationService
-      .updateReservationStatus(reservationId, status)
-      .subscribe({
-        next: (response) => {
-          console.log('Reservation Status has updated successfully');
-
-          const index = this.reservations.findIndex(
-            (reservation: { reservationId: string }) =>
-              reservation.reservationId === reservationId
-          );
-          if (index !== -1) {
-            if (status == 1) {
-              this.reservations[index].reservationStatus = 'Confirmed';
-            } else {
-              this.reservations[index].reservationStatus = 'Canceled';
-            }
-          }
+}
+DeleteReservation(reservationId:string){
+  this.reservationService.ReservationDelete(reservationId)
+    .subscribe({
+        next: data => {
+          this.cdr.detectChanges();
+          console.log('Delete successful');
         },
-        error: (error) => {
-          console.error('Error updating Reservation:', error);
-        },
-      });
-  }
-  getRoomReservation(reservationId: any): Observable<any[]> {
-    return this.roomService.getRoomsReservation(reservationId);
-  }
-  getServicesReservation(reservationId: any): Observable<any[]> {
-    return this.hotelService.getServicesReservation(reservationId);
-  }
-  onPageChange(page: number) {
-    this.currentPage = page;
-    this.fetchReservations();
-  }
+        error: error => {
+            console.error('There was an error!', error);
+        }
+    });    
+}
+onPageChange(page: number) {
+  this.currentPage = page;
+  this.fetchReservations();
+}
 
-  onSortChange(sort: { field: string; order: string }) {
-    this.sortField = sort.field;
-    this.sortOrder = sort.order;
-    this.fetchReservations();
-  }
+onSortChange(sort: { field: string; order: string }) {
+  this.sortField = sort.field;
+  this.sortOrder = sort.order;
+  this.fetchReservations();
+}
 
-  onSearchChange(searchString: string) {
-    this.searchString = searchString;
-    this.fetchReservations();
-  }
+onSearchChange(searchString: string) {
+  this.searchString = searchString;
+  this.fetchReservations();
+}
 }

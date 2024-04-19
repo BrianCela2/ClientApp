@@ -21,8 +21,8 @@ export class ReservationService {
   getReservationById(id: string): Observable<Reservation> {
     return this.httpClient.get<any>(this.url+'/'+id);
   }
-  getReservationOfUser(): Observable<any> {
-    return this.httpClient.get<any>(this.url+'/GetReservationForUser');
+  getReservationOfUser(): Observable<Reservation[]> {
+    return this.httpClient.get<Reservation[]>(this.url+'/GetReservationForUser');
   }
   getReservationRooms(): Observable<ReservationRoom[]> {
     return this.httpClient.get<any>(this.url+'/GetReservationsWithRooms');
@@ -34,6 +34,8 @@ export class ReservationService {
   updateReservationStatus(id: string, status: number): Observable<any> {
     return this.httpClient.put(`${this.url}/status/${id}?status=${status}`, {});
   }
+  ReservationDelete (reservationId:string):Observable<number>{
+   return this.httpClient.delete<number>(this.url+"/"+reservationId);}
 }
 
 
