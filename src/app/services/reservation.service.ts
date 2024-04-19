@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  PaginatedReservation,
   Reservation,
   ReservationSample,
   UpdateReservation,
@@ -27,7 +28,7 @@ export class ReservationService {
     sortField: string,
     sortOrder: string,
     searchString: string
-  ): Observable<any> {
+  ): Observable<PaginatedReservation> {
     return this.httpClient.get<any>(
       `${this.url}/ReservationsServiceRooms?page=${page}&pageSize=${pageSize}&sortField=${sortField}&sortOrder=${sortOrder}&searchString=${searchString}`
     );

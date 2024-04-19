@@ -35,7 +35,6 @@ export class DashboardComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private userRoleService: UserRoleService,
-    private router: Router
   ) { }
 
   ngOnInit() {

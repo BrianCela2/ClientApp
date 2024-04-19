@@ -43,7 +43,6 @@ public get reservationStatusEnum(): typeof ReservationStatusEnum {
   ngOnInit() {
     this.fetchReservations()
     this.userRole.getRole().subscribe((val) => {
-      console.log(val);
       const roleFromToken = this.authService.getRoleFromToken();
       console.log(roleFromToken);
       this.role = val || roleFromToken;
@@ -51,7 +50,6 @@ public get reservationStatusEnum(): typeof ReservationStatusEnum {
   }
   
   fetchReservations() {
-    console.log(this.sortField,this.sortOrder)
     this.reservationService.getReservations(this.currentPage, this.pageSize, this.sortField, this.sortOrder, this.searchString)
       .subscribe(res => {
         console.log(res)

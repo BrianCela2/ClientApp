@@ -45,8 +45,8 @@ export class UserRolesComponent implements OnInit {
       this.userRoleService
         .addRoleToUser(this.newUserRole.userId, this.newUserRole.role!)
         .subscribe((res) => {
-          this.getUserRoles(); // Refresh the user roles after adding the new role
-          this.toggleAddRoleForm(); // Hide the form after adding the role
+          this.getUserRoles(); 
+          this.toggleAddRoleForm(); 
         });
     }
   }

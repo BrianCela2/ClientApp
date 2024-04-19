@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ReservationService } from '../../../services/reservation.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HotelServicesService } from '../../../services/hotel-services.service';
 import { formatDateTimeToDate } from '../../../helpers/formatDateTimeToDate';
-import { ReservationStatusEnum } from '../../../shared/reservation.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-edit-reservation',
@@ -20,6 +20,7 @@ export class EditReservationComponent {
   reservationRooms: any;
   serviceDetails: any[] = [];
   services: any = [];
+  userServices!:any ;
   displayTable: boolean = false;
   public selectedServices: any = [];
   constructor(
@@ -37,15 +38,8 @@ export class EditReservationComponent {
           room.checkInDate = formatDateTimeToDate(room.checkInDate);
           room.checkOutDate = formatDateTimeToDate(room.checkOutDate);
         });
-        this.reservationDTO.reservationServices.forEach((service: any) => {
-          this.hotelService.getServiceById(service.serviceId).subscribe({
-            next: (service) => {
-              this.serviceDetails.push(service);
-            },
-            error: (error) => {
-              console.error('Error getting service details:', error);
-            },
-          });
+        this.getServicesReservation(this.reservationDTO.reservationId).subscribe(response => {
+          this.userServices = response;
         });
       },
       error: (error) => {
@@ -62,11 +56,15 @@ export class EditReservationComponent {
       .subscribe({
         next: (response) => {
           console.log('Room updated successfully', response);
+          
+        this.getServicesReservation(this.reservationDTO.reservationId).subscribe(response => {
+          this.userServices = response;
+        });
         },
         error: (error) => {
           console.error('Error updating room:', error);
         },
-        complete: () => {},
+        complete: () => {this.displayTable=false;},
       });
   }
 
@@ -81,6 +79,7 @@ export class EditReservationComponent {
         error: (error) => {
           console.error('Error updating status:', error);
         },
+        complete: () => {this.router.navigateByUrl("/YourReservations")},
       });
   }
 
@@ -108,5 +107,8 @@ export class EditReservationComponent {
     if (index !== -1) {
       this.services.splice(index, 1);
     }
+  }
+  getServicesReservation(reservationId:any):Observable<any[]>{
+    return this.hotelService.getServicesReservation(reservationId);
   }
 }

@@ -40,7 +40,6 @@ export class SignupComponent implements OnInit {
 
   onSignUp() {
     if (this.signUpForm.valid) {
-      //Send object to database
       console.log(this.signUpForm.value);
       this.auth.signUp(this.signUpForm.value).subscribe({
         next: (res) => {
@@ -54,7 +53,6 @@ export class SignupComponent implements OnInit {
       });
     } else {
       ValidateForm.validateAllFormFields(this.signUpForm);
-      //throw error using toaster
     }
   }
 

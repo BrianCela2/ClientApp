@@ -1,4 +1,3 @@
-// stepper.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
