@@ -1,0 +1,32 @@
+<div class="container mt-4">
+  <h2>Update Hotel Service</h2>
+  <form [formGroup]="updateForm" (ngSubmit)="onSubmit()">
+    <!-- Service Name Input -->
+    <div class="form-group">
+      <label for="serviceName">Service Name:</label>
+      <input type="text" class="form-control" id="serviceName" formControlName="serviceName">
+    </div>
+    <!-- Description Input -->
+    <div class="form-group">
+      <label for="description">Description:</label>
+      <textarea class="form-control" id="description" formControlName="description"></textarea>
+    </div>
+    <!-- Price Input -->
+    <div class="form-group">
+      <label for="price">Price:</label>
+      <input type="number" class="form-control" id="price" formControlName="price">
+    </div>
+    <!-- Category Input -->
+    <div class="form-group">
+      <label for="category">Category:</label>
+      <input type="text" class="form-control" id="category" formControlName="category">
+    </div>
+    <!-- Open Time Input -->
+    <div class="form-group">
+      <label for="openTime">Open Time:</label>
+      <input type="text" class="form-control" id="openTime" formControlName="openTime">
+    </div>
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
+</div>

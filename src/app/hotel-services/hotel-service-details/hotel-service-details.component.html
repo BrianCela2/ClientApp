@@ -1,0 +1,11 @@
+<div class="container mt-4">
+  <h2>Hotel Service Details</h2>
+  <div *ngIf="service">
+    <!-- Display service details -->
+    <p><strong>Service Name:</strong> {{ service.serviceName }}</p>
+    <p><strong>Description:</strong> {{ service.description }}</p>
+    <p><strong>Price:</strong> {{ service.price }}</p>
+    <p><strong>Category:</strong> {{ service.category }}</p>
+    <p><strong>Open Time:</strong> {{ service.openTime }}</p>
+  </div>
+</div>

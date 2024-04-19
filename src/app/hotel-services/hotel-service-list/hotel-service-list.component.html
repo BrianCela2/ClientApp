@@ -1,0 +1,16 @@
+<div class="container mt-4">
+  <h2>Hotel Services</h2>
+  <!-- Iterate over each hotel service and display details -->
+  <div *ngFor="let service of hotelServices">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ service.serviceName }}</h5>
+        <p class="card-text">{{ service.description }}</p>
+        <p class="card-text"><strong>Price:</strong> {{ service.price }}</p>
+        <!-- Link to navigate to service details page -->
+        <a [routerLink]="['/HotelServices/Details', service.serviceID]" class="btn btn-primary">Details</a>
+      </div>
+    </div>
+  </div>
+</div>
+

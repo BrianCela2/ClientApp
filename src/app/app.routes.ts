@@ -13,6 +13,10 @@ import { UserRolesComponent } from './components/tables/user-roles/user-roles.co
 import { ReservateComponent } from './components/reservate/reservate.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from "@angular/core";
+import { HotelServiceListComponent } from "./hotel-services/hotel-service-list/hotel-service-list.component";
+import { HotelServiceDetailsComponent } from "./hotel-services/hotel-service-details/hotel-service-details.component";
+import { HotelServiceCreateComponent } from "./hotel-services/hotel-service-create/hotel-service-create.component";
+import { HotelServiceUpdateComponent } from "./hotel-services/hotel-service-update/hotel-service-update.component";
 
 
 
@@ -48,7 +52,11 @@ export const routes: Routes = [
   { path: 'Room/GetAll', component: RoomListComponent, title: 'All Rooms' },
   { path: 'NotificationAllUsers', component: SendNotificationsComponent, title: 'Notification' },
   { path: 'SearchRooms', component: SearchRoomsComponent, title: 'Search' },
-  { path: 'Dashboard', component: DashboardComponent }
+  { path: 'Dashboard', component: DashboardComponent },
+  { path: 'HotelServices', component: HotelServiceListComponent },
+  { path: 'HotelServices/Details/:id', component: HotelServiceDetailsComponent },
+  { path: 'HotelServices/Create', component: HotelServiceCreateComponent },
+  { path: 'HotelServices/Update/:id', component: HotelServiceUpdateComponent },
 ];
 
 
