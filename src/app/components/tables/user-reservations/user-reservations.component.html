@@ -23,11 +23,9 @@
               <thead class="bg-primary text-white">
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Reservation ID</th>
                   <th scope="col">Total Price</th>
                   <th scope="col">Reservation Date</th>
                   <th scope="col">Reservation Status</th>
-                  <th scope="col">User Email</th>
                   <th scope="col">Reservation Actions</th>
                 </tr>
               </thead>
@@ -35,11 +33,9 @@
                 <ng-container *ngFor="let reservation of reservations; let i = index">
                   <tr>
                     <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ i + 1 }}</td>
-                    <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ reservation.reservationId }}</td>
                     <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ reservation.totalPrice }}</td>
                     <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ reservation.reservationDate | date:'mediumDate' }}</td>
                     <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ reservation.reservationStatus }}</td>
-                    <td>{{ reservation.user.email }}</td>
                     <td>
                         <button (click)="GoToEdit(reservation.reservationId)" class="btn btn-danger">Edit Dates</button>
                       </td>
@@ -48,7 +44,6 @@
                     <td [attr.colspan]="7">
                       <div>
                         <h2 class="text-primary">Details of Selected Reservation</h2>
-                        <p><strong>Reservation ID:</strong> {{ reservation.reservationId }}</p>
                         <h3>Rooms</h3>
                         <ul>
                           <li *ngFor="let room of roomsNumbers">

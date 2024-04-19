@@ -19,7 +19,7 @@ import { Reservation, ReservationStatusEnum } from '../../../shared/reservation.
 export class ReservationsComponent {
 public reservations:Reservation[]=[];
 public role!:string;
-selectedReservation!: Reservation;
+selectedReservation?: Reservation;
 roomsNumbers!:any[];
 services!:any[];
 public get reservationStatusEnum(): typeof ReservationStatusEnum {
@@ -38,13 +38,13 @@ ngOnInit() {
   .subscribe(val=>{
     console.log(val)
     const roleFromToken = this.authService.getRoleFromToken();
-    console.log(roleFromToken)
     this.role = val || roleFromToken;
   })
 }
 showReservationDetails(reservation: Reservation) {
   if (this.selectedReservation === reservation) {
-  } else {
+    this.selectedReservation = undefined;
+    } else {
     this.selectedReservation = reservation;
     this.getRoomReservation(reservation.reservationId).subscribe(data => {
       this.roomsNumbers = data;
@@ -100,7 +100,6 @@ DeleteReservation(reservationId:string){
         error: error => {
             console.error('There was an error!', error);
         }
-    });
-    
+    });    
 }
 }
