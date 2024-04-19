@@ -1,9 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RoomService } from '../../services/room.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RoomPhotosService } from '../../services/roomphotos.service';
+import { UserRoleService } from '../../services/user-role.service';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-room-details',
   standalone: true,
@@ -14,6 +16,7 @@ import { RoomPhotosService } from '../../services/roomphotos.service';
 export class RoomDetailsComponent {
   roomId!: string;
   room: any;
+  role!:string;
   activePhotoIndex: number = 0;
   @ViewChild('fileInput') fileInput!: ElementRef;
   photos!: File;
@@ -22,11 +25,21 @@ export class RoomDetailsComponent {
 
   constructor(private route: ActivatedRoute, 
     private roomService: RoomService,
-    private roomPhotoService:RoomPhotosService) {}
+    private roomPhotoService:RoomPhotosService,
+    private router:Router,
+    private userRole:UserRoleService,
+  private authService:AuthService) {}
 
   ngOnInit() {
     this.roomId = this.route.snapshot.paramMap.get('id') || '' ;
     this.getRoomDetails();
+    this.userRole.getRole()
+  .subscribe(val=>{
+    console.log(val)
+    const roleFromToken = this.authService.getRoleFromToken();
+    console.log(roleFromToken)
+    this.role = val || roleFromToken;
+  })
   }
 
 
@@ -115,5 +128,8 @@ export class RoomDetailsComponent {
     }
   });
 
+  }
+  GoToEdit(): void {
+    this.router.navigate(['/Room/Edit', this.roomId]);
   }
 } 

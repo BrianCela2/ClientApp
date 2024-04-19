@@ -1,0 +1,35 @@
+<div class="container">
+  <h2>Reservation Details</h2>
+  <div *ngIf="reservationDTO">
+    <p>Reservation Date: {{ reservationDTO.ReservationDate | date }}</p>
+    <p>Reservation Status: {{ reservationDTO.ReservationStatus }}</p>
+    <h3>Reserved Rooms:</h3>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="
+          let room of reservationDTO.ReservationRooms;
+          let roomIndex = index
+        "
+      >
+        <p>Room {{ roomIndex + 1 }}</p>
+        <p>Check-In Date: {{ room.CheckInDate }}</p>
+        <p>Check-Out Date: {{ room.CheckOutDate }}</p>
+      </li>
+    </ul>
+    <h3>Reserved Services:</h3>
+    <ul class="list-group">
+      <li class="list-group-item" *ngFor="let service of serviceDetails">
+        <p>Name: {{ service.serviceName }}</p>
+        <p>Price: {{ service.price }}</p>
+      </li>
+    </ul>
+    <p>Total Price: {{ totalPrice }}</p>
+    <button class="btn btn-primary" (click)="createReservation()">
+      Confirm Reservation
+    </button>
+  </div>
+  <div *ngIf="!reservationDTO">
+    <p>No reservation details available.</p>
+  </div>
+</div>

@@ -1,47 +1,37 @@
 <div class="container">
-  <div
-    *ngFor="let parameter of searchParameters; let i = index"
-    class="room-parameter"
-  >
+  <div *ngIf="!searchParameters.length" (click)="addSearchParameter()" class="alert alert-light mt-4 d-flex justify-content-center">
+    + Please add a room
+  </div>
+
+  <div *ngFor="let parameter of searchParameters; let i = index" class="room-parameter">
     <div class="form-row">
       <ng-container *ngIf="searchParameters.length > 1">
-        <button
-          class="btn bg-light h-25 font-weight-bolder mt-4"
-          (click)="removeSearchParameter(i)"
-        >
+        <button class="btn bg-light h-25 font-weight-bolder mt-4" (click)="removeSearchParameter(i)">
           -
         </button>
       </ng-container>
+
       <div class="form-group col-md-3">
-        <label for="capacity">Capacity:</label>
-        <input
-          type="number"
-          id="capacity"
-          class="form-control"
-          [(ngModel)]="parameter.capacity"
-        />
+        <label for="capacity{{i}}">Capacity:</label>
+        <input type="number" id="capacity{{i}}" class="form-control" [(ngModel)]="parameter.capacity" />
       </div>
+
       <div class="form-group col-md-3">
-        <label for="checkInDate">Check-in Date:</label>
-        <input
-          type="date"
-          id="checkInDate"
-          class="form-control"
-          [(ngModel)]="parameter.checkInDate"
-        />
+        <label for="checkInDate{{i}}">Check-in Date:</label>
+        <input type="date" id="checkInDate{{i}}" class="form-control" [(ngModel)]="parameter.checkInDate" />
       </div>
+
       <div class="form-group col-md-3">
-        <label for="checkOutDate">Check-out Date:</label>
-        <input
-          type="date"
-          id="checkOutDate"
-          class="form-control"
-          [(ngModel)]="parameter.checkOutDate"
-        />
+        <label for="checkOutDate{{i}}">Check-out Date:</label>
+        <input type="date" id="checkOutDate{{i}}" class="form-control" [(ngModel)]="parameter.checkOutDate" />
       </div>
     </div>
+
+    <div *ngIf="parameter.error" class="text-danger">{{ parameter.error }}</div>
   </div>
-  <button class="btn btn-primary" (click)="addSearchParameter()">
-    Add Room
-  </button>
+
+  <div class="justify-content-center d-flex">
+    <button class="btn btn-primary" (click)="addSearchParameter()" [disabled]="datesConfirmed">Add Room</button>
+    <button class="btn btn-success" (click)="confirmDates()">Confirm Dates</button>
+  </div>
 </div>

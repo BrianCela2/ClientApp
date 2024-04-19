@@ -11,6 +11,8 @@ import { SendNotificationsComponent } from './notifications/send-notifications/s
 import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.component';
 import { UserRolesComponent } from './components/tables/user-roles/user-roles.component';
 import { ReservateComponent } from './components/reservate/reservate.component';
+import { ReservationsComponent } from './components/tables/reservations/reservations.component';
+import { EditReservationComponent } from './components/forms/edit-reservation/edit-reservation.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from "@angular/core";
 import { HotelServiceListComponent } from "./hotel-services/hotel-service-list/hotel-service-list.component";
@@ -44,14 +46,12 @@ export const routes: Routes = [
     path: 'NotificationAllUsers',
     component: SendNotificationsComponent,
     title: 'Notification',
+    canActivate: [AuthGuard]
   },
   { path: 'SearchRooms', component: SearchRoomsComponent, title: 'Search' },
-  { path: 'Room', component: CreateRoomComponent, title: 'Room Create' },
-  { path: 'Room/Edit/:id', component: EditRoomComponent, title: 'Room Edit' },
-  { path: 'Room/Get/:id', component: RoomDetailsComponent, title: 'Room Details' },
-  { path: 'Room/GetAll', component: RoomListComponent, title: 'All Rooms' },
-  { path: 'NotificationAllUsers', component: SendNotificationsComponent, title: 'Notification' },
-  { path: 'SearchRooms', component: SearchRoomsComponent, title: 'Search' },
+  { path: 'Reservations', component: ReservationsComponent, title: 'Reservations', canActivate: [AuthGuard] },
+  { path: 'Reservations/Edit/:id', component: EditReservationComponent, title: 'Reservations Edit', canActivate: [AuthGuard] },
+
   { path: 'Dashboard', component: DashboardComponent },
   { path: 'HotelServices', component: HotelServiceListComponent },
   { path: 'HotelServices/Details/:id', component: HotelServiceDetailsComponent },

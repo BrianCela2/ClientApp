@@ -9,13 +9,16 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 })
 export class StepperComponent {
   @Input() steps: string[] = [];
+  @Input() isCompleted!:boolean;
   @Output() stepChanged = new EventEmitter<number>();
   currentStepIndex = 0;
+  @Output() nextButtonClicked = new EventEmitter();
 
   nextStep() {
     if (this.currentStepIndex < this.steps.length - 1) {
       this.currentStepIndex++;
       this.stepChanged.emit(this.currentStepIndex);
+      this.nextButtonClicked.emit();
     }
   }
 
