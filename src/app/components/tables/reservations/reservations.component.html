@@ -41,10 +41,10 @@
                   <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ reservation.reservationDate | date:'mediumDate' }}</td>
                   <td (click)="showReservationDetails(reservation)" style="cursor: pointer;">{{ reservation.reservationStatus }}</td>
                   <td>{{ reservation.user.email }}</td>
-                  <td *ngIf="reservation.reservationStatus=='Canceled'">
+                  <td *ngIf="reservation.reservationStatus==reservationStatusEnum.Canceled">
                     <button (click)="confirmStatusUpdate(reservation.reservationId,1)" class="btn btn-success">Confirmed</button>
                   </td>
-                  <td *ngIf="reservation.reservationStatus=='Confirmed'">
+                  <td *ngIf="reservation.reservationStatus==reservationStatusEnum.Confirmed">
                     <button (click)="confirmStatusUpdate(reservation.reservationId,2)" class="btn btn-danger">Canceled</button>
                   </td>
                   <td>

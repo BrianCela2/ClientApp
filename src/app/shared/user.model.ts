@@ -16,13 +16,13 @@ export interface Register {
   }
 
   export interface User {
-    FirstName: string;
-    LastName: string;
-    Email: string;
-    PhoneNumber: string;
-    Birthday?: Date | null;
-    Country: string;
-    City: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phoneNumber: string;
+    birthday?: Date | null;
+    country: string;
+    city: string;
   }
 
   

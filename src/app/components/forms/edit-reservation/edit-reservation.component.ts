@@ -22,7 +22,6 @@ export class EditReservationComponent {
   services: any = [];
   displayTable: boolean = false;
   public selectedServices: any = [];
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -74,7 +73,7 @@ export class EditReservationComponent {
   cancelReservation(event: Event) {
     event.preventDefault()
     this.reservationService
-      .updateReservationStatus(this.reservationId,ReservationStatusEnum.Canceled)
+      .updateReservationStatus(this.reservationId,2)
       .subscribe({
         next: (response) => {
           console.log('Reservation status updated successfully', response);

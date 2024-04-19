@@ -7,6 +7,7 @@ import { RoomService } from '../../../services/room.service';
 import { RoomDetailsComponent } from '../../../rooms/room-details/room-details.component';
 import { Observable } from 'rxjs';
 import { HotelServicesService } from '../../../services/hotel-services.service';
+import { Reservation, ReservationStatusEnum } from '../../../shared/reservation.model';
 
 @Component({
   selector: 'app-reservations',
@@ -16,12 +17,14 @@ import { HotelServicesService } from '../../../services/hotel-services.service';
   styleUrl: './reservations.component.css'
 })
 export class ReservationsComponent {
-public reservations:any=[];
+public reservations:Reservation[]=[];
 public role!:string;
-selectedReservation: any;
+selectedReservation!: Reservation;
 roomsNumbers!:any[];
 services!:any[];
-constructor(private reservationService:ReservationService,private userRole:UserRoleService,
+public get reservationStatusEnum(): typeof ReservationStatusEnum {
+  return ReservationStatusEnum; 
+}constructor(private reservationService:ReservationService,private userRole:UserRoleService,
   private authService:AuthService,private cdr:ChangeDetectorRef,private roomService:RoomService,private hotelService:HotelServicesService){}
 ngOnInit() {
   this.reservationService.getReservations()
@@ -39,9 +42,8 @@ ngOnInit() {
     this.role = val || roleFromToken;
   })
 }
-showReservationDetails(reservation: any) {
+showReservationDetails(reservation: Reservation) {
   if (this.selectedReservation === reservation) {
-    this.selectedReservation = null; 
   } else {
     this.selectedReservation = reservation;
     this.getRoomReservation(reservation.reservationId).subscribe(data => {
@@ -64,12 +66,13 @@ statusUpdate(reservationId: string, status: number) {
       
       const index = this.reservations.findIndex((reservation: { reservationId: string; }) => reservation.reservationId === reservationId);
       if (index !== -1) {
-        if(status==1){
-        this.reservations[index].reservationStatus = 'Confirmed'; 
-        }else{
-          this.reservations[index].reservationStatus = 'Canceled'; 
+        if (status == 1) {
+            this.reservations[index].reservationStatus = ReservationStatusEnum.Confirmed;
+        } else {
+            this.reservations[index].reservationStatus = ReservationStatusEnum.Canceled;
         }
-      }
+    }
+    
     },
     error: (error) => {
       console.error('Error updating Reservation:', error);

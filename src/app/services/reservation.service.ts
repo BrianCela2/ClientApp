@@ -16,7 +16,7 @@ export class ReservationService {
     return this.httpClient.post<any>(`${this.url}/GetReservationPrice`, request);
   }
   getReservations(): Observable<Reservation[]> {
-    return this.httpClient.get<any[]>(this.url+'/ReservationsServiceRooms');
+    return this.httpClient.get<Reservation[]>(this.url+'/ReservationsServiceRooms');
   }
   getReservationById(id: string): Observable<Reservation> {
     return this.httpClient.get<any>(this.url+'/'+id);

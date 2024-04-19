@@ -17,7 +17,7 @@ import { NotificationListComponent } from './notifications/notification-list/not
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-  export class AppComponent implements OnInit, OnDestroy {
+  export class AppComponent  {
     name = 'ClientApp';
     notifications: NotificationDTO[] = [];
     unreadCount: number = 0;
@@ -29,13 +29,6 @@ import { NotificationListComponent } from './notifications/notification-list/not
     ) {
       this.userId = this.authService.getUserIdFromToken();
     }
-  
-    ngOnInit(): void {
-    }
-  
-    ngOnDestroy(): void {
-    }
-  
     ngAfterViewInit(): void {
       this.updateNotificationView();
     }
@@ -46,7 +39,6 @@ import { NotificationListComponent } from './notifications/notification-list/not
         if (notificationContainer) {
           this.notifications = this.notificationList.notification;
           this.unreadCount = this.notifications.filter(notification => !notification.isSeen).length;
-          console.log("Test:"+this.notifications);
           this.cdr.detectChanges(); 
       }
     }

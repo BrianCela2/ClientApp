@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { RoomService } from '../../services/room.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { RoomDTO } from '../../shared/room.model';
 
 @Component({
   selector: 'app-room-list',
@@ -11,7 +12,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrls: ['./room-list.component.css']
 })
 export class RoomListComponent implements OnInit {
-   rooms: any[] = [];
+   rooms: RoomDTO[] = [];
 
    constructor(private roomService: RoomService, private router: Router) {}
 
