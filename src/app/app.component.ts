@@ -9,10 +9,11 @@ import { AuthService } from './services/auth.service';
 import { SignalRService } from './services/signal-rservice.service';
 import { NotificationDTO } from './shared/notification.model';
 import { NotificationListComponent } from './notifications/notification-list/notification-list.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent,NotificationListComponent],
+  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent,NotificationListComponent, SpinnerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
