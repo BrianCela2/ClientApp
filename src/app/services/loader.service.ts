@@ -10,7 +10,6 @@ export class LoaderService {
   constructor() { }
 
   setLoading(loading: boolean) {
-    console.log(loading)
     this.loading = loading;
   }
 

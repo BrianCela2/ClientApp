@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-sm bg-light">
   <div class="container-fluid">
     <!-- Brand -->
@@ -21,14 +20,14 @@
     <app-notification-list></app-notification-list>
 
     <!-- Notification Container -->
-  
-
   </div>
 </nav>
 <div class="notification-container">
   <ul class="notification-list" *ngIf="notifications.length > 0">
     <li *ngFor="let item of notifications" class="notification-item">
-      <span class="notification-message">Notification: {{ item.messageContent }}</span>
+      <span class="notification-message"
+        >Notification: {{ item.messageContent }}</span
+      >
     </li>
   </ul>
 </div>

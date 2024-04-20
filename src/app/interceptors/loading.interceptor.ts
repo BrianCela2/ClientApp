@@ -14,6 +14,7 @@ export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
   loadingService.setLoading(true);
 
   return next(req).pipe(
+    
     finalize(() => {
       totalRequests--;
       if (totalRequests === 0) {
