@@ -3,10 +3,7 @@
 >
   <navbar class="w-100"></navbar>
 
-  <!-- Notification List -->
   <app-notification-list></app-notification-list>
-
-  <!-- Notification Container -->
 </nav>
 
 <ul class="notification-list" *ngIf="notifications.length > 0">
@@ -18,4 +15,7 @@
 </ul>
 <foo-toaster [position]="ToasterPosition.BOTTOM_RIGHT"></foo-toaster>
 <app-spinner></app-spinner>
-<router-outlet />
+<div class="router-outlet">
+  <router-outlet></router-outlet>
+</div>
+<app-footer></app-footer>

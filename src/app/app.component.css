@@ -23,4 +23,22 @@
     font-size: 16px;
     color: #333;
   }
-  
+  /* app.component.css */
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+}
+
+.router-outlet {
+  flex-grow: 1; /* Make the content take up available space */
+}
+
+/* Footer Styling */
+footer {
+  background-color: #f8f9fa;
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}

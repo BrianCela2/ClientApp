@@ -19,6 +19,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NavbarComponent } from './components/navbar/navbar/navbar.component';
 import { PopUpComponent } from './components/popup/popup.component';
 import { ToasterPosition } from './shared/popup.model';
+import { FooterComponent } from './components/footer/footer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -32,6 +33,7 @@ import { ToasterPosition } from './shared/popup.model';
     SpinnerComponent,
     NavbarComponent,
     PopUpComponent,
+    FooterComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

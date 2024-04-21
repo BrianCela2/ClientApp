@@ -19,7 +19,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'updateUser', component: EditUserComponent },
+  { path: 'updateUser', component: EditUserComponent,canActivate: [AuthGuard] },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -43,7 +43,7 @@ export const routes: Routes = [
   },
   { path: 'Reservations', component: ReservationsComponent, title: 'Reservations',canActivate: [AuthGuard]},
   { path: 'Reservations/Edit/:id', component: EditReservationComponent, title: 'Reservations Edit',canActivate: [AuthGuard]},
-  {path: 'YourReservations', component: UserReservationsComponent, title: 'Reservations '}
+  {path: 'YourReservations', component: UserReservationsComponent, title: 'Reservations ',canActivate: [AuthGuard]}
 
 
 ];
