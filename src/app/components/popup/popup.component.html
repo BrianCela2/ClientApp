@@ -1,8 +1,11 @@
 <div class="toaster" [ngClass]="position">
-    <div class="toast-message" 
-        *ngFor="let message of messages" 
-        [ngClass]="message.type" 
-        [@showHide]>
-      {{ message.message }}
-    </div>
+  <div
+    class="toast-message"
+    *ngFor="let message of messages"
+    [ngClass]="message.type"
+    [@showHide]
+  >
+    <i [class]="getToastIcon(message.type)"></i>
+    {{ message.message }}
   </div>
+</div>

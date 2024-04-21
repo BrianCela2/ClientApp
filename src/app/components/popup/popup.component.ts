@@ -2,7 +2,7 @@ import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { ToastMessage } from '../../shared/popup.model'; 
+import {  ToastIconMap, ToastMessage, ToastType } from '../../shared/popup.model'; 
 import { ToasterPosition } from '../../shared/popup.model'; 
 import { PopupService } from '../../services/popup.service'; 
 import { SHOW_HIDE } from '../../../assets/animations/show-hite'; 
@@ -59,5 +59,8 @@ export class PopUpComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._toasterSubject$.next();
     this._toasterSubject$.complete();
+  }
+  public getToastIcon(type: ToastType): string {
+    return ToastIconMap[type];
   }
 }

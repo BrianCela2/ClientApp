@@ -24,3 +24,11 @@ export enum ToastType {
     BOTTOM_CENTER = 'toaster-bottom-center',
     BOTTOM_RIGHT = 'toaster-bottom-right'
   }
+  export const ToastIconMap: Record<ToastType, string> = {
+    [ToastType.PRIMARY]: 'fas fa-info-circle',
+    [ToastType.SECONDARY]: 'fas fa-question-circle',
+    [ToastType.SUCCESS]: 'fas fa-check-circle',
+    [ToastType.INFO]: 'fas fa-info-circle',
+    [ToastType.WARNING]: 'fas fa-exclamation-triangle',
+    [ToastType.DANGER]: 'fas fa-exclamation-circle',
+  };
