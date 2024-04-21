@@ -10,10 +10,11 @@ import { SignalRService } from './services/signal-rservice.service';
 import { NotificationDTO } from './shared/notification.model';
 import { NotificationListComponent } from './notifications/notification-list/notification-list.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { NavbarComponent } from './components/navbar/navbar/navbar.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent,NotificationListComponent, SpinnerComponent],
+  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent,NotificationListComponent, SpinnerComponent,NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
