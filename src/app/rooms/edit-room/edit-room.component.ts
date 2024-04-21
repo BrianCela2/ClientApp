@@ -5,6 +5,7 @@ import { RoomCategory, UpdateRoomDTO, RoomStatus } from '../../shared/room.model
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CreateRoomComponent } from '../create-room/create-room.component';
+import { PopupService } from '../../services/popup.service';
 
 @Component({
   selector: 'app-edit-room',
@@ -24,7 +25,8 @@ export class EditRoomComponent implements OnInit {
   };
   roomStatusOptions: { value: RoomStatus; label: string }[] = []; 
   roomCategoryOptions: { value: RoomCategory; label: string }[] = []; 
-  constructor(private router:Router,private route: ActivatedRoute, private roomService: RoomService) {}
+  constructor(private router:Router,private route: ActivatedRoute, private roomService: RoomService, private _toasterService: PopupService
+) {}
 
   ngOnInit(): void {
     this.roomId = this.route.snapshot.paramMap.get('id') || '';
@@ -56,9 +58,11 @@ this.roomCategoryOptions = Object.keys(RoomCategory)
     this.roomService.updateRoom(this.roomId, this.updateRoomDto).subscribe({
       next: (response) => {
         console.log('Room updated successfully');
+        this._toasterService.success('Room updated successfully');
       },
       error: (error) => {
         console.error('Error updating room:', error);
+        this._toasterService.danger('Something went wrong');
       },
       complete: () => {
       }

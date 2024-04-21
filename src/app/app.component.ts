@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component,ChangeDetectorRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import {
+  Component,
+  ChangeDetectorRef,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+} from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { Subject, takeUntil, timer } from 'rxjs';
@@ -11,36 +17,55 @@ import { NotificationDTO } from './shared/notification.model';
 import { NotificationListComponent } from './notifications/notification-list/notification-list.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NavbarComponent } from './components/navbar/navbar/navbar.component';
+import { PopUpComponent } from './components/popup/popup.component';
+import { ToasterPosition } from './shared/popup.model';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,CommonModule,FormsModule,RouterLink,SendNotificationsComponent,NotificationListComponent, SpinnerComponent,NavbarComponent],
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    FormsModule,
+    RouterLink,
+    SendNotificationsComponent,
+    NotificationListComponent,
+    SpinnerComponent,
+    NavbarComponent,
+    PopUpComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
-  export class AppComponent  {
-    name = 'ClientApp';
-    notifications: NotificationDTO[] = [];
-    unreadCount: number = 0;
-    userId: string;
-    @ViewChild(NotificationListComponent) notificationList!: NotificationListComponent;
-  
-    constructor(
-      private cdr: ChangeDetectorRef,private authService:AuthService
-    ) {
-      this.userId = this.authService.getUserIdFromToken();
-    }
-    ngAfterViewInit(): void {
-      this.updateNotificationView();
-    }
-  
-    updateNotificationView(): void {
-      if (this.notificationList && this.notificationList.notification) {
-        const notificationContainer = document.querySelector('.notification-container') as HTMLElement;
-        if (notificationContainer) {
-          this.notifications = this.notificationList.notification;
-          this.unreadCount = this.notifications.filter(notification => !notification.isSeen).length;
-          this.cdr.detectChanges(); 
+export class AppComponent {
+  name = 'ClientApp';
+  notifications: NotificationDTO[] = [];
+  unreadCount: number = 0;
+  userId: string;
+  @ViewChild(NotificationListComponent)
+  notificationList!: NotificationListComponent;
+  public ToasterPosition = ToasterPosition;
+
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private authService: AuthService
+  ) {
+    this.userId = this.authService.getUserIdFromToken();
+  }
+  ngAfterViewInit(): void {
+    this.updateNotificationView();
+  }
+
+  updateNotificationView(): void {
+    if (this.notificationList && this.notificationList.notification) {
+      const notificationContainer = document.querySelector(
+        '.notification-container'
+      ) as HTMLElement;
+      if (notificationContainer) {
+        this.notifications = this.notificationList.notification;
+        this.unreadCount = this.notifications.filter(
+          (notification) => !notification.isSeen
+        ).length;
+        this.cdr.detectChanges();
       }
     }
   }
