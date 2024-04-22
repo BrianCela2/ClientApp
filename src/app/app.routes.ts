@@ -14,6 +14,7 @@ import { ReservateComponent } from './components/reservate/reservate.component';
 import { ReservationsComponent } from './components/tables/reservations/reservations.component';
 import { EditReservationComponent } from './components/forms/edit-reservation/edit-reservation.component';
 import { UserReservationsComponent } from './components/tables/user-reservations/user-reservations.component';
+import { UserHistoryComponent } from './components/tables/user-history/user-history.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -43,7 +44,8 @@ export const routes: Routes = [
   },
   { path: 'Reservations', component: ReservationsComponent, title: 'Reservations',canActivate: [AuthGuard]},
   { path: 'Reservations/Edit/:id', component: EditReservationComponent, title: 'Reservations Edit',canActivate: [AuthGuard]},
-  {path: 'YourReservations', component: UserReservationsComponent, title: 'Reservations '}
+  {path: 'YourReservations', component: UserReservationsComponent, title: 'Reservations '},
+  {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History '},
 
 
 ];

@@ -27,6 +27,7 @@ ngOnInit() {
   this.reservationService.getReservationOfUser()
   .subscribe(res=>{
     this.reservations = res;
+    console.log(this.reservations);
     this.cdr.detectChanges();
   });
 

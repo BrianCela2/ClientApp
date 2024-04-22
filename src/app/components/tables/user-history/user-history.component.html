@@ -1,0 +1,18 @@
+<table>
+    <thead>
+      <tr>
+        <th>Option</th>
+        <th>Default</th>
+        <th>Description</th>
+        <th>....</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of userHistory">
+            <td>{{user.title}}</td>
+            <td>{{user.loginDate}}</td>
+            <td>{{user.userAction}}</td>
+            <td>{{user.browser}}</td>
+         </tr>
+    </tbody>
+  </table>

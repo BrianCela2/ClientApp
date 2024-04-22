@@ -1,72 +1,62 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RoomService } from '../../services/room.service';
-import { CreateRoomDTO } from '../../shared/room.model';
-import { FormsModule } from '@angular/forms';
-import { Route, Router } from '@angular/router';
+import {FormBuilder,FormsModule,FormGroup,ReactiveFormsModule,Validators,
+} from '@angular/forms';import { Route, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-room',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,CommonModule,ReactiveFormsModule],
   templateUrl: './create-room.component.html',
   styleUrl: './create-room.component.css'
 })
-
 export class CreateRoomComponent implements OnInit {
-  rooms: any[] = [];
-  newRoom: any = {}; 
-  public currentPage: number = 1;
-  public pageSize: number = 10;
-  public sortField: string = "Capacity";
-  public sortOrder: string = "asc";
-  sortOptions: { value: string, label: string }[] = [
-    { value: 'Capacity', label: 'Capacity' },
-    { value: 'RoomNumber', label: 'Room Number' },
-    { value: 'Price', label: 'Price' },
-    { value: 'Category', label: 'Category' },
-  ];
-  room: CreateRoomDTO = { roomNumber: 0, capacity: 0, price: 0,  photos: [] };
+  roomForm: FormGroup;
   private roomsSubscription: Subscription | undefined;
 
-  constructor(private router:Router,private roomService: RoomService) { }
-
-  ngOnInit(): void {
-    this.loadRooms();
-  }
-
-  loadRooms(): void {
-    this.roomsSubscription = this.roomService.getRooms(this.currentPage, this.pageSize, this.sortField, this.sortOrder).subscribe({
-      next: (data: any) => {
-        this.rooms = data;
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
+  constructor(
+    private router: Router,
+    private roomService: RoomService,
+    private formBuilder: FormBuilder
+  ) {
+    this.roomForm = this.formBuilder.group({
+      roomNumber: [null, Validators.required],
+      capacity: [null, Validators.required],
+      price: [null, Validators.required],
+      roomStatus: [null, Validators.required],
+      category: [null, Validators.required],
+      photos: [null, Validators.required]
     });
   }
 
-  onSubmit() {
-    console.log('Room data:', this.room); 
-    this.roomService.createRoom(this.room).subscribe({
-      next: (response: any) => {
-        console.log('Room created successfully:', response);
-      },
-      error: (error: any) => {
-        console.error('Error creating room:', error);
-      }
-    })
-    this.router.navigateByUrl('/Room/GetAll');
-
+  ngOnInit(): void {
   }
 
+  onSubmit() {
+    if (this.roomForm.valid) {
+      console.log('Room data:', this.roomForm.value);
+      this.roomService.createRoom(this.roomForm.value).subscribe({
+        next: (response: any) => {
+          console.log('Room created successfully:', response);
+          this.router.navigateByUrl('/Room/GetAll');
+        },
+        error: (error: any) => {
+          console.error('Error creating room:', error);
+        }
+      });
+    } else {
+      console.log('Form is invalid. Cannot submit.');
+    }
+  }
 
   resetForm() {
-    this.room = { roomNumber: 0, capacity: 0, price: 0, photos: [] };
+    this.roomForm.reset();
   }
 
   onFileChange(event: any) {
-    this.room.photos = event.target.files;
+    this.roomForm.patchValue({ photos: event.target.files });
   }
 
   ngOnDestroy(): void {
@@ -75,4 +65,3 @@ export class CreateRoomComponent implements OnInit {
     }
   }
 }
-
