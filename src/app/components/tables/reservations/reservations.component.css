@@ -1,4 +1,5 @@
 /* Button styles */
+@import url('./../../../../assets/css/tables.css');
 
 .btn {
     border: none;
