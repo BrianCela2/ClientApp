@@ -4,13 +4,14 @@ import { RoomService } from '../../services/room.service';
 import {FormBuilder,FormsModule,FormGroup,ReactiveFormsModule,Validators,
 } from '@angular/forms';import { Route, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { PopupService } from '../../services/popup.service';
 
 @Component({
   selector: 'app-create-room',
   standalone: true,
   imports: [FormsModule,CommonModule,ReactiveFormsModule],
   templateUrl: './create-room.component.html',
-  styleUrl: './create-room.component.css'
+  styleUrl: './create-room.component.css',
 })
 export class CreateRoomComponent implements OnInit {
   roomForm: FormGroup;
@@ -19,7 +20,8 @@ export class CreateRoomComponent implements OnInit {
   constructor(
     private router: Router,
     private roomService: RoomService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private _toasterService: PopupService
   ) {
     this.roomForm = this.formBuilder.group({
       roomNumber: [null, Validators.required],
@@ -40,14 +42,15 @@ export class CreateRoomComponent implements OnInit {
       this.roomService.createRoom(this.roomForm.value).subscribe({
         next: (response: any) => {
           console.log('Room created successfully:', response);
+          this._toasterService.success('Room created successfully');
           this.router.navigateByUrl('/Room/GetAll');
         },
         error: (error: any) => {
-          console.error('Error creating room:', error);
+          this._toasterService.danger('Something went wrong. Cannot submit.');
         }
       });
     } else {
-      console.log('Form is invalid. Cannot submit.');
+      this._toasterService.danger('Form is invalid. Cannot submit.');
     }
   }
 

@@ -43,3 +43,8 @@ export interface CreateReservation {
     ReservationRooms: ReservationRoom[];
     ReservationServices?: CreateReservationService[];
   }
+
+  export interface PaginatedReservation {
+    reservations:Reservation[],
+    totalPages:number
+  }

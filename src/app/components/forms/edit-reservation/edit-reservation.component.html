@@ -41,8 +41,9 @@
       </div>
       <ul class="list-group">
         <h4>Services</h4>
-        <li *ngFor="let service of serviceDetails">
-          <p>{{ service.serviceName }}</p>
+        <p *ngIf="!userServices?.length">No services for this reservation</p>
+        <li *ngFor="let service of userServices">
+          <p>{{ service.serviceName }} </p>
         </li>
       </ul>
       <table *ngIf="displayTable" class="table">
@@ -65,13 +66,13 @@
             <td>{{ service.openTime }}</td>
             <td>
               <button
-                class="btn btn-sm btn-outline-danger"
+                class="btn btn-primary"
                 (click)="removeService(i, $event)"
               >
                 Remove
               </button>
               <button
-                class="btn btn-sm btn-outline-success"
+                class="btn btn-primary"
                 (click)="addService(service.serviceID, $event)"
               >
                 Add

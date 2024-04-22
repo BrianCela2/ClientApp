@@ -2,10 +2,12 @@
   <div class="row">
     <ng-container *ngIf="role?.includes('Admin')">
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-
         <h2>User List</h2>
         <div class="d-flex">
-          <app-sorting (sortChange)="onSortChange($event)" [sortOptions]="sortOptions"></app-sorting>
+          <app-sorting
+            (sortChange)="onSortChange($event)"
+            [sortOptions]="sortOptions"
+          ></app-sorting>
           <app-search (searchChange)="onSearchChange($event)"></app-search>
         </div>
         <div class="table-responsive">
@@ -36,7 +38,11 @@
             </tbody>
           </table>
         </div>
-        <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChange)="onPageChange($event)"></app-pagination>
+        <app-pagination
+          [currentPage]="currentPage"
+          [totalPages]="totalPages"
+          (pageChange)="onPageChange($event)"
+        ></app-pagination>
       </main>
     </ng-container>
   </div>

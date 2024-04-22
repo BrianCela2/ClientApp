@@ -8,12 +8,15 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
 })
-export class SortingComponent {
+export class SortingComponent implements OnInit {
   sortField!: string;
   @Input() sortOrder: string = 'asc';
   @Input() sortOptions: { value: string; label: string }[] = [];
   @Output() sortChange = new EventEmitter<{ field: string; order: string }>();
 
+  ngOnInit(): void {
+    this.sortField = this.sortOptions[0].value;
+  }
   constructor() {}
   onSortChange(event: Event) {
     const target = event.target as HTMLSelectElement;

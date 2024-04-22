@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { SortingComponent } from '../../components/tablePagination/sorting/sorting.component';
 import { PaginationComponent } from '../../components/tablePagination/pagination/pagination.component';
 import { RoomDTO } from '../../shared/room.model';
+import { PopupService } from '../../services/popup.service';
 
 @Component({
   selector: 'app-room-list',
@@ -26,7 +27,8 @@ export class RoomListComponent implements OnInit {
      { value: 'Price', label: 'Price' },
      { value: 'Category', label: 'Category' },
    ];
-   constructor(private roomService: RoomService, private router: Router) {}
+   constructor(private roomService: RoomService, private router: Router, private _toasterService: PopupService
+   ) {}
 
    ngOnInit(): void {
      this.fetchRooms()
@@ -57,9 +59,11 @@ export class RoomListComponent implements OnInit {
      this.roomService.updateRoomStatus(roomId, status).subscribe({
        next: (response) => {
          console.log('Room updated successfully');
+         this._toasterService.success('Room updated successfully');
        },
        error: (error) => {
          console.error('Error updating room:', error);
+         this._toasterService.danger('Something went wrong');
        }
      });
    }

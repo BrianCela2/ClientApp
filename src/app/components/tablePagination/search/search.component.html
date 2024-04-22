@@ -1,4 +1,4 @@
-<div>
-    <input type="text" class="form-control border" placeholder="Search..." (input)="onSearchChange($event)">
-  </div>
-  
+<div class="d-flex">
+  <input type="text" class="form-control border" placeholder="Search..." [(ngModel)]="searchString" (keyup.enter)="onSearchButtonClick()">
+  <button class=" btn btn-light p-0" (click)="onSearchButtonClick()"> <span class="fa fa-search p-2"> </span></button>
+</div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { User } from '../shared/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -28,11 +29,8 @@ export class UserService {
 
   getActualUserById() {
     const userId = this.authService.getUserIdFromToken();
-    if (userId) {
-      return this.http.get<any>(`${this.baseUrl}userId/${userId}`);
-    } else {
-      console.error('User id not found in token');
-      return null;
-    }
+    console.log(userId)
+    return this.http.get<User>(`${this.baseUrl}${userId}`);
   }
+
 }

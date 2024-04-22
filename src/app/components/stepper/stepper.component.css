@@ -1,0 +1,73 @@
+/* stepper.component.css */
+
+.stepper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .stepper-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .stepper-indicator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .step {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    background-color: #f0f8ff;
+    border-radius: 10px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .step.active {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .step.complete {
+    background-color: #28a745;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .stepper-content {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stepper-buttons .btn {
+    min-width: 100px;
+    padding: 10px;
+  }
+  
+  .stepper-buttons .btn:disabled {
+    background-color: #ccc;
+    color: #666;
+  }
+  
+  .stepper-buttons .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .stepper-buttons .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+  

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ReservationService } from '../../../services/reservation.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HotelServicesService } from '../../../services/hotel-services.service';
 import { formatDateTimeToDate } from '../../../helpers/formatDateTimeToDate';
-import { ReservationStatusEnum } from '../../../shared/reservation.model';
+import { Observable } from 'rxjs';
+import { PopupService } from '../../../services/popup.service';
 
 @Component({
   selector: 'app-edit-reservation',
@@ -20,32 +21,29 @@ export class EditReservationComponent {
   reservationRooms: any;
   serviceDetails: any[] = [];
   services: any = [];
+  userServices!: any;
   displayTable: boolean = false;
   public selectedServices: any = [];
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private reservationService: ReservationService,
-    private hotelService: HotelServicesService
+    private hotelService: HotelServicesService,
+    private _toasterService: PopupService
   ) {}
   ngOnInit(): void {
     this.reservationId = this.route.snapshot.paramMap.get('id') || '';
     this.reservationService.getReservationById(this.reservationId).subscribe({
       next: (response: any) => {
-        this.reservationDTO=response;
+        this.reservationDTO = response;
         this.reservationDTO.reservationRooms.forEach((room: any) => {
           room.checkInDate = formatDateTimeToDate(room.checkInDate);
           room.checkOutDate = formatDateTimeToDate(room.checkOutDate);
         });
-        this.reservationDTO.reservationServices.forEach((service: any) => {
-          this.hotelService.getServiceById(service.serviceId).subscribe({
-            next: (service) => {
-              this.serviceDetails.push(service);
-            },
-            error: (error) => {
-              console.error('Error getting service details:', error);
-            },
-          });
+        this.getServicesReservation(
+          this.reservationDTO.reservationId
+        ).subscribe((response) => {
+          this.userServices = response;
         });
       },
       error: (error) => {
@@ -56,30 +54,46 @@ export class EditReservationComponent {
 
   updateReservation(): void {
     this.reservationDTO.reservationServices = this.selectedServices;
-    console.log('res',this.reservationDTO)
+    console.log('res', this.reservationDTO);
     this.reservationService
       .updateReservation(this.reservationId, this.reservationDTO)
       .subscribe({
         next: (response) => {
           console.log('Room updated successfully', response);
+          this.getServicesReservation(
+            this.reservationDTO.reservationId
+          ).subscribe((response) => {
+            this.userServices = response;
+            this._toasterService.success('Reservation updated successfully');
+          });
         },
         error: (error) => {
-          console.error('Error updating room:', error);
+          console.error('Error updating reservation:', error);
+          this._toasterService.danger('Something went wrong');
         },
-        complete: () => {},
+        complete: () => {
+          this.displayTable = false;
+        },
       });
   }
 
   cancelReservation(event: Event) {
-    event.preventDefault()
+    event.preventDefault();
     this.reservationService
-      .updateReservationStatus(this.reservationId,2)
+      .updateReservationStatus(this.reservationId, 2)
       .subscribe({
         next: (response) => {
           console.log('Reservation status updated successfully', response);
+          this._toasterService.success(
+            'Reservation status updated successfully'
+          );
         },
         error: (error) => {
           console.error('Error updating status:', error);
+          this._toasterService.danger('Something went wrong. Please try again');
+        },
+        complete: () => {
+          this.router.navigateByUrl('/YourReservations');
         },
       });
   }
@@ -108,5 +122,8 @@ export class EditReservationComponent {
     if (index !== -1) {
       this.services.splice(index, 1);
     }
+  }
+  getServicesReservation(reservationId: any): Observable<any[]> {
+    return this.hotelService.getServicesReservation(reservationId);
   }
 }

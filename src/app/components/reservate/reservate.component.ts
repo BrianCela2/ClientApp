@@ -1,4 +1,3 @@
-// reservate.component.ts
 import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { StepperComponent } from '../stepper/stepper.component';

@@ -1,0 +1,83 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+  border-bottom: 1px solid #dcdcdc;
+  z-index: 1000; 
+}
+
+.dropdown {
+  position: relative;
+}
+
+.btn {
+  font-family: 'Roboto', sans-serif;
+  transition: all 0.3s;
+}
+
+.btn-light {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.btn-light:hover {
+  background-color: #e0e0e0;
+}
+
+.fa-bell {
+  color: #3498db;
+}
+
+.badge {
+  font-size: 12px;
+  border-radius: 50%;
+}
+
+.badge.bg-danger {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.dropdown-menu {
+  background-color: #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 200px;
+}
+
+.dropdown-menu a {
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  transition: background-color 0.3s;
+}
+
+.dropdown-menu a:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown-menu-end {
+  right: 0;
+}
+
+.unread {
+  font-weight: bold;
+  color: #3498db;
+}
+
+.notification-list {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  padding: 10px;
+  z-index: 100; 
+}

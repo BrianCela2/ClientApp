@@ -1,35 +1,38 @@
-<div class="container">
-  <h2>Reservation Details</h2>
-  <div *ngIf="reservationDTO">
-    <p>Reservation Date: {{ reservationDTO.ReservationDate | date }}</p>
-    <p>Reservation Status: {{ reservationDTO.ReservationStatus }}</p>
-    <h3>Reserved Rooms:</h3>
-    <ul class="list-group">
-      <li
-        class="list-group-item"
-        *ngFor="
-          let room of reservationDTO.ReservationRooms;
-          let roomIndex = index
-        "
-      >
-        <p>Room {{ roomIndex + 1 }}</p>
-        <p>Check-In Date: {{ room.CheckInDate }}</p>
-        <p>Check-Out Date: {{ room.CheckOutDate }}</p>
-      </li>
-    </ul>
-    <h3>Reserved Services:</h3>
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let service of serviceDetails">
-        <p>Name: {{ service.serviceName }}</p>
-        <p>Price: {{ service.price }}</p>
-      </li>
-    </ul>
-    <p>Total Price: {{ totalPrice }}</p>
-    <button class="btn btn-primary" (click)="createReservation()">
-      Confirm Reservation
-    </button>
+<div class="reservation-details">
+  <div class="reservation-header">
+    <h2>Reservation Details</h2>
+    <p>{{ reservationDTO.ReservationDate | date }}</p>
   </div>
-  <div *ngIf="!reservationDTO">
+  <div class="reservation-content">
+    <div class="room-section">
+      <h3>Reserved Rooms</h3>
+      <div class="room-cards">
+        <div class="room-card" *ngFor="let room of reservationDTO.ReservationRooms; let i = index">
+          <h4>Room {{ i + 1 }}</h4>
+          <p>Check-In Date: {{ room.CheckInDate }}</p>
+          <p>Check-Out Date: {{ room.CheckOutDate }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="service-section">
+      <h3>Reserved Services</h3>
+      <div class="service-cards">
+        <div class="service-card" *ngFor="let service of serviceDetails">
+          <h4>{{ service.serviceName }}</h4>
+          <p>Price: {{ service.price }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="total-price">
+      <h3>Total Price: {{ totalPrice }}</h3>
+    </div>
+    <div class="action-buttons">
+      <button class="btn confirm-btn" (click)="createReservation()">
+        Confirm Reservation
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!reservationDTO" class="no-data">
     <p>No reservation details available.</p>
   </div>
 </div>

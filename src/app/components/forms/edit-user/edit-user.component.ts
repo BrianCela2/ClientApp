@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { UserService } from '../../../services/user.service';
+import { PopupService } from '../../../services/popup.service';
 
 @Component({
   selector: 'app-edit-user',
@@ -17,7 +18,7 @@ import { UserService } from '../../../services/user.service';
   styleUrl: './edit-user.component.css',
 })
 export class EditUserComponent implements OnInit {
-  constructor(private user: UserService, private fb: FormBuilder) {}
+  constructor(private user: UserService, private fb: FormBuilder,private _toasterService: PopupService) {}
   UpdateForm!: FormGroup;
 
   ngOnInit(): void {
@@ -37,10 +38,11 @@ export class EditUserComponent implements OnInit {
     this.user.updateUser(this.UpdateForm.value).subscribe({
       next: (res) => {
         this.UpdateForm.reset();
-        alert(res.message);
+        this._toasterService.success('User updated successfully');
       },
       error: (err) => {
         console.log(err);
+        this._toasterService.danger('Error updating user');
       },
     });
   }
