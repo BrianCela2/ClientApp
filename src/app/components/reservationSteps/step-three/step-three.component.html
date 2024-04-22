@@ -1,38 +1,40 @@
-<div class="container">
-  <h2>Services</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Service Name</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Category</th>
-        <th>Opening Time</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let service of services; let i = index">
-        <td>{{ service.serviceName }}</td>
-        <td>{{ service.description }}</td>
-        <td>{{ service.price }}</td>
-        <td>{{ service.category }}</td>
-        <td>{{ service.openTime }}</td>
-        <td>
-          <button
-            class="btn btn-sm btn-outline-danger"
-            (click)="removeService(i)"
-          >
-            Remove
-          </button>
-          <button
-            class="btn btn-sm btn-outline-success"
-            (click)="addService(service.serviceID)"
-          >
-            Add
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="services-section">
+  <h2 class="services-header">Our Services</h2>
+  <div class="services-table-container">
+    <table class="services-table">
+      <thead>
+        <tr>
+          <th>Service Name</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Category</th>
+          <th>Opening Time</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let service of services; let i = index">
+          <td>{{ service.serviceName }}</td>
+          <td>{{ service.description }}</td>
+          <td>{{ service.price | currency }}</td>
+          <td>{{ service.category }}</td>
+          <td>{{ service.openTime }}</td>
+          <td>
+            <button
+              class="btn btn-danger btn-sm"
+              (click)="removeService(i)"
+            >
+              Remove
+            </button>
+            <button
+              class="btn btn-success btn-sm"
+              (click)="addService(service.serviceID)"
+            >
+              Add
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

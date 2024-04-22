@@ -1,0 +1,78 @@
+.reservation-details {
+    font-family: 'Roboto', sans-serif;
+    color: #444;
+    padding: 20px;
+    background: #fdfdfd;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reservation-header {
+    text-align: center;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .reservation-header h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .reservation-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .room-section,
+  .service-section {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+  }
+  
+  .room-cards,
+  .service-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .room-card,
+  .service-card {
+    background: #f9f9f9;
+    border-radius: 10px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    transition: all 0.3s ease;
+  }
+  
+  .room-card:hover,
+  .service-card:hover {
+    background: #e6e6e6;
+  }
+  
+  .action-buttons {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .confirm-btn {
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    transition: transform 0.3s ease;
+  }
+  
+  .confirm-btn:hover {
+    transform: scale(1.05);
+  }
+  
+  .no-data {
+    text-align: center;
+    color: #777;
+    padding-top: 20px;
+  }
+  

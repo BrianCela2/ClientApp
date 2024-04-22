@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'stepper',
   templateUrl: './stepper.component.html',
   styleUrls: ['./stepper.component.css'],
-  standalone:true
+  standalone:true,
+  imports:[CommonModule]
 })
 export class StepperComponent {
   @Input() steps: string[] = [];

@@ -92,6 +92,7 @@ export class RoomDetailsComponent {
         this.getRoomDetails();
         console.log('Delete successful');
         this._toasterService.success('Room deleted successfully');
+        this.router.navigateByUrl('/Room/GetAll');
       },
       error: (error) => {
         console.error('There was an error!', error);
