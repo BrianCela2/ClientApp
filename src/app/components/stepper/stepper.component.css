@@ -1,73 +1,67 @@
-/* stepper.component.css */
+.simple-stepper {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
 
-.stepper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .stepper-buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  .stepper-indicator {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .step {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    background-color: #f0f8ff;
-    border-radius: 10px;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  
-  .step.active {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .step.complete {
-    background-color: #28a745;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .stepper-content {
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .stepper-buttons .btn {
-    min-width: 100px;
-    padding: 10px;
-  }
-  
-  .stepper-buttons .btn:disabled {
-    background-color: #ccc;
-    color: #666;
-  }
-  
-  .stepper-buttons .btn-success {
-    background-color: #28a745;
-    color: white;
-  }
-  
-  .stepper-buttons .btn-secondary {
-    background-color: #6c757d;
-    color: white;
-  }
-  
+.stepper-indicator {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #EFD4B9;
+  margin-bottom: 20px;
+}
+
+.step {
+  text-align: center;
+  flex: 1;
+  padding: 10px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.step.is-active {
+  background-color: #dfa974;
+  color: white;
+}
+
+.step.is-complete {
+  background-color: #e6e6e6;
+  color: #707079;
+}
+
+.stepper-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.stepper-btn-back,
+.stepper-btn-next {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.stepper-btn-back {
+  background-color: #ffffff;
+  border: 1px solid #EFD4B9;
+}
+
+.stepper-btn-next {
+  background-color: #dfa974;
+  color: white;
+  border: 1px solid #EFD4B9;
+}
+
+.stepper-btn-back:hover,
+.stepper-btn-next:hover {
+  background-color: #dfa974;
+  color: white;
+}
+
+.stepper-btn-back:disabled,
+.stepper-btn-next:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

@@ -15,17 +15,11 @@ import { ReservationsComponent } from './components/tables/reservations/reservat
 import { EditReservationComponent } from './components/forms/edit-reservation/edit-reservation.component';
 import { UserReservationsComponent } from './components/tables/user-reservations/user-reservations.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
-import { ProfileComponent } from './components/tables/profile/profile.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'HomePage', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  {
-    path: 'updateUser',
-    component: EditUserComponent,
-    canActivate: [AuthGuard],
-  },
   {
     path: 'dashboard',
     component: DashboardComponent,
@@ -72,7 +66,7 @@ export const routes: Routes = [
   },
   {
     path: 'Profile',
-    component: ProfileComponent,
+    component: EditUserComponent,
     title: 'Profile ',
     canActivate: [AuthGuard],
   },

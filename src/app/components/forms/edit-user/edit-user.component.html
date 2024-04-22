@@ -1,87 +1,128 @@
-<div class="panel-body p-3">
-  <form [formGroup]="UpdateForm">
-    <div class="form-row">
-      <div class="form-column">
-        <div class="input-field">
-          <span class="fa fa-user p-2"></span>
-          <input
-            formControlName="FirstName"
-            type="text"
-            class="form-control"
-            placeholder="First Name"
-          />
-        </div>
+<div class="profile-container container">
+  <div class="profile-header text-center" *ngIf="actualUser">
+    <h2>User Profile</h2>
+  </div>
 
-        <div class="input-field">
-          <span class="fa fa-user p-2"></span>
-          <input
-            formControlName="LastName"
-            type="text"
-            class="form-control"
-            placeholder="Last Name"
-          />
-        </div>
-
-        <div class="input-field">
-          <span class="fa fa-envelope p-2"></span>
-          <input
-            formControlName="Email"
-            type="email"
-            class="form-control"
-            placeholder="Email"
-          />
-        </div>
-
-        <div class="input-field">
-          <span class="fa fa-phone p-2"></span>
-          <input
-            formControlName="PhoneNumber"
-            type="text"
-            class="form-control"
-            placeholder="Phone Number"
-          />
-        </div>
-      </div>
-
-      <div class="form-column">
-        <div class="input-field">
-          <span class="fa fa-calendar-days p-2"></span>
-          <input
-            formControlName="Birthday"
-            type="date"
-            class="form-control"
-            placeholder="Birthday"
-          />
-        </div>
-
-        <div class="input-field">
-          <span class="fa fa-globe p-2"></span>
-          <input
-            formControlName="Country"
-            type="text"
-            class="form-control"
-            placeholder="Country"
-          />
-        </div>
-
-        <div class="input-field">
-          <span class="fa fa-location-dot p-2"></span>
-          <input
-            formControlName="City"
-            type="text"
-            class="form-control"
-            placeholder="City"
-          />
+  <div class="row gutters">
+    <div class="col-lg-3 col-md-4 col-sm-12">
+      <div class="card">
+        <div class="card-body text-center">
+          <div class="user-profile">
+            <div class="user-avatar">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png" alt="User Avatar">
+            </div>
+            <h5 class="user-name">{{ actualUser?.firstName }} {{ actualUser?.lastName }}</h5>
+            <h6 class="user-email">{{ actualUser?.email }}</h6>
+          </div>
+          <div class="about">
+            <h6>Country: {{ actualUser?.country }}</h6>
+            <h6>City: {{ actualUser?.city }}</h6>
+            <h6>Birthday: {{ actualUser?.birthday | date }}</h6>
+          </div>
         </div>
       </div>
     </div>
 
-    <button
-      type="submit"
-      (click)="onUpdate()"
-      class="btn btn-primary btn-block"
-    >
-      Update
-    </button>
-  </form>
+    <!-- Profile Form -->
+    <div class="col-lg-9 col-md-8 col-sm-12">
+      <div class="card">
+        <div class="card-body">
+          <form [formGroup]="UpdateForm">
+            <div class="row gutters">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input
+                    type="text"
+                    formControlName="FirstName"
+                    class="form-control"
+                    id="firstName"
+                    placeholder="First Name"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input
+                    type="text"
+                    formControlName="LastName"
+                    class="form-control"
+                    id="lastName"
+                    placeholder="Last Name"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="email">Email</label>
+                  <input
+                    type="email"
+                    formControlName="Email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Email"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input
+                    type="text"
+                    formControlName="PhoneNumber"
+                    class="form-control"
+                    id="phone"
+                    placeholder="Phone Number"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="birthday">Birthday</label>
+                  <input
+                    type="date"
+                    formControlName="Birthday"
+                    class="form-control"
+                    id="birthday"
+                    placeholder="Birthday"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="country">Country</label>
+                  <input
+                    type="text"
+                    formControlName="Country"
+                    class="form-control"
+                    id="country"
+                    placeholder="Country"
+                  />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="city">City</label>
+                  <input
+                    type="text"
+                    formControlName="City"
+                    class="form-control"
+                    id="city"
+                    placeholder="City"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row gutters">
+              <div class="col-md-12 text-right">
+                <button type="submit" class="btn btn-primary" (click)="onUpdate()">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

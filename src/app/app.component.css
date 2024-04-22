@@ -36,16 +36,15 @@
 }
 
 footer {
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   text-align: center;
   padding: 10px;
   border-top: 1px solid #ddd;
 }
 .navbar {
-  background-color: #f8f9fa;
+  background-color: #ffffff;
   padding: 10px 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  background-color: #f7f7f7;
   border-bottom: 2px solid #dfa974;
 }
 
