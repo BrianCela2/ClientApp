@@ -1,65 +1,60 @@
 <div class="homepage">
-    <!-- Hero Section with a Background Image -->
-    <div class="hero-section">
-      <div class="hero-content">
-        <h1>Welcome to Our Luxury Hotel</h1>
-        <p>Experience the epitome of comfort and style. Reserve your room today!</p>
+  <div class="home-section">
+    <div class="home-content">
+      <h1>Welcome to Our Luxury Hotel</h1>
+      <p>
+        Experience the epitome of comfort and style. Reserve your room today!
+      </p>
+    </div>
+  </div>
+
+  <section class="featured-rooms">
+    <h2>Our Rooms</h2>
+    <div class="room-gallery">
+      <div class="room" (click)="navigateTo('/Room/GetAll')">
+        <img src="assets/deluxe.jpeg" alt="Deluxe Room" />
+        <h3>Deluxe Room</h3>
+        <p>A spacious room with a beautiful view and modern amenities.</p>
+      </div>
+      <div class="room" (click)="navigateTo('/Room/GetAll')">
+        <img src="assets/luxary.jpeg" alt="Suite" />
+        <h3>Suite</h3>
+        <p>Experience luxury in our elegantly designed suites.</p>
+      </div>
+      <div class="room" (click)="navigateTo('/Room/GetAll')">
+        <img src="assets/family.webp" alt="Family Room" />
+        <h3>Family Room</h3>
+        <p>Perfect for families, offering ample space and comfort.</p>
       </div>
     </div>
-  
-    <!-- Featured Rooms Section -->
-    <section class="featured-rooms">
-      <h2>Our Rooms</h2>
-      <div class="room-gallery">
-        <div class="room" (click)="navigateTo('/Room/GetAll')">
-          <img src="assets/deluxe.jpeg" alt="Deluxe Room" />
-          <h3>Deluxe Room</h3>
-          <p>A spacious room with a beautiful view and modern amenities.</p>
-        </div>
-        <div class="room" (click)="navigateTo('/Room/GetAll')">
-          <img src="assets/luxary.jpeg" alt="Suite" />
-          <h3>Suite</h3>
-          <p>Experience luxury in our elegantly designed suites.</p>
-        </div>
-        <div class="room" (click)="navigateTo('/Room/GetAll')">
-          <img src="assets/family.webp" alt="Family Room" />
-          <h3>Family Room</h3>
-          <p>Perfect for families, offering ample space and comfort.</p>
-        </div>
+  </section>
+
+  <section class="hotel-services">
+    <h2>Hotel Services</h2>
+    <div class="service-gallery">
+      <div class="service" (click)="navigateTo('/hotelservices')">
+        <i class="fas fa-swimmer"></i>
+        <h3>Swimming Pool</h3>
+        <img src="assets/pool.avif" alt="Swimming pool" />
+        <p>Enjoy a relaxing swim in our heated indoor and outdoor pools.</p>
       </div>
-    </section>
-  
-    <!-- Hotel Services Section -->
-    <section class="hotel-services">
-      <h2>Hotel Services</h2>
-      <div class="service-gallery">
-        <div class="service" (click)="navigateTo('/hotelservices')">
-          <i class="fas fa-swimmer"></i>
-          <h3>Swimming Pool</h3>
-          <img src="assets/pool.avif" alt="Swimming pool" />
-          <p>Enjoy a relaxing swim in our heated indoor and outdoor pools.</p>
-        </div>
-        <div class="service" (click)="navigateTo('/hotelservices')">
-          <i class="fas fa-dumbbell"></i>
-          <h3>Fitness Center</h3>
-          <img src="assets/gym.webp" alt="Gym" />
-          <p>Fully equipped gym with personal trainers.</p>
-        </div>
-        <div class="service" (click)="navigateTo('/hotelservices')">
-          <i class="fas fa-spa"></i>
-          <h3>Spa Services</h3>
-          <img src="assets/spa.webp" alt="Spa" />
-          <p>Unwind with our luxurious spa treatments.</p>
-        </div>
+      <div class="service" (click)="navigateTo('/hotelservices')">
+        <i class="fas fa-dumbbell"></i>
+        <h3>Fitness Center</h3>
+        <img src="assets/gym.webp" alt="Gym" />
+        <p>Fully equipped gym with personal trainers.</p>
       </div>
-    </section>
-  
-  
-    <!-- Call-to-Action Section -->
-    <section class="cta-section">
-      <h2>Book Your Stay Today</h2>
-      <p>Ready for an unforgettable experience? Reserve your room with us!</p>
-      <a routerLink="/signup"  >Sign Up Now</a>
-    </section>
-  </div>
-  
+      <div class="service" (click)="navigateTo('/hotelservices')">
+        <i class="fas fa-spa"></i>
+        <h3>Spa Services</h3>
+        <img src="assets/spa.webp" alt="Spa" />
+        <p>Unwind with our luxurious spa treatments.</p>
+      </div>
+    </div>
+  </section>
+  <section class="cta-section">
+    <h2>Book Your Stay Today</h2>
+    <p>Ready for an unforgettable experience? Reserve your room with us!</p>
+    <a routerLink="/signup">Sign Up Now</a>
+  </section>
+</div>
