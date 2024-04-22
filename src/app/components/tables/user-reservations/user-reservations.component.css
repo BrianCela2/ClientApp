@@ -1,1 +1,14 @@
 @import url('./../../../../assets/css/tables.css');
+.btn-blue {
+    background-color: #dfa974; 
+    color: white;
+  }
+  
+  .btn-blue:hover {
+    background-color: #df9d5b;
+  }
+  
+  .btn-blue:active {
+    background-color: #cb7723; 
+  }
+  

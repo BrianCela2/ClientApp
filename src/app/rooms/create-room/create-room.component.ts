@@ -63,8 +63,10 @@ export class CreateRoomComponent implements OnInit {
         console.error('Error creating room:', error);
         this._toasterService.danger('Something went wrong');
       },
+      complete: () => {
+        this.router.navigateByUrl('/Room/GetAll');
+      },
     });
-    this.router.navigateByUrl('/Room/GetAll');
   }
 
   resetForm() {
