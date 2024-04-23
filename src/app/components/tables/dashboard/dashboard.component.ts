@@ -7,19 +7,22 @@ import { PaginationComponent } from '../../tablePagination/pagination/pagination
 import { SearchComponent } from '../../tablePagination/search/search.component';
 import { SortingComponent } from '../../tablePagination/sorting/sorting.component';
 import { CommonModule } from '@angular/common';
+import { Roles } from '../../../shared/userRole.model';
+import { PopupService } from '../../../services/popup.service';
+import { FormsModule } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   standalone:true,
-  imports:[PaginationComponent,SearchComponent,SortingComponent,CommonModule]
+  imports:[PaginationComponent,SearchComponent,SortingComponent,CommonModule, FormsModule]
 })
 export class DashboardComponent implements OnInit {
   public users: any = [];
   public role!: string;
   public totalPages!:number ;
-
   public fullName: string = "";
   public currentPage: number = 1;
   public pageSize: number = 10;
@@ -35,6 +38,7 @@ export class DashboardComponent implements OnInit {
     private userService: UserService,
     private authService: AuthService,
     private userRoleService: UserRoleService,
+    private _toasterService: PopupService
   ) { }
 
   ngOnInit() {
@@ -73,5 +77,24 @@ export class DashboardComponent implements OnInit {
   onSearchChange(searchString: string) {
     this.searchString = searchString;
     this.fetchUsers();
+  }
+
+  addRoleToUser(userId: string, role: Roles) {
+    console.log(userId,role)
+    if (!role) {
+      this._toasterService.success('Role cannot be empty');
+      return;
+    }
+
+    this.userRoleService.addRoleToUser(userId, role).subscribe(
+      (response) => {
+        this._toasterService.success('Role added successfully');
+      },
+      (error: HttpErrorResponse) => {
+        const errorMessage = error.error?.message || 'Something went wrong';
+        this._toasterService.danger(errorMessage);
+      }
+
+    );
   }
 }

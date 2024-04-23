@@ -25,6 +25,6 @@ export class HomepageComponent {
     this.searchService.setSearchParameters([{capacity:this.capacity,
       checkInDate:this.checkInDate,
       checkOutDate:this.checkOutDate}]);
-    this.router.navigate(['/createReservation']);
+    this.router.navigateByUrl('/createReservation'  );
   }
 }
