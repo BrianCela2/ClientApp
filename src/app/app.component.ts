@@ -29,7 +29,6 @@ import { FooterComponent } from './components/footer/footer.component';
     FormsModule,
     RouterLink,
     SendNotificationsComponent,
-    SearchRoomsComponent,
     NotificationListComponent,
     SpinnerComponent,
     NavbarComponent,

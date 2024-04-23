@@ -83,7 +83,6 @@ export const routes: Routes = [
     title: 'Profile ',
     canActivate: [AuthGuard],
   },
-  { path: 'SearchRooms', component: SearchRoomsComponent, title: 'Search' },
   { path: 'Reservations', component: ReservationsComponent, title: 'Reservations', canActivate: [AuthGuard] },
   { path: 'Reservations/Edit/:id', component: EditReservationComponent, title: 'Reservations Edit', canActivate: [AuthGuard] },
 
