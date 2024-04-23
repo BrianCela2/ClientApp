@@ -1,0 +1,18 @@
+<table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>User Action</th>
+        <th>Browser</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of userHistory">
+            <td>{{user.title}}</td>
+            <td>{{user.loginDate|date:'mediumDate'}}</td>
+            <td>{{user.userAction}}</td>
+            <td>{{user.browser}}</td>
+         </tr>
+    </tbody>
+  </table>

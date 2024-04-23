@@ -1,85 +1,51 @@
-<div class="container room-details-section">
-    <h2 class="rd-title">Create Room</h2>
-  
-    <form (ngSubmit)="onSubmit()" #roomForm="ngForm" class="room-details-item">
-      <!-- Room Number -->
-      <div class="form-group">
-        <label for="roomNumber">Room Number:</label>
-        <input type="number"
-               class="form-control"
-               id="roomNumber"
-               name="roomNumber"
-               [(ngModel)]="room.roomNumber"
-               required>
+<form [formGroup]="roomForm" (ngSubmit)="onSubmit()" class="custom-form">
+    <div class="mb-3">
+      <label for="roomNumber" class="form-label">Room Number:</label>
+      <input type="number" class="form-control" id="roomNumber" formControlName="roomNumber">
+      <div *ngIf="roomForm.get('roomNumber')?.invalid && roomForm.get('roomNumber')?.touched">
+        <small class="text-danger">Room Number is required</small>
       </div>
-  
-      <!-- Capacity -->
-      <div class="form-group">
-        <label for="capacity">Capacity:</label>
-        <input type="number"
-               class="form-control"
-               id="capacity"
-               name="capacity"
-               [(ngModel)]="room.capacity">
+    </div>
+    <div class="mb-3">
+      <label for="capacity" class="form-label">Capacity:</label>
+      <input type="number" class="form-control" id="capacity" formControlName="capacity">
+      <div *ngIf="roomForm.get('capacity')?.invalid && roomForm.get('capacity')?.touched">
+        <small class="text-danger">Capacity is required</small>
       </div>
-  
-      <!-- Price -->
-      <div class="form-group">
-        <label for="price">Price:</label>
-        <input type="number"
-               class="form-control"
-               id="price"
-               name="price"
-               [(ngModel)]="room.price"
-               required>
+    </div>
+    <div class="mb-3">
+      <label for="price" class="form-label">Price:</label>
+      <input type="number" class="form-control" id="price" formControlName="price">
+      <div *ngIf="roomForm.get('price')?.invalid && roomForm.get('price')?.touched">
+        <small class="text-danger">Price is required</small>
       </div>
-  
-      <!-- Room Status -->
-      <div class="form-group">
-        <label for="roomStatus">Room Status:</label>
-        <select class="form-control"
-                id="roomStatus"
-                name="roomStatus"
-                [(ngModel)]="room.roomStatus">
-          <option value="1">Available</option>
-          <option value="2">Busy</option>
-          <option value="3">Working</option>
-          <option value="4">Cleaning</option>
-        </select>
+    </div>
+    <div class="mb-3">
+      <label for="roomStatus" class="form-label">Room Status:</label>
+      <select class="form-select" id="roomStatus" formControlName="roomStatus">
+        <option value="1">Available</option>
+        <option value="2">Busy</option>
+        <option value="3">Working</option>
+        <option value="4">Cleaning</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="category" class="form-label">Category:</label>
+      <select class="form-select" id="category" formControlName="category">
+        <option value="1">Suit</option>
+        <option value="2">Presidential</option>
+        <option value="3">Mini</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="photos" class="form-label">Upload Image:</label>
+      <input type="file" class="form-control" id="photos" formControlName="photos" multiple (change)="onFileChange($event)">
+      <div *ngIf="roomForm.get('photos')?.invalid && roomForm.get('photos')?.touched">
+        <small class="text-danger">Photos are required</small>
       </div>
-  
-      <!-- Category -->
-      <div class="form-group">
-        <label for="category">Category:</label>
-        <select class="form-control"
-                id="category"
-                name="category"
-                [(ngModel)]="room.category">
-          <option value="1">Suit</option>
-          <option value="2">Presidential</option>
-          <option value="3">Mini</option>
-        </select>
-      </div>
-  
-      <!-- Upload Image -->
-      <div class="form-group">
-        <label for="photos">Upload Image:</label>
-        <input type="file"
-               class="form-control"
-               id="photos"
-               name="photos"
-               multiple
-               (change)="onFileChange($event)">
-      </div>
-  
-      <!-- Submit Button -->
-      <div class="text-center">
-        <button type="submit"
-                class="btn btn-primary"
-                [disabled]="!roomForm.valid">
-          Create Room
-        </button>
-      </div>
-    </form>
-  </div>
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-primary" [disabled]="!roomForm.valid">Create Room</button>
+    </div>
+  </form>
   

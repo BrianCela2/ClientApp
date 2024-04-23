@@ -15,6 +15,7 @@ import { ReservationsComponent } from './components/tables/reservations/reservat
 import { EditReservationComponent } from './components/forms/edit-reservation/edit-reservation.component';
 import { UserReservationsComponent } from './components/tables/user-reservations/user-reservations.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { UserHistoryComponent } from './components/tables/user-history/user-history.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'HomePage', pathMatch: 'full' },
@@ -71,4 +72,5 @@ export const routes: Routes = [
     title: 'Profile ',
     canActivate: [AuthGuard],
   },
+  {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History'}
 ];
