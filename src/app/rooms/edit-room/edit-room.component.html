@@ -36,11 +36,10 @@
           </select>
         </div>
       </div>
-      
-      <button type="submit" class="btn btn-primary" [disabled]="!roomForm.valid">Update</button>
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="!roomForm.valid">Update</button>
     </form>
   </div>
   <div *ngIf="updateRoomDto.roomId==''">
-    <p>Room not found.</p>
+    <p class="text-center">Room not found.</p>
   </div>
 </div>

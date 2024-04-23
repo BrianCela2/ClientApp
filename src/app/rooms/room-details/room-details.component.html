@@ -1,52 +1,63 @@
 <div class="container">
-  <h2>Room Details</h2>
-  
+  <h2 class="room-title">Room Details</h2>
+
   <div *ngIf="room" class="room-details">
-    <p><strong>Room Number:</strong> {{ room.roomNumber }}</p>
-    <p><strong>Capacity:</strong> {{ room.capacity }}</p>
-    <p><strong>Price:</strong> {{ room.price }}</p>
-    <p><strong>Room Status:</strong> {{ room.roomStatus }}</p>
-    <p><strong>Category:</strong> {{ room.category }}</p>
-    <div *ngIf="role">
-    <div *ngIf="role.includes('Admin')">
-    <div class="action-buttons">
-      <button (click)="GoToEdit()">Go to Edit</button>
-      <button (click)="confirmRoomDelete(roomId)">Delete Room</button>
-      <button (click)="chooseFile()">Add Photo</button>
-      </div>
+    <div class="room-info">
+      <p><strong>Room Number:</strong> {{ room.roomNumber }}</p>
+      <p><strong>Capacity:</strong> {{ room.capacity }}</p>
+      <p><strong>Price:</strong> {{ room.price | currency }}</p>
+      <p><strong>Room Status:</strong> {{ room.roomStatus }}</p>
+      <p><strong>Category:</strong> {{ room.category }}</p>
     </div>
+
+    <div *ngIf="role?.includes('Admin')" class="admin-actions">
+      <button class="btn btn-primary" (click)="GoToEdit()">Edit Room</button>
+      <button class="btn btn-danger" (click)="confirmRoomDelete(room.roomId)">Delete Room</button>
+      <button class="btn btn-secondary" (click)="chooseFile()">Add Photo</button>
     </div>
+
     <div *ngIf="showFileInput" class="file-input">
-      <input type="file" #fileInput (change)="onFileSelected($event)">
-      <button (click)="savePhoto()">Save</button>
+      <input type="file" #fileInput (change)="onFileSelected($event)" class="form-control-file">
+      <button class="btn btn-success" (click)="savePhoto()">Save Photo</button>
     </div>
-    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-      <div class="carousel-inner">
-        <div class="carousel-item" *ngFor="let photo of room.roomPhotos; let i = index" [class.active]="i === activePhotoIndex">
-          <div class="photo-container">
-            <img [src]="photo.photoContent" class="d-block w-100" alt="Room Photo">
-            <div *ngIf="role">
-              <div *ngIf="role.includes('Admin')">
-            <button class="delete-button" (click)="confirmDelete(photo.photoId)">Delete</button>
-              </div>
+
+    <div class="room-carousel">
+      <div id="roomCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item" *ngFor="let photo of room.roomPhotos; let i = index" [class.active]="i === activePhotoIndex">
+            <img [src]="photo.photoContent" class="d-block w-100" alt="Room Photo" />
+            <div *ngIf="role?.includes('Admin')" class="photo-actions">
+              <button class="btn btn-danger" (click)="confirmDelete(photo.photoId)">Delete Photo</button>
             </div>
           </div>
         </div>
+
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#roomCarousel"
+          data-bs-slide="prev"
+          (click)="setActivePhoto((activePhotoIndex - 1 + room.roomPhotos.length) % room.roomPhotos.length)"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#roomCarousel"
+          data-bs-slide="next"
+          (click)="setActivePhoto((activePhotoIndex + 1) % room.roomPhotos.length)"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev" (click)="setActivePhoto((activePhotoIndex - 1 + room.roomPhotos.length) % room.roomPhotos.length)">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next" (click)="setActivePhoto((activePhotoIndex + 1) % room.roomPhotos.length)">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
     </div>
   </div>
-  
+
   <div *ngIf="!room">
-    <p>Room not found.</p>
+    <p class="text-danger">Room not found.</p>
   </div>
 </div>

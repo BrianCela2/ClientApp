@@ -14,3 +14,7 @@ export interface UserRole {
     Admin = 3,
     Operator = 2
   }
+  export interface  NewUserRole {
+    userId: string;
+    role?: Roles;
+  }

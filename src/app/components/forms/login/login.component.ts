@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UserRoleService } from '../../../services/user-role.service';
-import { Login } from '../../../shared/user.model';
+import { PopupService } from '../../../services/popup.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,13 @@ export class LoginComponent implements OnInit {
   isText: boolean = false;
   eyeIcon: string = 'fa fa-eye-slash';
   loginForm!: FormGroup;
-  constructor(private fb: FormBuilder, private auth: AuthService, private userRole:UserRoleService, private router:Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private userRole: UserRoleService,
+    private router: Router,
+    private _toasterService: PopupService
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -43,17 +49,19 @@ export class LoginComponent implements OnInit {
   }
   onLogin() {
     if (this.loginForm.valid) {
+      console.log(this.loginForm.value);
       this.auth.login(this.loginForm.value).subscribe({
         next: (res) => {
-          console.log(res)
+          console.log(res);
           this.loginForm.reset();
           this.auth.storeToken(res);
           const tokenPayload = this.auth.decodeToken();
           this.userRole.setRole(tokenPayload.role);
-          this.router.navigate(["dashboard"]);
+          this.router.navigate(['dashboard']);
         },
         error: (err) => {
           console.log(err);
+          this._toasterService.danger('Wrong email or password');
         },
       });
     } else {

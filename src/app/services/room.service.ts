@@ -9,8 +9,8 @@ export class RoomService {
   private url = 'https://localhost:7006/Room'; 
   constructor(private httpClient: HttpClient) { }
 
-  getRooms(): Observable<any[]> {
-    return this.httpClient.get<any[]>(this.url+'/GetRoomPhotos');
+  getRooms(page: number, pageSize: number, sortField: string, sortOrder: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.url}/GetRoomPhotos?page=${page}&pageSize=${pageSize}&sortField=${sortField}&sortOrder=${sortOrder}`);
   }
   getRoomsReservation(id:string) {
     return this.httpClient.get<any[]>('https://localhost:7006/api/ReservationRoom/GetRoomsReservation/'+id);
@@ -41,11 +41,11 @@ export class RoomService {
     
     return this.httpClient.put(this.url+'/UpdateRoom/'+id, formData);
   }
-  getRoomById(id: string): Observable<any> {
-    return this.httpClient.get<any>(this.url+'/GetRoom/'+id);
+  getRoomById(id: string): Observable<RoomDTO> {
+    return this.httpClient.get<RoomDTO>(this.url+'/GetRoom/'+id);
   }
-  getRoomWithId(id: string): Observable<any> {
-    return this.httpClient.get<any>(this.url+'/GetById/'+id);
+  getRoomWithId(id: string): Observable<RoomDTO> {
+    return this.httpClient.get<RoomDTO>(this.url+'/GetById/'+id);
   }
   RoomDelete (id:string):Observable<number>{
     let httpheaders=new HttpHeaders()

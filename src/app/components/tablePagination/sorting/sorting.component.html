@@ -1,0 +1,13 @@
+<div class="d-flex">
+  <div>
+    <select class="form-select" (change)="onSortChange($event)">
+      <option *ngFor="let option of sortOptions" [value]="option.value">{{ option.label }}</option>
+    </select>
+  </div>
+  <div>
+    <select class="form-select" (change)="onOrderChange($event)">
+      <option value="asc">Ascending</option>
+      <option value="desc">Descending</option>
+    </select>
+  </div>
+</div>

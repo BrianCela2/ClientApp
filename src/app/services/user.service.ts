@@ -11,8 +11,16 @@ export class UserService {
   private baseUrl: string = 'https://localhost:7006/User/';
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.baseUrl}getAllUsers`);
+  getUsers(
+    page: number,
+    pageSize: number,
+    sortField: string,
+    sortOrder: string,
+    searchString: string
+  ): Observable<any> {
+    return this.http.get<any>(
+      `${this.baseUrl}getAllUsers?page=${page}&pageSize=${pageSize}&sortField=${sortField}&sortOrder=${sortOrder}&searchString=${searchString}`
+    );
   }
 
   updateUser(request: any) {
@@ -20,12 +28,9 @@ export class UserService {
   }
 
   getActualUserById() {
-    const userId = this.authService.getUserIdFromToken(); 
-    if (userId) {
-      return this.http.get<any>(`${this.baseUrl}userId/${userId}`);
-    } else {
-      console.error('User id not found in token');
-      return null;
-    }
+    const userId = this.authService.getUserIdFromToken();
+    console.log(userId)
+    return this.http.get<User>(`${this.baseUrl}${userId}`);
   }
+
 }

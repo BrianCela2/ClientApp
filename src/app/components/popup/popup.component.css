@@ -1,0 +1,109 @@
+.toaster {
+    position: fixed;
+    z-index: 200;
+    min-width: 300px;
+    max-width: 300px;
+  }
+  
+  .toaster .toast-message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px; 
+    word-break: break-all;
+  }
+  
+  .toaster .toast-message:last-child {
+    margin-bottom: 0;
+  }
+  
+  .toaster .toast-message.toast-primary {
+    background: #ffffff;
+    color: #003366; 
+    border:#003366 1px solid ;
+  }
+  
+  .toaster .toast-message.toast-secondary {
+    background: #ffffff;
+    color: #336633; 
+    border:#336633 1px solid ;
+
+  }
+  
+  .toaster .toast-message.toast-success {
+    background: #ffffff;
+    color: #006600; 
+    border:#006600 1px solid ;
+
+  }
+  
+  .toaster .toast-message.toast-info {
+    background: #ffffff; 
+    color: #003366;
+    border:#003366 1px solid ;
+
+  }
+  
+  .toaster .toast-message.toast-warning {
+    background: #ffffff; 
+    color: #cc6600; 
+    border:#cc6600 1px solid ;
+
+  }
+  
+  .toaster .toast-message.toast-danger {
+    background: #ffffff;
+    color: #cc0000; 
+    border:#cc0000 1px solid ;
+  }
+  
+  .toaster.toaster-top-left {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    top: 0;
+    left: 0;
+  }
+  
+  .toaster.toaster-top-center {
+    margin-top: 1rem;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .toaster.toaster-top-right {
+    margin-top: 1rem;
+    margin-right: 1rem;
+    top: 0;
+    right: 0;
+  }
+  
+  .toaster.toaster-bottom-left {
+    margin-bottom: 1rem;
+    margin-left: 1rem;
+    bottom: 0;
+    left: 0;
+  }
+  
+  .toaster.toaster-bottom-center {
+    margin-bottom: 1rem;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .toaster.toaster-bottom-right {
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    bottom: 0;
+    right: 0;
+  }
+  
+  @media (max-width: 478px) {
+    .toaster {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+    }
+  }
+  

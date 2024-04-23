@@ -2,42 +2,10 @@
   <div class="row">
     <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
       <div class="card mt-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
           <h2 class="h4 m-0">Dashboard</h2>
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
-            <div class="dropdown">
-              <button
-                class="btn btn-sm btn-outline-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenuButton"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  class="bi bi-calendar align-text-bottom"
-                  viewBox="0 0 16 16"
-                >
-                  <rect width="16" height="16" rx="2" ry="2"></rect>
-                  <path
-                    fill-rule="evenodd"
-                    d="M11.636 2.364a.5.5 0 0 1 0 .707L10.707 3.5a.5.5 0 0 1-.707 0L9.5 2.793l-1.5 1.5a.5.5 0 1 1-.707-.707l1.146-1.147a.5.5 0 0 1 .708 0l1.5 1.5 1.147-1.147a.5.5 0 0 1 .707 0zm-8 0a.5.5 0 0 0-.707 0L1.5 3.5a.5.5 0 0 0 .707.707l1.147-1.147a.5.5 0 0 0 0-.707L2.793 1.5 4.5.293a.5.5 0 0 0-.707-.707L2.364 1.636zM0 4.5a.5.5 0 0 0 .5.5h15a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 0-.5-.5H0a.5.5 0 0 0-.5.5v2z"
-                  ></path>
-                </svg>
-                This week
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <li><a class="dropdown-item" href="#">This week</a></li>
-                <li><a class="dropdown-item" href="#">Last week</a></li>
-                <li><a class="dropdown-item" href="#">Next week</a></li>
-              </ul>
-            </div>
-          </div>
         </div>
         <div class="card-body">
           <h3 class="mb-4">User Roles List</h3>
@@ -59,20 +27,73 @@
                   <td>{{ userRole.lastName }}</td>
                   <td>{{ userRole.roles }}</td>
                   <td>
-                    <button type="button" class="btn btn-sm btn-outline-danger" (click)="removeRole(userRole)">
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-danger"
+                      (click)="removeRole(userRole)"
+                    >
                       Delete
                     </button>
-                    <button type="button" class="btn btn-sm btn-outline-success" (click)="toggleInput(userRole)">
-                      {{ activeUserRole === userRole ? 'Cancel' : 'Add' }}
+                    <button
+                      type="button"
+                      class="btn btn-sm btn-outline-success"
+                      (click)="toggleInput(userRole)"
+                    >
+                      {{ activeUserRole === userRole ? "Cancel" : "Add" }}
                     </button>
                     <div *ngIf="activeUserRole === userRole" class="mt-2">
-                      <input type="text" class="form-control mb-2" [(ngModel)]="userRole.newRoles" placeholder="Enter role">
-                      <button type="button" class="btn btn-sm btn-primary" (click)="addRole(userRole)">Save</button>
+                      <input
+                        type="text"
+                        class="form-control mb-2"
+                        [(ngModel)]="userRole.newRoles"
+                        placeholder="Enter role"
+                      />
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-primary"
+                        (click)="addRole(userRole)"
+                      >
+                        Save
+                      </button>
                     </div>
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="toggleAddRoleForm()"
+          >
+            Add Role to User
+          </button>
+          <!-- Add Role Form -->
+          <div *ngIf="showAddRoleForm" class="mt-3">
+            <h4>Add Role to User</h4>
+            <form (submit)="submitAddRoleForm()">
+              <div class="mb-3">
+                <label for="userIdInput" class="form-label">User ID</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="userIdInput"
+                  [(ngModel)]="newUserRole.userId"
+                  name="userId"
+                />
+              </div>
+              <div class="mb-3">
+                <label for="roleInput" class="form-label">Role</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="roleInput"
+                  [(ngModel)]="newUserRole.role"
+                  name="role"
+                />
+              </div>
+              <button type="submit" class="btn btn-primary">Add Role</button>
+            </form>
           </div>
         </div>
       </div>

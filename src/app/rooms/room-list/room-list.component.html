@@ -10,11 +10,11 @@
               </div>
             </div>
           </div>
-          <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExampleControls-' + roomIndex" data-bs-slide="prev" (click)="setActivePhoto(room, (room.activePhotoIndex - 1 + room.roomPhotos.length) % room.roomPhotos.length)">
+          <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#carouselExampleControls-' + roomIndex" data-bs-slide="prev" (click)="setActivePhoto(room, (room.activePhotoIndex! - 1 + room.roomPhotos.length) % room.roomPhotos.length)">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExampleControls-' + roomIndex" data-bs-slide="next" (click)="setActivePhoto(room, (room.activePhotoIndex + 1) % room.roomPhotos.length)">
+          <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#carouselExampleControls-' + roomIndex" data-bs-slide="next" (click)="setActivePhoto(room, (room.activePhotoIndex! + 1) % room.roomPhotos.length)">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -34,5 +34,7 @@
         </div>
       </div>
     </div>
+    <app-sorting (sortChange)="onSortChange($event)" [sortOptions]="sortOptions"></app-sorting>
+    <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChange)="onPageChange($event)"></app-pagination>
   </div>
 </div>

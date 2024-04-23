@@ -10,6 +10,7 @@ import ValidateForm from '../../../helpers/validateForm';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import { PopupService } from '../../../services/popup.service';
 @Component({
   selector: 'app-signup',
   imports: [ReactiveFormsModule, CommonModule, RouterModule],
@@ -23,7 +24,7 @@ export class SignupComponent implements OnInit {
   eyeIcon: string = 'fa fa-eye-slash';
   signUpForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router:Router) {}
+  constructor(private fb: FormBuilder, private auth: AuthService, private router:Router,private _toasterService: PopupService) {}
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
@@ -40,7 +41,6 @@ export class SignupComponent implements OnInit {
 
   onSignUp() {
     if (this.signUpForm.valid) {
-      //Send object to database
       console.log(this.signUpForm.value);
       this.auth.signUp(this.signUpForm.value).subscribe({
         next: (res) => {
@@ -50,11 +50,11 @@ export class SignupComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
+          this._toasterService.danger('Something went wrong. Please try again');
         },
       });
     } else {
       ValidateForm.validateAllFormFields(this.signUpForm);
-      //throw error using toaster
     }
   }
 

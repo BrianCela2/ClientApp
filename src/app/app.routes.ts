@@ -8,11 +8,13 @@ import { EditRoomComponent } from './rooms/edit-room/edit-room.component';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 import { RoomListComponent } from './rooms/room-list/room-list.component';
 import { SendNotificationsComponent } from './notifications/send-notifications/send-notifications.component';
-import { SearchRoomsComponent } from './rooms/search-rooms/search-rooms.component';
 import { UserRolesComponent } from './components/tables/user-roles/user-roles.component';
 import { ReservateComponent } from './components/reservate/reservate.component';
 import { ReservationsComponent } from './components/tables/reservations/reservations.component';
 import { EditReservationComponent } from './components/forms/edit-reservation/edit-reservation.component';
+import { UserReservationsComponent } from './components/tables/user-reservations/user-reservations.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { ProfileComponent } from './components/tables/profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from "@angular/core";
 import { HotelServiceListComponent } from "./hotel-services/hotel-service-list/hotel-service-list.component";
@@ -23,17 +25,21 @@ import { HotelServiceUpdateComponent } from "./hotel-services/hotel-service-upda
 
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'HomePage', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'updateUser', component: EditUserComponent },
+  {
+    path: 'updateUser',
+    component: EditUserComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
   },
   { path: 'userRoles', component: UserRolesComponent },
-  { path: 'steps', component: ReservateComponent },
+  { path: 'createReservation', component: ReservateComponent },
   { path: 'Room', component: CreateRoomComponent, title: 'Room Create' },
   { path: 'Room/Edit/:id', component: EditRoomComponent, title: 'Room Edit' },
   {
@@ -46,7 +52,36 @@ export const routes: Routes = [
     path: 'NotificationAllUsers',
     component: SendNotificationsComponent,
     title: 'Notification',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'Reservations',
+    component: ReservationsComponent,
+    title: 'Reservations',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'Reservations/Edit/:id',
+    component: EditReservationComponent,
+    title: 'Reservations Edit',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'YourReservations',
+    component: UserReservationsComponent,
+    title: 'Reservations ',
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'HomePage',
+    component: HomepageComponent,
+    title: 'Homepage ',
+  },
+  {
+    path: 'Profile',
+    component: ProfileComponent,
+    title: 'Profile ',
+    canActivate: [AuthGuard],
   },
   { path: 'SearchRooms', component: SearchRoomsComponent, title: 'Search' },
   { path: 'Reservations', component: ReservationsComponent, title: 'Reservations', canActivate: [AuthGuard] },
