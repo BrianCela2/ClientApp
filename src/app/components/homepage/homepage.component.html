@@ -15,32 +15,30 @@
         <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
           <div class="booking-form">
             <h3>Booking Your Hotel</h3>
-            <form action="#">
+            <form (ngSubmit)="onSubmit()">
               <div class="check-date">
                 <label for="date-in">Check In:</label>
-                <input type="date" class="date-input" id="date-in" />
-                <i class="icon_calendar"></i>
+                <input type="date" [(ngModel)]="checkInDate" name="checkInDate" />
               </div>
               <div class="check-date">
                 <label for="date-out">Check Out:</label>
-                <input type="date" class="date-input" id="date-out" />
-                <i class="icon_calendar"></i>
+                <input type="date" [(ngModel)]="checkOutDate" name="checkOutDate" />
               </div>
               <div class="select-option">
-                <label for="guest">Guests:</label>
-                <select id="guest">
-                  <option value="">2 Adults</option>
-                  <option value="">3 Adults</option>
+                <label for="capacity">Guests:</label>
+                <select [(ngModel)]="capacity" name="capacity">
+                  <option value="2">2 Adults</option>
+                  <option value="3">3 Adults</option>
                 </select>
               </div>
               <div class="select-option">
                 <label for="room">Room:</label>
-                <select id="room">
-                  <option value="">1 Room</option>
-                  <option value="">2 Rooms</option>
+                <select [(ngModel)]="rooms" name="rooms">
+                  <option value="1">1 Room</option>
+                  <option value="2">2 Rooms</option>
                 </select>
               </div>
-              <button type="submit">Check Availability</button>
+              <button type="submit" (click)="onSubmit()">Check Availability</button>
             </form>
           </div>
         </div>
