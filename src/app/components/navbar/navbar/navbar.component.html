@@ -19,11 +19,14 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/Room/GetAll">Rooms</a>
       </li>
-      <li class="nav-item">
+      <!-- Display these items only if the user is logged in -->
+      <li class="nav-item" *ngIf="isLoggedIn()">
         <a class="nav-link" routerLink="/Reservations">Reservations</a>
       </li>
     </ul>
+
     <ul class="navbar-nav">
+      <!-- Book Your Stay is visible to everyone -->
       <li class="nav-item">
         <a
           class="nav-link"
@@ -38,19 +41,33 @@
             text-transform: uppercase;
             letter-spacing: 2px;
           "
-          >Book Your Stay</a
         >
+          Book Your Stay
+        </a>
       </li>
-      <li class="nav-item">
+
+      <!-- These items should be visible only if the user is logged in -->
+      <li class="nav-item" *ngIf="isLoggedIn()">
         <a class="nav-link" routerLink="/Profile">Profile</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" *ngIf="isLoggedIn()">
         <a class="nav-link" routerLink="/YourReservations">My Reservations</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="logout()" style="cursor: pointer"
-          >Logout</a
-        >
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <a class="nav-link" (click)="logout()" style="cursor: pointer">
+          Logout
+        </a>
+      </li>
+      <li class="nav-item" *ngIf="isLoggedIn()">
+        <app-notification-list></app-notification-list>
+      </li>
+
+      <!-- Login/Register should be visible only if the user is NOT logged in -->
+      <li class="nav-item" *ngIf="!isLoggedIn()">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li class="nav-item" *ngIf="!isLoggedIn()">
+        <a class="nav-link" routerLink="/register">Register</a>
       </li>
     </ul>
   </div>

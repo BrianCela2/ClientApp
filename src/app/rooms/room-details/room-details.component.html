@@ -57,7 +57,7 @@
     <div class="rd-text">
       <div class="rd-title">
         <div class="rdt-right">
-          <div class="admin-actions">
+          <div class="admin-actions" *ngIf="role?.includes('Admin')">
             <button class="btn btn-primary" (click)="GoToEdit()">Edit Room</button>
             <button class="btn btn-danger" (click)="confirmRoomDelete(room.roomId)">Delete Room</button>
             <button class="btn btn-secondary" (click)="chooseFile()">Add Photo</button>
