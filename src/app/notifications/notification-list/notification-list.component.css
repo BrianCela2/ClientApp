@@ -22,7 +22,7 @@ body {
 }
 
 .btn-light {
-  background-color: #f0f0f0;
+  background-color: transparent;
   color: #333;
 }
 
@@ -31,7 +31,7 @@ body {
 }
 
 .fa-bell {
-  color: #3498db;
+  color: #dfa974;
 }
 
 .badge {
@@ -42,6 +42,7 @@ body {
 .badge.bg-danger {
   background-color: #e74c3c;
   color: white;
+  right: 13px;
 }
 
 .dropdown-menu {

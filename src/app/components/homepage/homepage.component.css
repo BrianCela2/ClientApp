@@ -1,163 +1,247 @@
-.homepage {
-  font-family: "Roboto", sans-serif;
+body {
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.6;
   color: #333;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
 }
 
-.home-section {
-  background: url("./../../../assets/homepage.avif")
-    no-repeat center center;
-  background-size: cover;
-  height: 60vh;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+}
+
+.center {
+  justify-content: center;
   display: flex;
   align-items: center;
-  justify-content: center;
+}
+.hero-section {
+  padding: 50px 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("./../../../assets/cover.webp") no-repeat center center/cover;
+  color: white;
+  text-align: left;
 }
 
-.home-content {
-  text-align: center;
-  color: #ffffff;
-  background-color: rgba(165, 123, 91, 0.6); 
-  padding: 40px;
-  border-radius: 10px;
-  width: 80%; 
-  max-width: 800px; 
-  margin: 0 auto;
+.hero-text {
+  margin-top: 20px;
 }
 
-.home-content h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+.primary-btn {
+  background-color: #dfa974;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-.home-content p {
-  font-size: 1.2rem;
+.primary-btn:hover {
+  background-color: #bc8f62;
 }
 
-.featured-rooms {
-  padding: 40px;
-  background-color: #f5f5f5;
-  text-align: center;
-}
-
-.featured-rooms h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.room-gallery {
-  display: flex;
-  justify-content: space-between;
-}
-
-.room {
-  width: 30%;
-  background-color: #ffffff;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: all 0.3s;
-  cursor: pointer;
-}
-
-.room:hover {
-  transform: scale(1.05);
-}
-
-.room img {
-  width: 100%;
-  height: auto;
-}
-
-.room h3 {
-  font-size: 1.5rem;
-  margin-top: 10px;
-}
-
-.room p {
-  font-size: 1rem;
-  color: #666;
-}
-
-.hotel-services {
-  padding: 40px;
-  background-color: #ffffff;
-  text-align: center;
-}
-
-.hotel-services h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-}
-
-.service-gallery {
-  display: flex;
-  justify-content: space-between;
-}
-
-.service {
-  width: 30%;
-  background-color: #f5f5f5;
-  border-radius: 10px;
+.booking-form {
+  background-color: white;
   padding: 20px;
-  text-align: center;
-  transition: all 0.3s;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.check-date {
+  margin-bottom: 15px;
+}
+
+.check-date input {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.check-date i {
+  position: relative;
+  right: 20px;
+}
+
+.select-option {
+  margin-bottom: 15px;
+}
+
+.select-option select {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.booking-form button {
+  background-color: #dfa974;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
 
-.service:hover {
+.booking-form button:hover {
+  background-color: #bc8f62;
+}
+
+.rooms-section {
+  padding-top: 40px;
+  padding-bottom: 60px;
+}
+
+.room-item {
+  border: 1px solid #e5e5e5;
+  border-radius: 5px;
+  overflow: hidden;
+  background: white;
+  transition: all 0.3s;
+}
+
+.room-item img {
+  width: 100%;
+  max-height: 174px;
+}
+
+.room-item:hover {
   transform: scale(1.05);
-  background-color: #ffffff;
 }
 
-.service i {
-  font-size: 2rem;
+.ri-text {
+  padding: 20px;
+  min-height: 500px;
+}
+
+.ri-text h4 {
+  font-size: 1.5em;
   color: #3498db;
   margin-bottom: 10px;
 }
 
-.service h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+.ri-text h3 {
+  font-size: 1.8em;
+  color: #e67e22;
 }
 
-.service p {
-  font-size: 1rem;
-  color: #666;
+.ri-text h3 span {
+  font-size: 0.8em;
+  font-weight: normal;
+  color: #7f8c8d;
 }
 
-.service img {
+.ri-text table {
+  font-size: 1em;
+  color: #7f8c8d;
+}
+
+.ri-text .r-o {
+  font-weight: bold;
+}
+.room-item .ri-text table {
   width: 100%;
-  height: auto;
-  border-radius: 10px;
+  border-collapse: collapse;
+  margin-bottom: 24px;
 }
 
-.cta-section {
-  padding: 40px;
-  background-color: #3498db;
-  text-align: center;
-  color: #ffffff;
+.room-item .ri-text table tbody tr {
+  border-bottom: 1px solid #e5e5e5;
 }
 
-.cta-section h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+.room-item .ri-text table tbody tr:last-child {
+  border-bottom: none;
 }
 
-.cta-section p {
-  font-size: 1.2rem;
+.room-item .ri-text table tbody tr td {
+  font-size: 16px;
+  color: #19191a;
+  padding: 8px;
+  line-height: 36px;
 }
 
-.cta-section a {
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: 700;
+.room-item .ri-text table tbody tr td.r-o {
+  font-weight: bold;
+  color: #707079;
+  width: 120px;
+}
+
+.primary-btn {
+  background-color: #dfa974;
+  color: white;
   padding: 10px 20px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  transition: all 0.3s;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  text-transform: uppercase;
 }
 
-.cta-section a:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+.primary-btn:hover {
+  background-color: #bc8f62;
+  color: white;
+}
+
+.services-section {
+  padding: 60px 0;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.services-section .section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.services-section .section-title span {
+  color: #dfa974;
+  font-size: 18px;
+}
+
+.services-section .section-title h2 {
+  font-size: 36px;
+  color: #19191a;
+  margin-bottom: 0;
+}
+
+.services-section .service-item {
+  text-align: center;
+  padding: 20px;
+  transition: all 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.services-section .service-item:hover {
+  background-color: #dfa974;
+  border: 1px solid #dfa974;
+  border-radius: 8px;
+}
+
+.services-section .service-item i {
+  font-size: 40px;
+  color: #dfa974;
+  margin-bottom: 15px;
+}
+
+.services-section .service-item h4 {
+  font-size: 24px;
+  color: #19191a;
+}
+
+.services-section .service-item p {
+  color: #707079;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+label {
+  color: gray;
 }

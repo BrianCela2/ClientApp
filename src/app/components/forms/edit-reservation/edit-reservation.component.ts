@@ -65,6 +65,7 @@ export class EditReservationComponent {
           ).subscribe((response) => {
             this.userServices = response;
             this._toasterService.success('Reservation updated successfully');
+            this.router.navigateByUrl('YourReservations')
           });
         },
         error: (error) => {

@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { NotificationListComponent } from '../../../notifications/notification-list/notification-list.component';
 
 @Component({
   selector: 'navbar',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink,CommonModule,NotificationListComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css',
 })
@@ -15,7 +17,7 @@ export class NavbarComponent {
     this.authService.signOut();
     this.router.navigateByUrl('/login');
   }
-  toggleDropdown(event: Event) {
-    event.preventDefault();
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn(); 
   }
 }

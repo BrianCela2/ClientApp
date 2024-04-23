@@ -1,63 +1,106 @@
-<div class="container">
-  <h2 class="room-title">Room Details</h2>
-
-  <div *ngIf="room" class="room-details">
-    <div class="room-info">
-      <p><strong>Room Number:</strong> {{ room.roomNumber }}</p>
-      <p><strong>Capacity:</strong> {{ room.capacity }}</p>
-      <p><strong>Price:</strong> {{ room.price | currency }}</p>
-      <p><strong>Room Status:</strong> {{ room.roomStatus }}</p>
-      <p><strong>Category:</strong> {{ room.category }}</p>
-    </div>
-
-    <div *ngIf="role?.includes('Admin')" class="admin-actions">
-      <button class="btn btn-primary" (click)="GoToEdit()">Edit Room</button>
-      <button class="btn btn-danger" (click)="confirmRoomDelete(room.roomId)">Delete Room</button>
-      <button class="btn btn-secondary" (click)="chooseFile()">Add Photo</button>
-    </div>
-
-    <div *ngIf="showFileInput" class="file-input">
-      <input type="file" #fileInput (change)="onFileSelected($event)" class="form-control-file">
-      <button class="btn btn-success" (click)="savePhoto()">Save Photo</button>
-    </div>
-
-    <div class="room-carousel">
-      <div id="roomCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item" *ngFor="let photo of room.roomPhotos; let i = index" [class.active]="i === activePhotoIndex">
-            <img [src]="photo.photoContent" class="d-block w-100" alt="Room Photo" />
-            <div *ngIf="role?.includes('Admin')" class="photo-actions">
-              <button class="btn btn-danger" (click)="confirmDelete(photo.photoId)">Delete Photo</button>
+<div class="container room-details-section">
+  <div class="room-details-item">
+    <div class="breadcrumb-section">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12">
+                  <div class="breadcrumb-text">
+                      <h2>Our Rooms</h2>
+                      <div class="bt-option">
+                          <a href="./home.html">Home</a>
+                          <span>Rooms</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+      <div class="room-carousel col-lg-7">
+        <div id="roomCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div
+              class="carousel-item"
+              *ngFor="let photo of room.roomPhotos; let i = index"
+              [class.active]="i === activePhotoIndex"
+            >
+              <img [src]="photo.photoContent" class="d-block w-100" alt="Room Photo" />
+              <div *ngIf="role?.includes('Admin')" class="photo-actions">
+                <button class="btn btn-danger" (click)="confirmDelete(photo.photoId)">Delete Photo</button>
+              </div>
             </div>
           </div>
+
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#roomCarousel"
+            data-bs-slide="prev"
+            (click)="setActivePhoto((activePhotoIndex - 1 + room.roomPhotos.length) % room.roomPhotos.length)"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#roomCarousel"
+            data-bs-slide="next"
+            (click)="setActivePhoto((activePhotoIndex + 1) % room.roomPhotos.length)"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
-
-        <button
-          class="carousel-control-prev"
-          type="button"
-          data-bs-target="#roomCarousel"
-          data-bs-slide="prev"
-          (click)="setActivePhoto((activePhotoIndex - 1 + room.roomPhotos.length) % room.roomPhotos.length)"
-        >
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-
-        <button
-          class="carousel-control-next"
-          type="button"
-          data-bs-target="#roomCarousel"
-          data-bs-slide="next"
-          (click)="setActivePhoto((activePhotoIndex + 1) % room.roomPhotos.length)"
-        >
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
       </div>
-    </div>
-  </div>
 
-  <div *ngIf="!room">
-    <p class="text-danger">Room not found.</p>
+    <div class="rd-text">
+      <div class="rd-title">
+        <div class="rdt-right">
+          <div class="admin-actions" *ngIf="role?.includes('Admin')">
+            <button class="btn btn-primary" (click)="GoToEdit()">Edit Room</button>
+            <button class="btn btn-danger" (click)="confirmRoomDelete(room.roomId)">Delete Room</button>
+            <button class="btn btn-secondary" (click)="chooseFile()">Add Photo</button>
+          </div>
+          <div *ngIf="showFileInput" class="file-input">
+            <input type="file" #fileInput (change)="onFileSelected($event)" class="form-control-file">
+            <button class="btn btn-success" (click)="savePhoto()">Save Photo</button>
+          </div>
+        </div>
+      </div>
+
+      <h2>{{ room.price | currency }}<span>/ Pernight</span></h2>
+
+      <table>
+        <tbody>
+          <tr>
+            <td class="r-o">Room Number:</td>
+            <td>{{ room.roomNumber }}</td>
+          </tr>
+          <tr>
+            <td class="r-o">Capacity:</td>
+            <td>{{ room.capacity }}</td>
+          </tr>
+          <tr>
+            <td class="r-o">Room Status:</td>
+            <td>{{ room.roomStatus }}</td>
+          </tr>
+          <tr>
+            <td class="r-o">Category:</td>
+            <td>{{ room.category }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="f-para">Motorhome or Trailer that is the question for you. Here are some of the advantages and disadvantages of both, so you will be confident when purchasing an RV. When comparing Rvs, a motorhome or a travel trailer, should you buy a motorhome or fifth wheeler? The advantages and disadvantages of both are studied so that you can make your choice wisely when purchasing an RV. Possessing a motorhome or fifth wheel is an achievement of a lifetime. It can be similar to sojourning with your residence as you search the various sites of our great land, America.
+
+        The two commonly known recreational vehicle classes are the motorized and towable. Towable rvs are the travel trailers and the fifth wheel. The rv travel trailer or fifth wheel has the attraction of getting towed by a pickup or a car, thus giving the adaptability of possessing transportation for you when you are parked at your campsite.</p>
+
+      <div *ngIf="showFileInput" class="file-input">
+        <input type="file" #fileInput (change)="onFileSelected($event)" class="form-control-file" />
+        <button class="btn btn-success" (click)="savePhoto()">Save Photo</button>
+      </div>
+
+    </div>
   </div>
 </div>
