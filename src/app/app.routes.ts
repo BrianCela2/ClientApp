@@ -17,6 +17,7 @@ import { UserReservationsComponent } from './components/tables/user-reservations
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { UserHistoryComponent } from './components/tables/user-history/user-history.component';
 import { AdminGuard } from './guards/admin.guard';
+import { OpeartorGuard } from './guards/operator.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'HomePage', pathMatch: 'full' },
@@ -48,7 +49,7 @@ export const routes: Routes = [
     path: 'Reservations',
     component: ReservationsComponent,
     title: 'Reservations',
-    canActivate: [AdminGuard],
+    canActivate: [OpeartorGuard || AdminGuard],
   },
   {
     path: 'Reservations/Edit/:id',

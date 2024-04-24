@@ -75,10 +75,8 @@ export class AuthService {
   isAdmin(){
     const role= this.getRoleFromToken()
     if(role?.includes('Admin') || role?.includes('Operator')){
-      console.log('true')
       return true
     }
-    console.log('false')
     return false;
   }
 }
