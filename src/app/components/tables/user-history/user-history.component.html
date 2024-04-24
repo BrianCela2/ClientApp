@@ -1,3 +1,4 @@
+<div>
 <table>
     <thead>
       <tr>
@@ -16,3 +17,9 @@
          </tr>
     </tbody>
   </table>
+  <app-pagination
+  [currentPage]="currentPage"
+  [totalPages]="totalPages"
+  (pageChange)="onPageChange($event)"
+></app-pagination>
+</div>
