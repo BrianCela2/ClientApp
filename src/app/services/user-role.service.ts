@@ -9,6 +9,7 @@ import { Roles, UserRoleDetail } from '../shared/userRole.model';
 export class UserRoleService {
   private role = new BehaviorSubject<any>('');
   private baseUrl: string = 'https://localhost:7006/api/';
+  
 
   constructor(private http: HttpClient) {}
 
@@ -21,9 +22,14 @@ export class UserRoleService {
     this.role.next(role);
   }
 
-  getUserRoleDetails() {
+  getUserRoleDetails(
+    page: number,
+    pageSize: number,
+    sortField: string,
+    sortOrder: string,
+    searchString: string) {
     return this.http.get<any>(
-      `${this.baseUrl}UserRole/getUserRoleDetails`
+      `${this.baseUrl}UserRole/getUserRoleDetails?page=${page}&pageSize=${pageSize}&sortField=${sortField}&sortOrder=${sortOrder}&searchString=${searchString}`
     );
   }
 
