@@ -1,9 +1,9 @@
 <div class="profile-container container">
-  <div class="profile-header text-center" *ngIf="actualUser">
+  <div class="profile-header text-center">
     <h2>User Profile</h2>
   </div>
 
-  <div class="row gutters">
+  <div class="row gutters" *ngIf="actualUser">
     <div class="col-lg-3 col-md-4 col-sm-12">
       <div class="card">
         <div class="card-body text-center">
@@ -11,13 +11,13 @@
             <div class="user-avatar">
               <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png" alt="User Avatar">
             </div>
-            <h5 class="user-name">{{ actualUser?.firstName }} {{ actualUser?.lastName }}</h5>
-            <h6 class="user-email">{{ actualUser?.email }}</h6>
+            <h5 class="user-name">{{ actualUser.firstName }} {{ actualUser.lastName }}</h5>
+            <h6 class="user-email">{{ actualUser.email }}</h6>
           </div>
           <div class="about">
-            <h6>Country: {{ actualUser?.country }}</h6>
-            <h6>City: {{ actualUser?.city }}</h6>
-            <h6>Birthday: {{ actualUser?.birthday | date }}</h6>
+            <h6>Country: {{ actualUser.country }}</h6>
+            <h6>City: {{ actualUser.city }}</h6>
+            <h6>Birthday: {{ actualUser.birthday | date }}</h6>
           </div>
         </div>
       </div>
