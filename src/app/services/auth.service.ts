@@ -59,12 +59,14 @@ export class AuthService {
 }
 
   getUserIdFromToken(){
+    this.userPayload = this.decodeToken();
     if(this.userPayload){
       return this.userPayload.nameid
     }
   }
 
   getRoleFromToken(){
+    this.userPayload = this.decodeToken();
     if(this.userPayload){
       return this.userPayload.role
     }
