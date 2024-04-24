@@ -24,13 +24,12 @@ export const OpeartorGuard: CanActivateFn = (
     return router.createUrlTree(['/login']);
   }
   const userRoles = auth.getRoleFromToken();
-  console.log('userrole', userRoles)
-  const isOperator = userRoles?.includes('Operator');
-
-  if (isOperator) {
+  const isOperator = userRoles?.includes('Operator') ;
+  const isAdmin = userRoles?.includes('Admin') ;
+  
+  if (isOperator || isAdmin) {
     return true;
   } else {
-    console.log(isOperator)
-    return router.createUrlTree(['/unauthorized']);
+    return router.createUrlTree(['/HomePage']);
   }
 };

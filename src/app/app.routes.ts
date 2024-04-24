@@ -28,17 +28,17 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AdminGuard],
   },
-  { path: 'userRoles', component: UserRolesComponent,canActivate: [AuthGuard], },
+  { path: 'userRoles', component: UserRolesComponent,canActivate: [AdminGuard], },
   { path: 'createReservation', component: ReservateComponent ,canActivate: [AuthGuard],},
-  { path: 'Room', component: CreateRoomComponent, title: 'Room Create',canActivate: [AuthGuard], },
-  { path: 'Room/Edit/:id', component: EditRoomComponent, title: 'Room Edit',canActivate: [AuthGuard], },
+  { path: 'Room', component: CreateRoomComponent, title: 'Room Create',canActivate: [AdminGuard], },
+  { path: 'Room/Edit/:id', component: EditRoomComponent, title: 'Room Edit',canActivate: [AdminGuard], },
   {
     path: 'Room/Get/:id',
     component: RoomDetailsComponent,
     title: 'Room Details',
-    canActivate: [AuthGuard],
+    canActivate: [OpeartorGuard],
   },
-  { path: 'Room/GetAll', component: RoomListComponent, title: 'All Rooms',canActivate: [AuthGuard], },
+  { path: 'Room/GetAll', component: RoomListComponent, title: 'All Rooms',canActivate: [OpeartorGuard] },
   {
     path: 'NotificationAllUsers',
     component: SendNotificationsComponent,
@@ -49,7 +49,7 @@ export const routes: Routes = [
     path: 'Reservations',
     component: ReservationsComponent,
     title: 'Reservations',
-    canActivate: [OpeartorGuard || AdminGuard],
+    canActivate: [OpeartorGuard],
   },
   {
     path: 'Reservations/Edit/:id',
@@ -74,5 +74,5 @@ export const routes: Routes = [
     title: 'Profile ',
     canActivate: [AuthGuard],
   },
-  {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History'}
+  {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History',canActivate: [AdminGuard],}
 ];

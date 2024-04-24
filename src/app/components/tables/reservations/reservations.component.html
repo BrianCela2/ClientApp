@@ -21,7 +21,7 @@
                 <th scope="col">Full Name</th>
                 <th scope="col">User Email</th>
                 <th scope="col">Reservation Status</th>
-                <th scope="col">Action</th>
+                <th *ngIf="role?.includes('Admin')" scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -91,7 +91,7 @@
                       Canceled
                     </button>
                   </td>
-                  <td>
+                  <td *ngIf="role?.includes('Admin')">
                     <button
                       (click)="
                         confirmReservationDelete(reservation.reservationId)
