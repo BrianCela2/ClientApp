@@ -67,6 +67,7 @@ export class StepFourComponent implements OnInit {
         error: (error) => {
           console.error('Error creating reservation:', error);
           console.log(this.reservationDTO);
+          this._toasterService.danger('Something went wrong');
         },
       });
   }

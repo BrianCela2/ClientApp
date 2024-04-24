@@ -46,7 +46,7 @@ export class SignupComponent implements OnInit {
         next: (res) => {
           this.signUpForm.reset();
           this.router.navigate(['login'])
-          alert(res.message);
+          this._toasterService.success('User registrated successfully');
         },
         error: (err) => {
           console.log(err);

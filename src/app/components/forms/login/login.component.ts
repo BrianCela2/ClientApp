@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
           this.auth.storeToken(res);
           const tokenPayload = this.auth.decodeToken();
           this.userRole.setRole(tokenPayload.role);
-          this.router.navigate(['dashboard']);
+          this.router.navigateByUrl('HomePage');
         },
         error: (err) => {
           console.log(err);
