@@ -1,0 +1,20 @@
+<div class="container">
+    <h1>Reservation Details</h1>
+    <div class="reservation-details">
+      <p><label>Reservation Date:</label> <span>{{reservation?.reservationDate | date:"mediumDate"}}</span></p>
+      <p><label>Total Price:</label> <span>${{reservation?.totalPrice}}</span></p>
+      <p><label>Reservation Status:</label> <span>{{reservation?.reservationStatus}}</span></p>
+      <h2>Reserved Rooms</h2>
+      <div *ngFor="let roomReservation of roomsReservations">
+      <p><label>Room Category:</label> <span>{{roomReservation.room.category}}</span></p>
+      <p><label>Check-In Date:</label> <span>{{roomReservation.checkInDate| date:"mediumDate"}}</span></p>
+      <p><label>Check-Out Date:</label> <span>{{roomReservation.checkOutDate| date:"mediumDate"}}</span></p>
+      <p><label>Room Price :</label><span>{{roomReservation.room.price}}</span></p>
+      </div>
+      <h2>Services</h2>
+    <div *ngFor="let service of services">
+    <p><label>Service:</label> <span>{{service.serviceName}}</span></p>
+    <p><label>Service Price:</label> <span>{{service.price}}</span></p>
+   </div>
+  </div>
+ </div>

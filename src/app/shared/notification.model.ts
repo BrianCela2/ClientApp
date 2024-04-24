@@ -9,6 +9,7 @@ export interface NotificationDTO {
     senderId:string;
     messageContent:string;
     isSeen:boolean;
+    contentId:string;
     receiver:User;
     sender:User;
   }

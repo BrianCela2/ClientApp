@@ -36,20 +36,21 @@ export class NotificationListComponent implements OnInit {
       this.signalRService.startConnection();
       this.signalRService.getConnectionId();
   
-      this.signalRService.getHubConnection().on('SendNotificationAll', (result1: NotificationDTO) => {
-        this.addNotification(result1);
+      this.signalRService.getHubConnection().on('SendNotificationAll', (result: NotificationDTO) => {
+        this.addNotification(result);
         this.unreadCount++;
-        console.log(result1);
+        console.log(result);
       });
-      this.signalRService.getHubConnection().on('SendNotification', (result1: NotificationDTO) => {
-        this.addNotification(result1);
+      this.signalRService.getHubConnection().on('SendNotification', (result: NotificationDTO) => {
+        this.addNotification(result);
         this.unreadCount++;
-        console.log(result1);
+        console.log(result);
       });
   
       const receiverId = this.authService.getUserIdFromToken();
       if(this.authService.isLoggedIn()){
       this.notificationService.getNotifications(receiverId).subscribe(data => {
+        console.log(receiverId)
         this.notifications = data;
         this.unreadCount = this.notifications.filter(notification => !notification.isSeen).length;
         console.log(this.notifications);

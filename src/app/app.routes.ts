@@ -16,6 +16,7 @@ import { EditReservationComponent } from './components/forms/edit-reservation/ed
 import { UserReservationsComponent } from './components/tables/user-reservations/user-reservations.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { UserHistoryComponent } from './components/tables/user-history/user-history.component';
+import { ReservationDetailsComponent } from './components/pages/reservation-details/reservation-details.component';
 import { AdminGuard } from './guards/admin.guard';
 import { OpeartorGuard } from './guards/operator.guard';
 
@@ -74,5 +75,7 @@ export const routes: Routes = [
     title: 'Profile ',
     canActivate: [AuthGuard],
   },
+  {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History'},
+  {path:'Reservation/:id',component:ReservationDetailsComponent,title:'Reservation'}
   {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History',canActivate: [AdminGuard],}
 ];
