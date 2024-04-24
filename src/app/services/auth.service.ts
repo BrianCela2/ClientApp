@@ -71,4 +71,14 @@ export class AuthService {
       return this.userPayload.role
     }
   }
+
+  isAdmin(){
+    const role= this.getRoleFromToken()
+    if(role?.includes('Admin') || role?.includes('Operator')){
+      console.log('true')
+      return true
+    }
+    console.log('false')
+    return false;
+  }
 }

@@ -16,6 +16,7 @@ import { EditReservationComponent } from './components/forms/edit-reservation/ed
 import { UserReservationsComponent } from './components/tables/user-reservations/user-reservations.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { UserHistoryComponent } from './components/tables/user-history/user-history.component';
+import { AdminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'HomePage', pathMatch: 'full' },
@@ -24,7 +25,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AdminGuard],
   },
   { path: 'userRoles', component: UserRolesComponent,canActivate: [AuthGuard], },
   { path: 'createReservation', component: ReservateComponent ,canActivate: [AuthGuard],},
@@ -47,7 +48,7 @@ export const routes: Routes = [
     path: 'Reservations',
     component: ReservationsComponent,
     title: 'Reservations',
-    canActivate: [AuthGuard],
+    canActivate: [AdminGuard],
   },
   {
     path: 'Reservations/Edit/:id',

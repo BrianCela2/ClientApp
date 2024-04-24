@@ -60,11 +60,7 @@ export class ReservationsComponent {
   ) {}
   ngOnInit() {
     this.fetchReservations();
-    this.userRole.getRole().subscribe((val) => {
-      const roleFromToken = this.authService.getRoleFromToken();
-      console.log(roleFromToken);
-      this.role = val || roleFromToken;
-    });
+      this.role = this.authService.getRoleFromToken();
   }
 
   fetchReservations() {

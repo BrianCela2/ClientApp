@@ -8,6 +8,7 @@
             <th scope="col">#</th>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
+            <th scope="col">Email</th>
             <th scope="col">Role</th>
             <th scope="col">Actions</th>
           </tr>
@@ -15,8 +16,9 @@
         <tbody>
           <tr *ngFor="let userRole of userRoles; let i = index">
             <td>{{ i + 1 }}</td>
-            <td>{{ userRole.firstName }}</td>
-            <td>{{ userRole.lastName }}</td>
+            <td>{{ userRole.user.firstName }}</td>
+            <td>{{ userRole.user.lastName }}</td>
+            <td>{{ userRole.user.email }}</td>
             <td>{{ userRole.roles }}</td>
             <td>
               <button

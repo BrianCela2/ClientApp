@@ -47,9 +47,7 @@ export class RoomDetailsComponent {
     this.roomId = this.route.snapshot.paramMap.get('id') || '';
     this.getRoomDetails();
     this.userRole.getRole().subscribe((val) => {
-      console.log(val);
       const roleFromToken = this.authService.getRoleFromToken();
-      console.log(roleFromToken);
       this.role = val || roleFromToken;
     });
   }

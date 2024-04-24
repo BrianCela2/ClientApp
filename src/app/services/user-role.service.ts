@@ -22,7 +22,7 @@ export class UserRoleService {
   }
 
   getUserRoleDetails() {
-    return this.http.get<UserRoleDetail[]>(
+    return this.http.get<any>(
       `${this.baseUrl}UserRole/getUserRoleDetails`
     );
   }

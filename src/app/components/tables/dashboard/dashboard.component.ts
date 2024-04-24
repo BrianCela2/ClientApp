@@ -43,7 +43,6 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.fetchUsers();
-    this.fetchUserRole();
   }
 
   fetchUsers() {
@@ -55,13 +54,6 @@ export class DashboardComponent implements OnInit {
       });
   }
 
-  fetchUserRole() {
-    this.userRoleService.getRole()
-      .subscribe(val => {
-        const roleFromToken = this.authService.getRoleFromToken();
-        this.role = val || roleFromToken;
-      });
-  }
 
   onPageChange(page: number) {
     this.currentPage = page;

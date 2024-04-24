@@ -18,7 +18,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   imports: [CommonModule, FormsModule],
 })
 export class UserRolesComponent implements OnInit {
-  public userRoles: UserRoleDetail[] = [];
+  public userRoles:any;
   public activeUserRole: any = null;
   public newUserRole: NewUserRole={userId:""};
 
@@ -34,6 +34,7 @@ export class UserRolesComponent implements OnInit {
   getUserRoles() {
     this.userRoleService.getUserRoleDetails().subscribe((res: any) => {
       this.userRoles = res;
+      console.log('res',res)
     });
   }
   addRole(userRole: UserRoleDetail) {
