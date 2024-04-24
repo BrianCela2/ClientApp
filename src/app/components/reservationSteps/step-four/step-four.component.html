@@ -9,8 +9,8 @@
       <div class="room-cards">
         <div class="room-card" *ngFor="let room of reservationDTO.ReservationRooms; let i = index">
           <h4>Room {{ i + 1 }}</h4>
-          <p>Check-In Date: {{ room.CheckInDate }}</p>
-          <p>Check-Out Date: {{ room.CheckOutDate }}</p>
+          <p>Check-In Date: {{ room.checkInDate }}</p>
+          <p>Check-Out Date: {{ room.checkOutDate }}</p>
         </div>
       </div>
     </div>

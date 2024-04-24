@@ -5,8 +5,8 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
       <li *ngFor="let notification of notifications" [class.unread]="!notification.isSeen">
-        <a class="dropdown-item" href="#">
-          {{ notification.messageContent }} 
+        <a class="dropdown-item" href="http://localhost:4200/Reservation/{{notification.contentId}}">
+                  {{ notification.messageContent }} 
         </a>
       </li>
       <li *ngIf="!notifications || notifications.length === 0">

@@ -46,9 +46,9 @@ export class StepTwoComponent implements OnInit {
   createReservation() {
     console.log(this.selectedRooms)
     const reservationRooms = this.selectedRooms.map((room) => ({
-      RoomId: room.roomId,
-      CheckInDate: room.checkInDate,
-      CheckOutDate: room.checkOutDate,
+      roomId: room.roomId,
+      checkInDate: room.checkInDate,
+      checkOutDate: room.checkOutDate,
     }));
 
     this.searchService.setReservation ({

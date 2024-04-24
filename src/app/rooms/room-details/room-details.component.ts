@@ -58,7 +58,6 @@ export class RoomDetailsComponent {
     this.roomService.getRoomById(this.roomId).subscribe({
       next: (room: RoomDTO) => {
         this.room = room;
-        console.log(this.room);
         if (this.room.roomPhotos) {
           this.room.roomPhotos.forEach((photo: RoomPhotoDTO) => {
             if (
