@@ -76,6 +76,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History'},
-  {path:'Reservation/:id',component:ReservationDetailsComponent,title:'Reservation'}
+  {path:'Reservation/:id',component:ReservationDetailsComponent,title:'Reservation'},
   {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History',canActivate: [AdminGuard],}
 ];
