@@ -9,8 +9,8 @@ export class RoomService {
   private url = 'https://localhost:7006/Room'; 
   constructor(private httpClient: HttpClient) { }
 
-  getRoomsByCategory(page: number, pageSize: number): Observable<any> {
-    return this.httpClient.get<any>(`${this.url}/GetAll?page=${page}&pageSize=${pageSize}`);
+  getRoomsByCategory(): Observable<any> {
+    return this.httpClient.get<any>(`${this.url}/GetAll`);
   }
   getRooms(page: number, pageSize: number, sortField: string, sortOrder: string): Observable<any> {
     return this.httpClient.get<any>(`${this.url}/GetRoomPhotos?page=${page}&pageSize=${pageSize}&sortField=${sortField}&sortOrder=${sortOrder}`);

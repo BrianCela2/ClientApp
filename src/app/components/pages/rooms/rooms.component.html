@@ -62,18 +62,9 @@
                     <td class="r-o">Price:</td>
                     <td>{{ room.price }}</td>
                   </tr>
-                  <tr>
-                    <td class="r-o">Room Number:</td>
-                    <td>{{ room.roomNumber }}</td>
-                  </tr>
                 </tbody>
               </table>
             </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-12">
-          <app-pagination [currentPage]="currentPage" [totalPages]="totalPages" (pageChange)="onPageChange($event)"></app-pagination>
         </div>
       </div>
     </div>
