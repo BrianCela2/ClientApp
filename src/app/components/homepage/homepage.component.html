@@ -9,7 +9,9 @@
               Experience the epitome of comfort and style. Reserve your room
               today!
             </p>
-            <a (click)="navigateTo('/Rooms')" class="primary-btn">Discover Now</a>
+            <a (click)="navigateTo('/Rooms')" class="primary-btn"
+              >Discover Now</a
+            >
           </div>
         </div>
         <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
@@ -18,11 +20,19 @@
             <form (ngSubmit)="onSubmit()">
               <div class="check-date">
                 <label for="date-in">Check In:</label>
-                <input type="date" [(ngModel)]="checkInDate" name="checkInDate" />
+                <input
+                  type="date"
+                  [(ngModel)]="checkInDate"
+                  name="checkInDate"
+                />
               </div>
               <div class="check-date">
                 <label for="date-out">Check Out:</label>
-                <input type="date" [(ngModel)]="checkOutDate" name="checkOutDate" />
+                <input
+                  type="date"
+                  [(ngModel)]="checkOutDate"
+                  name="checkOutDate"
+                />
               </div>
               <div class="select-option">
                 <label for="capacity">Guests:</label>
@@ -38,7 +48,9 @@
                   <option value="2">2 Rooms</option>
                 </select>
               </div>
-              <button type="submit" (click)="onSubmit()">Check Availability</button>
+              <button type="submit" (click)="onSubmit()">
+                Check Availability
+              </button>
             </form>
           </div>
         </div>
@@ -48,42 +60,42 @@
   <section class="rooms-section">
     <div class="container">
       <div class="row">
-        <div class="col-lg-3 col-md-6">
+        <div class="col-lg-3 col-md-6" *ngFor="let room of roomsService; let roomIndex = index">
           <div class="room-item">
-            <img src="./../../../assets/deluxe.jpeg" alt="Room 1" />
-            <div class="ri-text">
-              <h4>Standard Room</h4>
-              <h3>99$<span>/Pernight</span></h3>
-              <table>
-                <tbody>
-                  <tr>
-                    <td class="r-o">Size:</td>
-                    <td>25 ft</td>
-                  </tr>
-                  <tr>
-                    <td class="r-o">Capacity:</td>
-                    <td>Max 3 persons</td>
-                  </tr>
-                  <tr>
-                    <td class="r-o">Bed:</td>
-                    <td>Queen Bed</td>
-                  </tr>
-                  <tr>
-                    <td class="r-o">Services:</td>
-                    <td>Wifi, Television, Bathroom</td>
-                  </tr>
-                </tbody>
-              </table>
-              <a href="#" class="primary-btn">More Details</a>
+            <div id="carousel-{{ roomIndex }}" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div
+                  *ngFor="let photo of room.roomPhotos; let photoIndex = index"
+                  [class.active]="photoIndex === room.activePhotoIndex"
+                  class="carousel-item"
+                >
+                  <img [src]="'data:image/jpeg;base64,' + photo.photoContent" alt="Room Photo" class="d-block w-100" style="max-height: 200px;" />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                [attr.data-bs-target]="'#carousel-' + roomIndex"
+                data-bs-slide="prev"
+                (click)="setActivePhoto(room, (room.activePhotoIndex - 1 + room.roomPhotos.length) % room.roomPhotos.length)"
+              >
+                <span class="carousel-control-prev-icon"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                [attr.data-bs-target]="'#carousel-' + roomIndex"
+                data-bs-slide="next"
+                (click)="setActivePhoto(room, (room.activePhotoIndex + 1) % room.roomPhotos.length)"
+              >
+                <span class="carousel-control-next-icon"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="room-item">
-            <img src="./../../../assets/family.webp" alt="Room 2" />
             <div class="ri-text">
-              <h4>Deluxe Room</h4>
-              <h3>149$<span>/Pernight</span></h3>
+              <h4>{{ room.category }}</h4>
+              <h3>{{ room.price }}$<span>/Pernight</span></h3>
               <table>
                 <tbody>
                   <tr>
@@ -92,75 +104,11 @@
                   </tr>
                   <tr>
                     <td class="r-o">Capacity:</td>
-                    <td>Max 4 persons</td>
-                  </tr>
-                  <tr>
-                    <td class="r-o">Bed:</td>
-                    <td>King Bed</td>
+                    <td>Max {{ room.capacity }} persons</td>
                   </tr>
                   <tr>
                     <td class="r-o">Services:</td>
-                    <td>Wifi, Television, Bathroom, Room Service</td>
-                  </tr>
-                </tbody>
-              </table>
-              <a href="#" class="primary-btn">More Details</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="room-item">
-            <img src="./../../../assets/luxary.jpeg" alt="Room 3" />
-            <div class="ri-text">
-              <h4>Executive Suite</h4>
-              <h3>249$<span>/Pernight</span></h3>
-              <table>
-                <tbody>
-                  <tr>
-                    <td class="r-o">Size:</td>
-                    <td>35 ft</td>
-                  </tr>
-                  <tr>
-                    <td class="r-o">Capacity:</td>
-                    <td>Max 5 persons</td>
-                  </tr>
-                  <tr>
-                    <td class="r-o">Bed:</td>
-                    <td>King Beds</td>
-                  </tr>
-                  <tr>
-                    <td class="r-o">Services:</td>
-                    <td>Wifi, Television, Bathroom, Room Service</td>
-                  </tr>
-                </tbody>
-              </table>
-              <a href="#" class="primary-btn">More Details</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <div class="room-item">
-            <img src="./../../../assets/spa.webp" alt="Room 4" />
-            <div class="ri-text">
-              <h4>Family Suite</h4>
-              <h3>299$<span>/Pernight</span></h3>
-              <table>
-                <tbody>
-                  <tr>
-                    <td class="r-o">Size:</td>
-                    <td>40 ft</td>
-                  </tr>
-                  <tr>
-                    <td class="r-o">Capacity:</td>
-                    <td>Max 6 persons</td>
-                  </tr>
-                  <tr>
-                    <td class="r-o">Bed:</td>
-                    <td>2 King Beds</td>
-                  </tr>
-                  <tr>
-                    <td class="r-o">Services:</td>
-                    <td>Wifi, Television, Bathroom, Room Service</td>
+                    <td>Wifi, Television, Bathroom,...</td>
                   </tr>
                 </tbody>
               </table>
@@ -171,6 +119,7 @@
       </div>
     </div>
   </section>
+
   <section class="services-section spad">
     <div class="container">
       <div class="row">

@@ -113,7 +113,7 @@ h4 {
 
 .room-item img {
   width: 100%;
-  max-height: 174px;
+  height: 200px;
 }
 
 .room-item:hover {
