@@ -33,6 +33,9 @@ export class DashboardComponent implements OnInit {
     { value: 'FirstName', label: 'First Name' },
     { value: 'LastName', label: 'Last Name' }
   ];
+  public get userRoleEnum(): typeof Roles {
+    return Roles;
+  }
 
   constructor(
     private userService: UserService,
@@ -83,8 +86,8 @@ export class DashboardComponent implements OnInit {
         this._toasterService.success('Role added successfully');
       },
       (error: HttpErrorResponse) => {
-        const errorMessage = error.error?.message || 'Something went wrong';
-        this._toasterService.danger(errorMessage);
+        const errorMessage = error.error?.message || 'User already has this role';
+        this._toasterService.warning(errorMessage);
       }
 
     );

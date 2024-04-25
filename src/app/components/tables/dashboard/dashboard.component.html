@@ -35,11 +35,36 @@
                 <td>{{ user.birthday }}</td>
                 <td>{{ user.country }}</td>
                 <td>{{ user.city }}</td>
-                <td class="inline-container">
-                  <input type="text" [(ngModel)]="user.newRole" placeholder="Role..." class="form-control" />
-                  <button (click)="addRoleToUser(user.userId, user.newRole)" class="btn btn-primary ">
-                    +
-                  </button>
+                <td>
+                  <div class="dropdown">
+                    <button
+                      class="btn btn-primary dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Add Role
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li>
+                        <a
+                          class="dropdown-item"
+                          (click)="addRoleToUser(user.userId, userRoleEnum.Operator)"
+                        >
+                          Operator
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          class="dropdown-item"
+                          (click)="addRoleToUser(user.userId, userRoleEnum.Admin)"
+                        >
+                          Admin
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </td>
               </tr>
             </tbody>
