@@ -55,6 +55,7 @@
 .btn {
   border: none;
   transition: all 0.3s ease;
+  padding: 2px;
 }
 
 .btn-sm {
@@ -63,13 +64,14 @@
 }
 
 .btn-danger {
-  background: #dc3545;
+  background: #444;
   color: white;
 }
 
 .btn-success {
-  background: #28a745;
-  color: white;
+  background: white;
+  color: #dfa974;
+  border: 1px solid #dfa974;
 }
 
 .btn:hover {
