@@ -54,7 +54,6 @@ export class EditReservationComponent {
 
   updateReservation(): void {
     this.reservationDTO.reservationServices = this.selectedServices;
-    console.log('res', this.reservationDTO);
     this.reservationService
       .updateReservation(this.reservationId, this.reservationDTO)
       .subscribe({
@@ -110,12 +109,25 @@ export class EditReservationComponent {
 
   addService(serviceId: string, event: Event) {
     event.preventDefault();
+  
+    const alreadyAdded = this.userServices.some(
+      
+      (service: any) => service.serviceID === serviceId
+    );
+  
+    if (alreadyAdded) {
+      this._toasterService.warning('This service is already added to the reservation.');
+      return;
+    }
+  
     const selectedService = {
       serviceId: serviceId,
       dateOfPurchase: new Date(),
     };
+  
     this.selectedServices.push(selectedService);
   }
+  
 
   removeService(i: number, event: Event) {
     event.preventDefault();
