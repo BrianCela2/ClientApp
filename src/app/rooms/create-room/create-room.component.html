@@ -27,8 +27,7 @@
       <select class="form-select" id="roomStatus" formControlName="roomStatus">
         <option value="1">Available</option>
         <option value="2">Busy</option>
-        <option value="3">Working</option>
-        <option value="4">Cleaning</option>
+        <option value="3">Cleaning</option>
       </select>
     </div>
     <div class="mb-3">
@@ -37,13 +36,14 @@
         <option value="1">Suit</option>
         <option value="2">Presidential</option>
         <option value="3">Mini</option>
+        <option value="4">Standard</option>
       </select>
     </div>
     <div class="mb-3">
       <label for="photos" class="form-label">Upload Image:</label>
-      <input type="file" class="form-control" id="photos" formControlName="photos" multiple (change)="onFileChange($event)">
+      <input type="file" class="form-control" id="photos" multiple (change)="onFileChange($event)">
       <div *ngIf="roomForm.get('photos')?.invalid && roomForm.get('photos')?.touched">
-        <small class="text-danger">Photos are required</small>
+         <small class="text-danger">Photos are required</small> 
       </div>
     </div>
     <div class="mb-3">

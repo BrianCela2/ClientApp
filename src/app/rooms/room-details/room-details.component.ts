@@ -87,7 +87,6 @@ export class RoomDetailsComponent {
     this.roomService.RoomDelete(roomId).subscribe({
       next: (data) => {
         this.getRoomDetails();
-        console.log('Delete successful');
         this._toasterService.success('Room deleted successfully');
         this.router.navigateByUrl('/Room/GetAll');
       },
@@ -105,12 +104,10 @@ export class RoomDetailsComponent {
   DeletePhoto(Id: string) {
     this.roomPhotoService.deletePhoto(Id).subscribe({
       next: (data) => {
-        console.log('Delete successful');
         this._toasterService.success('Room photo deleted successfully');
         this.getRoomDetails();
       },
       error: (error) => {
-        console.error('There was an error!', error);
         this._toasterService.danger('Something went wrong');
       },
     });
@@ -126,7 +123,6 @@ export class RoomDetailsComponent {
 
   savePhoto() {
     if (!this.photos) {
-      console.error('No file selected');
       return;
     }
 
@@ -136,14 +132,11 @@ export class RoomDetailsComponent {
 
     this.roomPhotoService.addPhotoToRoom(formData, this.roomId).subscribe({
       next: (response) => {
-        console.log('Photo uploaded successfully');
         this._toasterService.success('Photo uploaded successfully');
         this.getRoomDetails();
         this.showFileInput = false;
-        this.getRoomDetails();
       },
       error: (error) => {
-        console.error('Error uploading photo:', error);
         this._toasterService.danger('Something went wrong');
       },
     });

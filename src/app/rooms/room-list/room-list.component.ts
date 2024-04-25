@@ -58,8 +58,8 @@ export class RoomListComponent implements OnInit {
    statusUpdate(roomId: string, status: number) {
      this.roomService.updateRoomStatus(roomId, status).subscribe({
        next: (response) => {
-         console.log('Room updated successfully');
-         this._toasterService.success('Room updated successfully');
+        this.fetchRooms()
+        this._toasterService.success('Room updated successfully');
        },
        error: (error) => {
          console.error('Error updating room:', error);

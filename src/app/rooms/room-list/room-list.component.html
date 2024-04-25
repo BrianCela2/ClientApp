@@ -55,16 +55,20 @@
             <table>
               <tbody>
                 <tr>
+                  <td class="r-o">Room Number:</td>
+                  <td>{{ room.roomNumber }}</td>
+                </tr>
+                <tr>
+                  <td class="r-o">Price:</td>
+                  <td>{{ room.roomStatus }}</td>
+                </tr>
+                <tr>
                   <td class="r-o">Capacity:</td>
                   <td>{{ room.capacity }}</td>
                 </tr>
                 <tr>
                   <td class="r-o">Price:</td>
                   <td>{{ room.price }}</td>
-                </tr>
-                <tr>
-                  <td class="r-o">Room Number:</td>
-                  <td>{{ room.roomNumber }}</td>
                 </tr>
               </tbody>
             </table>
@@ -73,7 +77,7 @@
           <div class="btn-group" >
             <button (click)="confirmStatusUpdate(room.roomId, 1)" class="btn btn-success">Available</button>
             <button (click)="confirmStatusUpdate(room.roomId, 2)" class="btn btn-danger">Busy</button>
-            <button (click)="confirmStatusUpdate(room.roomId, 4)" class="btn btn-warning">Cleaning</button>
+            <button (click)="confirmStatusUpdate(room.roomId, 3)" class="btn btn-warning">Cleaning</button>
           </div>
         </div>
       </div>

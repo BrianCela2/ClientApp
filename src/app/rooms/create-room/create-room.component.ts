@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RoomService } from '../../services/room.service';
-import {FormBuilder,FormsModule,FormGroup,ReactiveFormsModule,Validators,
-} from '@angular/forms';import { Route, Router } from '@angular/router';
+import {FormBuilder,FormsModule,FormGroup,ReactiveFormsModule,Validators} from '@angular/forms';import { Route, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PopupService } from '../../services/popup.service';
 
@@ -29,7 +28,7 @@ export class CreateRoomComponent implements OnInit {
       price: [null, Validators.required],
       roomStatus: [null, Validators.required],
       category: [null, Validators.required],
-      photos: [null, Validators.required]
+      photos: [null ,Validators.required]
     });
   }
 
@@ -39,9 +38,23 @@ export class CreateRoomComponent implements OnInit {
   onSubmit() {
     if (this.roomForm.valid) {
       console.log('Room data:', this.roomForm.value);
-      this.roomService.createRoom(this.roomForm.value).subscribe({
+
+      const formData = new FormData();
+      formData.append('roomNumber', this.roomForm.value.roomNumber);
+      formData.append('capacity', this.roomForm.value.capacity);
+      formData.append('price', this.roomForm.value.price);
+      formData.append('roomStatus', this.roomForm.value.roomStatus);
+      formData.append('category', this.roomForm.value.category);
+
+      if (this.roomForm.value.photos) {
+        const files = this.roomForm.value.photos;
+        for (let i = 0; i < files.length; i++) {
+          formData.append('photos', files[i]);
+        }
+      }
+
+      this.roomService.createRoom(formData).subscribe({
         next: (response: any) => {
-          console.log('Room created successfully:', response);
           this._toasterService.success('Room created successfully');
           this.router.navigateByUrl('/Room/GetAll');
         },
@@ -59,7 +72,10 @@ export class CreateRoomComponent implements OnInit {
   }
 
   onFileChange(event: any) {
-    this.roomForm.patchValue({ photos: event.target.files });
+    if (event.target.files && event.target.files.length > 0) {
+      const files = event.target.files;
+      this.roomForm.patchValue({ photos: files });
+    }
   }
 
   ngOnDestroy(): void {
