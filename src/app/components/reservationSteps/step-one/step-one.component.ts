@@ -55,7 +55,7 @@ export class StepOneComponent implements OnInit {
     const hasError = this.searchParameters.some(
       (parameter) => parameter.error !== ''
     );
-    if (hasError) {
+    if (hasError || !this.searchParameters.length) {
       return;
     }
     this.datesConfirmed = true;
