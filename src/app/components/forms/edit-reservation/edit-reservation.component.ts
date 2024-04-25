@@ -24,6 +24,7 @@ export class EditReservationComponent {
   userServices!: any;
   displayTable: boolean = false;
   public selectedServices: any = [];
+  
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -51,7 +52,10 @@ export class EditReservationComponent {
       },
     });
   }
-
+  isServiceSelected(serviceId: any): boolean {
+    console.log(this.selectedServices);
+    return this.selectedServices.some((s: any) => s.serviceId === serviceId);
+  }
   updateReservation(): void {
     this.reservationDTO.reservationServices = this.selectedServices;
     this.reservationService

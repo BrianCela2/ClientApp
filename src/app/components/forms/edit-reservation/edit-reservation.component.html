@@ -68,12 +68,14 @@
               <button
                 class="btn btn-success"
                 (click)="removeService(i, $event)"
+                [disabled]="!isServiceSelected(service.serviceID)"
               >
                 Remove
               </button>
               <button
                 class="btn btn-danger"
                 (click)="addService(service.serviceID, $event)"
+                [disabled]="isServiceSelected(service.serviceID)"
               >
                 Add
               </button>

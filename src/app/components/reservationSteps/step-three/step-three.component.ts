@@ -30,7 +30,6 @@ export class StepThreeComponent implements OnInit {
   }
 
   isServiceSelected(serviceId: any): boolean {
-    console.log(this.selectedServices);
     return this.selectedServices.some((s: any) => s.serviceId === serviceId);
   }
   addService(serviceId: any) {
