@@ -14,7 +14,7 @@ export class HotelServiceService {
 
   // Fetches all hotel services from the backend
   getAllHotelServices(): Observable<any[]> {
-    return this.http.get<any[]>(this.baseUrl)
+    return this.http.get<any[]>(`${this.baseUrl}/all`)
       .pipe(
         catchError(this.handleError)
       );

@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HotelServiceService } from '../../services/hotel-service.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-hotel-service-update',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './hotel-service-update.component.html',
   styleUrls: ['./hotel-service-update.component.css']
 })
 export class HotelServiceUpdateComponent implements OnInit {
   updateForm!: FormGroup;
-  serviceId!: string;
+  serviceID!: string;
+  submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -23,7 +25,7 @@ export class HotelServiceUpdateComponent implements OnInit {
 
   ngOnInit(): void {
     // Retrieve service ID from route parameters
-    this.serviceId = this.route.snapshot.paramMap.get('id')!;
+    this.serviceID = this.route.snapshot.paramMap.get('id')!;
 
     // Initialize form with validators
     this.updateForm = this.formBuilder.group({
@@ -40,7 +42,7 @@ export class HotelServiceUpdateComponent implements OnInit {
 
   // Function to load service details
   loadService(): void {
-    this.hotelServiceService.getHotelServiceById(this.serviceId).subscribe(
+    this.hotelServiceService.getHotelServiceById(this.serviceID).subscribe(
       (data: any) => {
         // Populate form with service details
         this.updateForm.patchValue(data);
@@ -54,11 +56,12 @@ export class HotelServiceUpdateComponent implements OnInit {
   // Function to handle form submission
   onSubmit(): void {
     if (this.updateForm.valid) {
+      this.submitted = true; // Set submitted to true
       // Update service with form data
-      this.hotelServiceService.updateHotelService(this.serviceId, this.updateForm.value).subscribe(
+      this.hotelServiceService.updateHotelService(this.serviceID, this.updateForm.value).subscribe(
         () => {
           // Navigate back to hotel services list after successful update
-          this.router.navigate(['/hotel-services']);
+          this.router.navigate(['https://localhost:7006/api/hotel-services/all']);
         },
         (error: any) => {
           console.log(error);

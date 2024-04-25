@@ -17,6 +17,7 @@ import { CreateHotelServiceDTO } from '../../shared/hotel-services.model';
 
 export class HotelServiceCreateComponent implements OnInit {
   createForm!: FormGroup;
+  submitted: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,12 +38,13 @@ export class HotelServiceCreateComponent implements OnInit {
 
   // Function to handle form submission
   onSubmit(): void {
+    this.submitted = true; // Set submitted to true
     if (this.createForm.valid) {
       // If the form is valid, call the service to add the hotel service
       this.hotelServiceService.addHotelService(this.createForm.value).subscribe(
         () => {
           // If successful, navigate to the hotel services page
-          this.router.navigate(['/hotel-services']);
+          this.router.navigate(['https://localhost:7006/api/hotel-services/all']);
         },
         (error: any) => {
           // If an error occurs, log it to the console

@@ -5,6 +5,10 @@
     <div class="form-group">
       <label for="ServiceName">Service Name:</label>
       <input type="text" class="form-control" id="ServiceName" formControlName="ServiceName">
+      <!-- Validation message -->
+      <div *ngIf="createForm.get('ServiceName')?.invalid && (createForm.get('ServiceName')?.dirty || createForm.get('ServiceName')?.touched)">
+        <span class="text-danger" *ngIf="createForm.get('ServiceName')?.errors?.['required']">Service Name is required</span>
+      </div>
     </div>
     <div class="form-group">
       <label for="Description">Description:</label>
@@ -13,6 +17,11 @@
     <div class="form-group">
       <label for="Price">Price:</label>
       <input type="number" class="form-control" id="Price" formControlName="Price">
+      <!-- Validation message -->
+      <div *ngIf="createForm.get('Price')?.invalid && (createForm.get('Price')?.dirty || createForm.get('Price')?.touched)">
+        <span class="text-danger" *ngIf="createForm.get('Price')?.errors?.['required']">Price is required</span>
+        <span class="text-danger" *ngIf="createForm.get('Price')?.errors?.['pattern']">Invalid price format</span>
+      </div>
     </div>
     <div class="form-group">
       <label for="Category">Category:</label>
@@ -24,5 +33,9 @@
     </div>
     <!-- Submit button -->
     <button type="submit" class="btn btn-primary">Submit</button>
+    <!-- Submission message -->
+    <div *ngIf="createForm.valid && submitted" class="alert alert-success mt-3">
+      Form submitted successfully!
+    </div>
   </form>
 </div>

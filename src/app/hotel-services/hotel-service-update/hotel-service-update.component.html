@@ -4,7 +4,10 @@
     <!-- Service Name Input -->
     <div class="form-group">
       <label for="serviceName">Service Name:</label>
-      <input type="text" class="form-control" id="serviceName" formControlName="serviceName">
+      <input type="text" class="form-control" id="serviceName" formControlName="serviceName" [class.is-invalid]="updateForm.get('serviceName')?.invalid && updateForm.get('serviceName')?.touched" required>
+      <div *ngIf="updateForm.get('serviceName')?.invalid && updateForm.get('serviceName')?.touched" class="invalid-feedback">
+        Service Name is required.
+      </div>
     </div>
     <!-- Description Input -->
     <div class="form-group">
@@ -14,7 +17,10 @@
     <!-- Price Input -->
     <div class="form-group">
       <label for="price">Price:</label>
-      <input type="number" class="form-control" id="price" formControlName="price">
+      <input type="number" class="form-control" id="price" formControlName="price" [class.is-invalid]="updateForm.get('price')?.invalid && updateForm.get('price')?.touched" required>
+      <div *ngIf="updateForm.get('price')?.invalid && updateForm.get('price')?.touched" class="invalid-feedback">
+        Price is required and must be a positive number.
+      </div>
     </div>
     <!-- Category Input -->
     <div class="form-group">
@@ -28,5 +34,9 @@
     </div>
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary">Update</button>
+    <!-- Submission message -->
+    <div *ngIf="updateForm.valid && submitted" class="alert alert-success mt-3">
+      Form submitted successfully!
+    </div>
   </form>
 </div>
