@@ -52,7 +52,7 @@
     <button
       class="btn stepper-btn-next"
       (click)="nextStep()"
-      [disabled]="currentStepIndex === steps.length - 1"
+      [disabled]="currentStepIndex === steps.length - 1 || !isCompleted"
     >
       Next &gt;
     </button>
