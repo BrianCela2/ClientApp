@@ -2,8 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background: linear-gradient(to right, #f7f7f7, #ececec);
+  margin: 50px 0 50px 0;
 }
 
 .panel {

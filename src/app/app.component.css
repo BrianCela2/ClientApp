@@ -31,7 +31,6 @@
 :host {
   display: flex;
   flex-direction: column;
-  height: 100vh; 
 }
 
 .router-outlet {
@@ -44,11 +43,6 @@ footer {
   padding: 10px;
   border-top: 1px solid #ddd;
 }
-.navbar {
-  background-color: #ffffff;
-  padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  border-bottom: 2px solid #dfa974;
-}
+
 
 

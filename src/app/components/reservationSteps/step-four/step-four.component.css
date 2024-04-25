@@ -58,14 +58,19 @@
   }
   
   .confirm-btn {
-    background: #007bff;
-    color: white;
+    background: white;
+    color: #dfa974;
+    border: 1px solid #dfa974;
     padding: 10px 20px;
     border-radius: 5px;
-    border: none;
     transition: transform 0.3s ease;
   }
-  
+    
+  .confirm-btn:hover {
+    background-color: #dfa974;
+    color: white;
+    
+  }
   .confirm-btn:hover {
     transform: scale(1.05);
   }

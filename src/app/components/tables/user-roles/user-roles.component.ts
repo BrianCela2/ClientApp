@@ -9,18 +9,32 @@ import {
 } from '../../../shared/userRole.model';
 import { PopupService } from '../../../services/popup.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PaginationComponent } from '../../tablePagination/pagination/pagination.component';
+import { SortingComponent } from '../../tablePagination/sorting/sorting.component';
+import { SearchComponent } from '../../tablePagination/search/search.component';
 
 @Component({
   selector: 'app-user-roles',
   standalone: true,
   templateUrl: './user-roles.component.html',
   styleUrl: './user-roles.component.css',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,PaginationComponent,SortingComponent,SearchComponent],
 })
 export class UserRolesComponent implements OnInit {
   public userRoles:any;
   public activeUserRole: any = null;
   public newUserRole: NewUserRole={userId:""};
+  public totalPages!:number ;
+  public currentPage: number = 1;
+  public pageSize: number = 10;
+  public sortField: string = "FirstName";
+  public sortOrder: string = "asc";
+  public searchString: string = "";
+  sortOptions: { value: string, label: string }[] = [
+    { value: 'FirstName', label: 'First Name' },
+    { value: 'LastName', label: 'Last Name' }
+  ];
+
 
   constructor(private userRoleService: UserRoleService,private _toasterService: PopupService) {}
 
@@ -32,9 +46,10 @@ export class UserRolesComponent implements OnInit {
     this.activeUserRole = this.activeUserRole === userRole ? null : userRole;
   }
   getUserRoles() {
-    this.userRoleService.getUserRoleDetails().subscribe((res: any) => {
-      this.userRoles = res;
+    this.userRoleService.getUserRoleDetails(this.currentPage, this.pageSize, this.sortField, this.sortOrder, this.searchString).subscribe((res: any) => {
       console.log('res',res)
+      this.userRoles = res.users;
+      this.totalPages =res.totalPages;
     });
   }
   addRole(userRole: UserRoleDetail) {
@@ -60,4 +75,20 @@ export class UserRolesComponent implements OnInit {
       this.getUserRoles();
     });
   }
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getUserRoles();
+  }
+
+  onSortChange(sort: { field: string, order: string }) {
+    this.sortField = sort.field;
+    this.sortOrder = sort.order;
+    this.getUserRoles();
+  }
+
+  onSearchChange(searchString: string) {
+    this.searchString = searchString;
+    this.getUserRoles();
+  }
+
 }

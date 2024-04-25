@@ -22,9 +22,18 @@ export class HomepageComponent {
     this.router.navigate([route]);
   }
   onSubmit() {
-    this.searchService.setSearchParameters([{capacity:this.capacity,
-      checkInDate:this.checkInDate,
-      checkOutDate:this.checkOutDate}]);
-    this.router.navigateByUrl('/createReservation'  );
+    const searchParameters = [];
+
+    for (let i = 0; i < this.rooms; i++) {
+      searchParameters.push({
+        checkInDate: this.checkInDate,
+        checkOutDate: this.checkOutDate,
+        capacity: this.capacity
+      });
+    }
+
+    this.searchService.setSearchParameters(searchParameters);
+
+    this.router.navigateByUrl('/createReservation');
   }
 }

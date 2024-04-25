@@ -45,12 +45,15 @@
   }
   
   .btn-primary {
-    background-color: #007bff;
-    color: white;
+    background: white;
+    color: #dfa974;
+    border: 1px solid #dfa974;
   }
   
   .btn-primary:hover {
-    background-color: #0056b3;
+    background-color: #dfa974;
+    color: white;
+    
   }
   
   .mb-4 {

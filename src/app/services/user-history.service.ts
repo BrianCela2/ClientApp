@@ -8,7 +8,8 @@ import { Observable } from 'rxjs';
 export class UserHistoryService {
   private url='https://localhost:7006/api/UserHistory';
   constructor(private httpClient:HttpClient) { }
-getHistory():Observable<any>{
-return this.httpClient.get<any[]>(this.url);
+getHistory(page: number,
+  pageSize: number,):Observable<any>{
+return this.httpClient.get<any[]>(`${this.url}?page=${page}&pageSize=${pageSize}`);
 }
 }
