@@ -17,7 +17,7 @@ export const tokenInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(req).pipe(
     catchError((err: any) => {
-      console.error('Error occurred:', err); // Log the error to console
+      console.error('Error occurred:', err); 
       if (err instanceof HttpErrorResponse) {
         if (err.status === 401) {
           return auth.refreshToken().pipe(

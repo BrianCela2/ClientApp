@@ -1,87 +1,56 @@
-.container-fluid {
-  background-color: #f5f7fa;
-  padding: 20px;
-  font-family: 'Roboto', sans-serif;
-}
-
-.row {
-  margin: 0;
-}
-
-.d-flex {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 15px;
-}
-
-.table {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
-
-.table th {
-  background-color: #3498db;
-  color: white;
-  padding: 15px;
-  text-align: left;
-  font-weight: 700;
-}
-
-.table tbody tr {
-  transition: background-color 0.3s;
-}
-
-.table tbody tr:hover {
-  background-color: #f5f5f5;
-}
-
-.table td {
-  padding: 15px;
-  font-family: 'Lora', serif;
-  cursor: pointer;
-}
+/* Button styles */
+@import url('./../../../../assets/css/tables.css');
 
 .btn {
-  font-family: 'Roboto', sans-serif;
-  border-radius: 6px;
-  padding: 10px 20px;
-  transition: all 0.3s;
-}
-
-.btn-success {
-  background-color: #2ecc71;
-  color: white;
-}
-
-.btn-success:hover {
-  background-color: #27ae60;
-}
-
-.btn-danger {
-  background-color: #e74c3c;
-  color: white;
-}
-
-.btn-danger:hover {
-  background-color: #c0392b;
-}
-
-.bg-light {
-  background-color: #f9f9f9;
-  padding: 20px;
-}
-
-.text-secondary {
-  color: #7f8c8d;
-}
-
-.text-primary {
-  color: #3498db;
-}
-
-.text-center {
-  text-align: center;
-}
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .btn-neutral {
+    background-color: white;
+    color: #dfa974;
+    border: 1px solid #dfa974;
+  }
+  
+  .btn-neutral:hover {
+    background-color: rgb(237, 231, 231);
+    color: #df9d5b;
+  }
+  
+  .btn-neutral:active {
+    background-color: #ffffff; 
+  }
+  
+  .btn-blue {
+    background-color: #dfa974; 
+    color: white;
+  }
+  
+  .btn-blue:hover {
+    background-color: #df9d5b;
+  }
+  
+  .btn-blue:active {
+    background-color: #cb7723; 
+  }
+  
+  .btn-danger {
+    color: white;
+    background-color: #777;
+  }
+  
+  .btn-danger:hover {
+    background-color: #555;
+  }
+  
+  .btn-danger:active {
+    background-color: #333; 
+  }
+  
+  .btn,
+  .btn:active,
+  .btn:hover {
+    text-shadow: none; 
+  }
+  

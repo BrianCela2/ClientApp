@@ -6,9 +6,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../../services/user.service';
 import { PopupService } from '../../../services/popup.service';
+import { User } from '../../../shared/user.model';
 
 @Component({
   selector: 'app-edit-user',
@@ -18,8 +19,14 @@ import { PopupService } from '../../../services/popup.service';
   styleUrl: './edit-user.component.css',
 })
 export class EditUserComponent implements OnInit {
-  constructor(private user: UserService, private fb: FormBuilder,private _toasterService: PopupService) {}
+  constructor(
+    private user: UserService,
+    private fb: FormBuilder,
+    private _toasterService: PopupService,
+    private router: Router
+  ) {}
   UpdateForm!: FormGroup;
+  public actualUser!: User;
 
   ngOnInit(): void {
     this.UpdateForm = this.fb.group({
@@ -31,6 +38,19 @@ export class EditUserComponent implements OnInit {
       Country: [''],
       City: [''],
     });
+    this.fetchuser();
+  }
+
+  fetchuser() {
+    this.user.getActualUserById().subscribe({
+      next: (res) => {
+        this.actualUser = res;
+        console.log(res)
+      },
+      error: (error) => {
+        console.error('There was an error!', error);
+      },
+    });
   }
 
   onUpdate() {
@@ -39,6 +59,7 @@ export class EditUserComponent implements OnInit {
       next: (res) => {
         this.UpdateForm.reset();
         this._toasterService.success('User updated successfully');
+        this.fetchuser();
       },
       error: (err) => {
         console.log(err);

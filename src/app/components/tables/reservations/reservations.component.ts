@@ -147,8 +147,9 @@ export class ReservationsComponent {
     this.reservationService.ReservationDelete(reservationId).subscribe({
       next: (data) => {
         this.cdr.detectChanges();
-        this._toasterService.danger('Reservation deleted successfully');
+        this._toasterService.success('Reservation deleted successfully');
         console.log('Delete successful');
+        this.fetchReservations();
       },
       error: (error) => {
         console.error('There was an error!', error);

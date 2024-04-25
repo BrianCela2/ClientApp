@@ -1,17 +1,60 @@
-<div class="stepper">
+<div class="simple-stepper">
   <div class="stepper-indicator">
-    <div class="step" [ngClass]="{ active: currentStepIndex === 0, complete: currentStepIndex > 0 }">Step 1</div>
-    <div class="step" [ngClass]="{ active: currentStepIndex === 1, complete: currentStepIndex > 1 }">Step 2</div>
-    <div class="step" [ngClass]="{ active: currentStepIndex === 2, complete: currentStepIndex > 2 }">Step 3</div>
-    <div class="step" [ngClass]="{ active: currentStepIndex === 3, complete: currentStepIndex > 3 }">Step 4</div>
+    <div
+      class="step"
+      [ngClass]="{
+        'is-active': currentStepIndex === 0,
+        'is-complete': currentStepIndex > 0
+      }"
+    >
+      Step 1
+    </div>
+    <div
+      class="step"
+      [ngClass]="{
+        'is-active': currentStepIndex === 1,
+        'is-complete': currentStepIndex > 1
+      }"
+    >
+      Step 2
+    </div>
+    <div
+      class="step"
+      [ngClass]="{
+        'is-active': currentStepIndex === 2,
+        'is-complete': currentStepIndex > 2
+      }"
+    >
+      Step 3
+    </div>
+    <div
+      class="step"
+      [ngClass]="{
+        'is-active': currentStepIndex === 3,
+        'is-complete': currentStepIndex > 3
+      }"
+    >
+      Step 4
+    </div>
   </div>
-
   <div class="stepper-content">
     <ng-content select="[stepContent]"></ng-content>
   </div>
 
   <div class="stepper-buttons">
-    <button class="btn btn-secondary" (click)="prevStep()" [disabled]="currentStepIndex === 0">&lt; Go back</button>
-    <button class="btn btn-success" (click)="nextStep()" [disabled]="currentStepIndex === steps.length - 1 || !isCompleted">Next &gt;</button>
+    <button
+      class="btn stepper-btn-back"
+      (click)="prevStep()"
+      [disabled]="currentStepIndex === 0"
+    >
+      &lt; Go back
+    </button>
+    <button
+      class="btn stepper-btn-next"
+      (click)="nextStep()"
+      [disabled]="currentStepIndex === steps.length - 1"
+    >
+      Next &gt;
+    </button>
   </div>
 </div>

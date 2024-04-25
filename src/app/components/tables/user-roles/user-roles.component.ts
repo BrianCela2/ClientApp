@@ -7,6 +7,8 @@ import {
   Roles,
   UserRoleDetail,
 } from '../../../shared/userRole.model';
+import { PopupService } from '../../../services/popup.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-user-roles',
@@ -18,10 +20,9 @@ import {
 export class UserRolesComponent implements OnInit {
   public userRoles: UserRoleDetail[] = [];
   public activeUserRole: any = null;
-  public showAddRoleForm: boolean = false;
   public newUserRole: NewUserRole={userId:""};
 
-  constructor(private userRoleService: UserRoleService) {}
+  constructor(private userRoleService: UserRoleService,private _toasterService: PopupService) {}
 
   ngOnInit() {
     this.getUserRoles();
@@ -30,32 +31,25 @@ export class UserRolesComponent implements OnInit {
   toggleInput(userRole: UserRoleDetail) {
     this.activeUserRole = this.activeUserRole === userRole ? null : userRole;
   }
-
-  toggleAddRoleForm() {
-    this.showAddRoleForm = !this.showAddRoleForm;
-  }
   getUserRoles() {
     this.userRoleService.getUserRoleDetails().subscribe((res: any) => {
       this.userRoles = res;
     });
   }
-  submitAddRoleForm() {
-    if (this.newUserRole) {
-      console.log(this.newUserRole.userId)
-      this.userRoleService
-        .addRoleToUser(this.newUserRole.userId, this.newUserRole.role!)
-        .subscribe((res) => {
-          this.getUserRoles(); 
-          this.toggleAddRoleForm(); 
-        });
-    }
-  }
   addRole(userRole: UserRoleDetail) {
     const userId = userRole.userId;
     const role = userRole.newRoles;
-    this.userRoleService.addRoleToUser(userId, role!).subscribe((res) => {
-      this.getUserRoles();
-    });
+    this.userRoleService.addRoleToUser(userId, role!).subscribe(
+      (response) => {
+        this._toasterService.success('Role added successfully');
+        this.getUserRoles();
+      },
+      (error: HttpErrorResponse) => {
+        const errorMessage = error.error?.message || 'Something went wrong';
+        this._toasterService.danger(errorMessage);
+      }
+
+    );
   }
 
   removeRole(userRole: UserRoleDetail) {

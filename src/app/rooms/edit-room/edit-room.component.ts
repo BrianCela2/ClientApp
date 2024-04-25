@@ -65,9 +65,9 @@ this.roomCategoryOptions = Object.keys(RoomCategory)
         this._toasterService.danger('Something went wrong');
       },
       complete: () => {
+        this.router.navigateByUrl('/Room/Get/'+this.roomId);
       }
     });
-    this.router.navigateByUrl('/Room/Get/'+this.roomId);
 
   }
 }

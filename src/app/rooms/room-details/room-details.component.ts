@@ -141,7 +141,9 @@ export class RoomDetailsComponent {
       next: (response) => {
         console.log('Photo uploaded successfully');
         this._toasterService.success('Photo uploaded successfully');
+        this.getRoomDetails();
         this.showFileInput = false;
+        this.getRoomDetails();
       },
       error: (error) => {
         console.error('Error uploading photo:', error);

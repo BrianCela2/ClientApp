@@ -14,6 +14,7 @@ import { ReservationsComponent } from './components/tables/reservations/reservat
 import { EditReservationComponent } from './components/forms/edit-reservation/edit-reservation.component';
 import { UserReservationsComponent } from './components/tables/user-reservations/user-reservations.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
+import { UserHistoryComponent } from './components/tables/user-history/user-history.component';
 import { ProfileComponent } from './components/tables/profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from "@angular/core";
@@ -29,25 +30,21 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   {
-    path: 'updateUser',
-    component: EditUserComponent,
-    canActivate: [AuthGuard],
-  },
-  {
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'userRoles', component: UserRolesComponent },
-  { path: 'createReservation', component: ReservateComponent },
-  { path: 'Room', component: CreateRoomComponent, title: 'Room Create' },
-  { path: 'Room/Edit/:id', component: EditRoomComponent, title: 'Room Edit' },
+  { path: 'userRoles', component: UserRolesComponent, canActivate: [AuthGuard], },
+  { path: 'createReservation', component: ReservateComponent, canActivate: [AuthGuard], },
+  { path: 'Room', component: CreateRoomComponent, title: 'Room Create', canActivate: [AuthGuard], },
+  { path: 'Room/Edit/:id', component: EditRoomComponent, title: 'Room Edit', canActivate: [AuthGuard], },
   {
     path: 'Room/Get/:id',
     component: RoomDetailsComponent,
     title: 'Room Details',
+    canActivate: [AuthGuard],
   },
-  { path: 'Room/GetAll', component: RoomListComponent, title: 'All Rooms' },
+  { path: 'Room/GetAll', component: RoomListComponent, title: 'All Rooms', canActivate: [AuthGuard], },
   {
     path: 'NotificationAllUsers',
     component: SendNotificationsComponent,
@@ -79,12 +76,11 @@ export const routes: Routes = [
   },
   {
     path: 'Profile',
-    component: ProfileComponent,
+    component: EditUserComponent,
     title: 'Profile ',
     canActivate: [AuthGuard],
   },
-  { path: 'Reservations', component: ReservationsComponent, title: 'Reservations', canActivate: [AuthGuard] },
-  { path: 'Reservations/Edit/:id', component: EditReservationComponent, title: 'Reservations Edit', canActivate: [AuthGuard] },
+  { path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History' },
 
   { path: 'Dashboard', component: DashboardComponent },
   { path: 'HotelServices', component: HotelServiceListComponent },
