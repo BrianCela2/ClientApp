@@ -33,16 +33,9 @@ export class RoomService {
     return this.httpClient.post<any>(this.url+'/AddRoom', formData);
   }
  
+  
   updateRoom(id: string, updateRoomDto: UpdateRoomDTO): Observable<any> {
-    const formData = new FormData();
-    formData.append('roomId', id);
-    formData.append('roomNumber', updateRoomDto.roomNumber.toString());
-    formData.append('capacity', updateRoomDto.capacity ? updateRoomDto.capacity.toString() : '');
-    formData.append('price', updateRoomDto.price.toString());
-    formData.append('roomStatus', updateRoomDto.roomStatus ? updateRoomDto.roomStatus.toString() : '');
-    formData.append('category', updateRoomDto.category ? updateRoomDto.category.toString() : '');
-    
-    return this.httpClient.put(this.url+'/UpdateRoom/'+id, formData);
+    return this.httpClient.put(`${this.url}/UpdateRoom/${id}`, updateRoomDto);
   }
   getRoomById(id: string): Observable<RoomDTO> {
     return this.httpClient.get<RoomDTO>(this.url+'/GetRoom/'+id);

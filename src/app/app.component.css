@@ -2,10 +2,14 @@
     font-weight: bold;
     color: #000; 
   }
+
   .notification-container {
-    margin: 20px;
+    position: fixed;
+    top: 100px; 
+    right: 20px;
+    z-index: 1000;
+    width: 300px; 
   }
-  
   .notification-list {
     list-style-type: none;
     padding: 0;
@@ -30,7 +34,7 @@
 }
 
 .router-outlet {
-  margin: 100px 0 50px 0;
+  margin-top: 100px;
 }
 
 footer {
