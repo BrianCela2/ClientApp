@@ -58,9 +58,9 @@
       <div class="rd-title">
         <div class="rdt-right">
           <div class="admin-actions" *ngIf="role?.includes('Admin')">
-            <button class="btn btn-primary" (click)="GoToEdit()">Edit Room</button>
+            <button class="btn btn-success" (click)="GoToEdit()">Edit Room</button>
             <button class="btn btn-danger" (click)="confirmRoomDelete(room.roomId)">Delete Room</button>
-            <button class="btn btn-secondary" (click)="chooseFile()">Add Photo</button>
+            <button class="btn btn-warning" (click)="chooseFile()">Add Photo</button>
           </div>
           <div *ngIf="showFileInput" class="file-input">
             <input type="file" #fileInput (change)="onFileSelected($event)" class="form-control-file">
