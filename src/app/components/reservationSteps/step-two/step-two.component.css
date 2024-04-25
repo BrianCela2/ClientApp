@@ -8,6 +8,9 @@
   .row {
     margin-bottom: 20px;
   }
+  .selected {
+    opacity: 0.5; 
+  }
   
   .card {
     border: none;
