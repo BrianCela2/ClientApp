@@ -30,32 +30,46 @@
             <td>
               <button
                 type="button"
-                class="btn btn-sm btn-outline-danger"
+                class="btn btn-sm btn-neutral"
                 (click)="removeRole(userRole)"
               >
                 Delete
               </button>
               <button
                 type="button"
-                class="btn btn-sm btn-outline-success"
+                class="btn btn-sm btn-blue"
                 (click)="toggleInput(userRole)"
               >
                 {{ activeUserRole === userRole ? "Cancel" : "Add" }}
               </button>
-              <div *ngIf="activeUserRole === userRole" class="mt-2">
-                <input
-                  type="text"
-                  class="form-control mb-2"
-                  [(ngModel)]="userRole.newRoles"
-                  placeholder="Enter role"
-                />
+              <div *ngIf="activeUserRole === userRole" class="mt-2 dropdown">
                 <button
+                  class="btn btn-danger dropdown-toggle"
                   type="button"
-                  class="btn btn-sm btn-primary"
-                  (click)="addRole(userRole)"
+                  id="dropdownMenuButton"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
                 >
-                  Save
+                  Choose Role
                 </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li >
+                    <a
+                      class="dropdown-item"
+                      (click)="addRoleToUser(userRole.userId, userRoleEnum.Operator)"
+                    >
+                      Operator
+                    </a>
+                  </li>
+                  <li >
+                    <a
+                      class="dropdown-item"
+                      (click)="addRoleToUser(userRole.userId, userRoleEnum.Admin)"
+                    >
+                      Admin
+                    </a>
+                  </li>
+                </ul>
               </div>
             </td>
           </tr>

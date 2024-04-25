@@ -34,7 +34,9 @@ export class UserRolesComponent implements OnInit {
     { value: 'FirstName', label: 'First Name' },
     { value: 'LastName', label: 'Last Name' }
   ];
-
+  public get userRoleEnum(): typeof Roles {
+    return Roles;
+  }
 
   constructor(private userRoleService: UserRoleService,private _toasterService: PopupService) {}
 
@@ -52,19 +54,17 @@ export class UserRolesComponent implements OnInit {
       this.totalPages =res.totalPages;
     });
   }
-  addRole(userRole: UserRoleDetail) {
-    const userId = userRole.userId;
-    const role = userRole.newRoles;
-    this.userRoleService.addRoleToUser(userId, role!).subscribe(
+  addRoleToUser(userId: string, role: Roles) {
+    this.userRoleService.addRoleToUser(userId, role).subscribe(
       (response) => {
         this._toasterService.success('Role added successfully');
         this.getUserRoles();
+        this.activeUserRole = null;
       },
       (error: HttpErrorResponse) => {
-        const errorMessage = error.error?.message || 'Something went wrong';
-        this._toasterService.danger(errorMessage);
+        const errorMessage = error.error?.message || 'User already has this role';
+        this._toasterService.warning(errorMessage);
       }
-
     );
   }
 

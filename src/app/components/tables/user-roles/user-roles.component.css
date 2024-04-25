@@ -13,34 +13,57 @@
 .btn-sm {
   padding: 6px 12px;
 }
-
-.btn-outline-danger {
-  color: #e74c3c;
-  border: 1px solid #e74c3c;
+.btn {
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.btn-outline-danger:hover {
-  background-color: #e74c3c;
+.btn-neutral {
+  background-color: white;
+  color: #dfa974;
+  border: 1px solid #dfa974;
+}
+
+.btn-neutral:hover {
+  background-color: rgb(237, 231, 231);
+  color: #df9d5b;
+}
+
+.btn-neutral:active {
+  background-color: #ffffff; 
+}
+
+.btn-blue {
+  background-color: #dfa974; 
   color: white;
 }
 
-.btn-outline-success {
-  color: #2ecc71;
-  border: 1px solid #2ecc71;
+.btn-blue:hover {
+  background-color: #df9d5b;
 }
 
-.btn-outline-success:hover {
-  background-color: #2ecc71;
+.btn-blue:active {
+  background-color: #cb7723; 
+}
+
+.btn-danger {
   color: white;
+  background-color: #777;
 }
 
-.btn-primary {
-  background-color: #3498db;
-  color: white;
+.btn-danger:hover {
+  background-color: #555;
 }
 
-.btn-primary:hover {
-  background-color: #2980b9;
+.btn-danger:active {
+  background-color: #333; 
+}
+
+.btn,
+.btn:active,
+.btn:hover {
+  text-shadow: none; 
 }
 
 .form-control {
@@ -50,16 +73,6 @@
   border: 1px solid #dddddd;
 }
 
-.form-control:focus {
-  border-color: #3498db;
-  outline: none;
-}
-
-.form-label {
-  font-family: 'Lora', serif;
-  font-weight: bold;
-  color: #3498db;
-}
 
 .mt-2 {
   margin-top: 10px;
