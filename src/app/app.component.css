@@ -34,7 +34,7 @@
 }
 
 .router-outlet {
-  margin-top: 100px;
+  margin: 100px 0 50px 0;
 }
 
 footer {
@@ -44,5 +44,10 @@ footer {
   border-top: 1px solid #ddd;
 }
 
+.notifications {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+} 
 
 

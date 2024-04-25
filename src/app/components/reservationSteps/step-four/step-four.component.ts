@@ -62,7 +62,7 @@ export class StepFourComponent implements OnInit {
         next: (response) => {
           this._toasterService.success('Reservation created successfully');
           console.log('Reservation created successfully:', this.reservationDTO);
-          this.router.navigate(['HomePage']);
+          this.router.navigate(['YourReservations']);
         },
         error: (error) => {
           console.error('Error creating reservation:', error);

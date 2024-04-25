@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg ">
+<nav class="navbar navbar-expand-lg">
   <a class="navbar-brand" routerLink="/HomePage">Hotel Name</a>
   <button
     class="navbar-toggler"
@@ -19,9 +19,27 @@
       <li class="nav-item">
         <a class="nav-link" routerLink="/Room/GetAll">Rooms</a>
       </li>
-      <li class="nav-item" *ngIf="isLoggedIn() && isAdmin()">
+      <li class="nav-item" *ngIf="isLoggedIn() && isAdminOperator()">
         <a class="nav-link" routerLink="/Reservations">Reservations</a>
       </li>
+      <div class="dropdown" *ngIf="isLoggedIn() && isAdmin()">
+        <button
+          class="btn btn-light dropdown-toggle"
+          type="button"
+          id="dropdownMenuButton1"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          Panel
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li class="nav-item nav-dropdown"><a class="nav-link dropdown-border" href="#" routerLink="/userRoles">User Roles</a></li>
+          <li class="nav-item nav-dropdown">
+            <a class="nav-link dropdown-border " routerLink="/UsersHistory">User History</a>
+          </li>
+          <li class="nav-item nav-dropdown"><a class="nav-link dropdown-border" routerLink="/users">Users</a></li>
+        </ul>
+      </div>
     </ul>
 
     <ul class="navbar-nav">
@@ -55,7 +73,6 @@
           Logout
         </a>
       </li>
-      
 
       <li class="nav-item" *ngIf="!isLoggedIn()">
         <a class="nav-link" routerLink="/login">Login</a>

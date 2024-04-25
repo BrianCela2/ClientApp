@@ -10,7 +10,7 @@ import { Login, Register } from '../shared/user.model';
 })
 export class AuthService {
   private baseUrl: string = 'https://localhost:7006/api/Auth/';
-  private userPayload:any;
+  private userPayload: any;
   constructor(private http: HttpClient, private router: Router) {
     this.userPayload = this.decodeToken();
   }
@@ -55,27 +55,34 @@ export class AuthService {
   refreshToken(): Observable<string> {
     const expiredToken = localStorage.getItem('token');
     return this.http.post<string>(`${this.baseUrl}refresh-token`, expiredToken);
-}
+  }
 
-  getUserIdFromToken(){
+  getUserIdFromToken() {
     this.userPayload = this.decodeToken();
 
-    if(this.userPayload){
-      return this.userPayload.nameid
+    if (this.userPayload) {
+      return this.userPayload.nameid;
     }
   }
 
-  getRoleFromToken(){
+  getRoleFromToken() {
     this.userPayload = this.decodeToken();
-    if(this.userPayload){
-      return this.userPayload.role
+    if (this.userPayload) {
+      return this.userPayload.role;
     }
   }
 
-  isAdmin(){
-    const role= this.getRoleFromToken()
-    if(role?.includes('Admin') || role?.includes('Operator')){
-      return true
+  isAdminOperator() {
+    const role = this.getRoleFromToken();
+    if (role?.includes('Admin') || role?.includes('Operator')) {
+      return true;
+    }
+    return false;
+  }
+  isAdmin() {
+    const role = this.getRoleFromToken();
+    if (role?.includes('Admin')) {
+      return true;
     }
     return false;
   }
