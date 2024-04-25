@@ -1,73 +1,66 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { RoomService } from '../../services/room.service';
-import { RoomCategory, UpdateRoomDTO, RoomStatus } from '../../shared/room.model';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CreateRoomComponent } from '../create-room/create-room.component';
 import { PopupService } from '../../services/popup.service';
+import { UpdateRoomDTO } from '../../shared/room.model';
 
 @Component({
   selector: 'app-edit-room',
   standalone: true,
-  imports: [FormsModule,CommonModule,CreateRoomComponent],
+  imports: [FormsModule,CommonModule,CreateRoomComponent,ReactiveFormsModule],
   templateUrl: './edit-room.component.html',
   styleUrl: './edit-room.component.css'
 })
 export class EditRoomComponent implements OnInit {
-  roomId!: string;
-  updateRoomDto: UpdateRoomDTO = {
-    roomId: '',
-    roomNumber: 0,
-    price: 0,
-    roomStatus: RoomStatus.Available,
-    category: RoomCategory.Mini
-  };
-  roomStatusOptions: { value: RoomStatus; label: string }[] = []; 
-  roomCategoryOptions: { value: RoomCategory; label: string }[] = []; 
-  constructor(private router:Router,private route: ActivatedRoute, private roomService: RoomService, private _toasterService: PopupService
-) {}
+  editRoomForm: any = {}; 
+  roomId!: any;
+  error: any;
+
+  constructor(
+    private route: ActivatedRoute,
+    private roomService: RoomService,
+    private router: Router,
+    private toasterService: PopupService
+  ) { }
 
   ngOnInit(): void {
-    this.roomId = this.route.snapshot.paramMap.get('id') || '';
-    this.roomStatusOptions = Object.keys(RoomStatus)
-  .filter((key: string) => !isNaN(Number(RoomStatus[key as keyof typeof RoomStatus])))
-  .map((key: string) => ({ value: RoomStatus[key as keyof typeof RoomStatus], label: key }));
+    this.roomId = this.route.snapshot.paramMap.get('id');
 
-this.roomCategoryOptions = Object.keys(RoomCategory)
-  .filter((key: string) => !isNaN(Number(RoomCategory[key as keyof typeof RoomCategory])))
-  .map((key: string) => ({ value: RoomCategory[key as keyof typeof RoomCategory], label: key }));
-
-    this.roomService.getRoomById(this.roomId).subscribe({
-      next: (response: UpdateRoomDTO) => {
-        this.updateRoomDto.roomId = this.roomId;
-        this.updateRoomDto.roomNumber = response.roomNumber;
-        this.updateRoomDto.price = response.price;
-        this.updateRoomDto.capacity = response.capacity ;
-        this.updateRoomDto.roomStatus = response.roomStatus || RoomStatus.Available;
-        this.updateRoomDto.category = response.category || RoomCategory.Mini;
-        console.log(response);
+    this.roomService.getRoomById(this.roomId).subscribe(
+      (room: any) => {
+        this.editRoomForm = room; 
       },
-      error: (error) => {
-        console.error('Error fetching room data:', error);
+      (error) => {
+        this.handleError();
       }
-    });
+    );
   }
 
-  updateRoom(): void {
-    this.roomService.updateRoom(this.roomId, this.updateRoomDto).subscribe({
-      next: (response) => {
-        console.log('Room updated successfully');
-        this._toasterService.success('Room updated successfully');
-      },
-      error: (error) => {
-        console.error('Error updating room:', error);
-        this._toasterService.danger('Something went wrong');
-      },
-      complete: () => {
-        this.router.navigateByUrl('/Room/Get/'+this.roomId);
-      }
-    });
+  onSubmit(): void {
+    if (!this.editRoomForm) {
+      return; 
+    }
 
+    this.roomService.updateRoom(this.roomId, this.editRoomForm)
+      .subscribe({
+        next: () => {
+          this.handleSuccess();
+        },
+        error: (error) => {
+          this.handleError();
+        }
+      });
+  }
+
+  private handleError(): void {
+    this.toasterService.danger('Failed to update room.');
+  }
+
+  private handleSuccess(): void {
+    this.toasterService.success('Room updated successfully');
+    this.router.navigateByUrl('/Room/Get/' + this.roomId);
   }
 }

@@ -1,93 +1,42 @@
-<div class="container room-details-section">
-  <h2 class="rd-title">Update Room</h2>
-
-  <div *ngIf="updateRoomDto.roomId">
-    <form (ngSubmit)="updateRoom()" #roomForm="ngForm">
-      <div class="form-group room-details-item">
-        <label for="roomNumber">Room Number:</label>
-        <input
-          type="number"
-          class="form-control"
-          id="roomNumber"
-          name="roomNumber"
-          [ngModel]="updateRoomDto.roomNumber"
-          (ngModelChange)="updateRoomDto.roomNumber = $event"
-          required
-        />
+<div class="container">
+  <div class="form-container">
+    <h2>Edit Room</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <label for="roomNumber">Room Number</label>
+        <input type="text" id="roomNumber" [(ngModel)]="editRoomForm.roomNumber" name="roomNumber" required>
+        <div *ngIf="!editRoomForm.roomNumber" class="text-danger">Room Number is required</div>
       </div>
-
-      <div class="form-group room-details-item">
-        <label for="capacity">Capacity:</label>
-        <input
-          type="number"
-          class="form-control"
-          id="capacity"
-          name="capacity"
-          [ngModel]="updateRoomDto.capacity"
-          (ngModelChange)="updateRoomDto.capacity = $event"
-        />
+      <div>
+        <label for="capacity">Capacity</label>
+        <input type="number" id="capacity" [(ngModel)]="editRoomForm.capacity" name="capacity" required>
+        <div *ngIf="!editRoomForm.capacity" class="text-danger">Capacity is required</div>
       </div>
-
-      <div class="form-group room-details-item">
-        <label for="price">Price:</label>
-        <input
-          type="number"
-          class="form-control"
-          id="price"
-          name="price"
-          [ngModel]="updateRoomDto.price"
-          (ngModelChange)="updateRoomDto.price = $event"
-          required
-        />
+      <div>
+        <label for="price">Price</label>
+        <input type="text" id="price" [(ngModel)]="editRoomForm.price" name="price" required>
+        <div *ngIf="!editRoomForm.price" class="text-danger">Price is required</div>
       </div>
-
-      <div class="form-group room-details-item">
-        <label for="roomStatus">Room Status:</label>
-        <select
-          class="form-control"
-          id="roomStatus"
-          name="roomStatus"
-          [(ngModel)]="updateRoomDto.roomStatus"
-        >
-          <option
-            *ngFor="let status of roomStatusOptions"
-            [value]="status.value"
-          >
-            {{ status.label }}
-          </option>
+      <div>
+        <label for="roomStatus">Room Status</label>
+        <select id="roomStatus" [(ngModel)]="editRoomForm.roomStatus" name="roomStatus" required>
+          <option value="Available">Available</option>
+          <option value="Busy">Busy</option>
+          <option value="Working">Working</option>
+          <option value="Cleaning">Cleaning</option>
         </select>
+        <div *ngIf="!editRoomForm.roomStatus" class="text-danger">Room Status is required</div>
       </div>
-
-      <div class="form-group room-details-item">
-        <label for="category">Category:</label>
-        <select
-          class="form-control"
-          id="category"
-          name="category"
-          [(ngModel)]="updateRoomDto.category"
-        >
-          <option
-            *ngFor="let category of roomCategoryOptions"
-            [value]="category.value"
-          >
-            {{ category.label }}
-          </option>
+      <div>
+        <label for="category">Category</label>
+        <select id="category" [(ngModel)]="editRoomForm.category" name="category" required>
+          <option value="Suit">Suit</option>
+          <option value="Presidential">Presidential</option>
+          <option value="Mini">Mini</option>
         </select>
+        <div *ngIf="!editRoomForm.category" class="text-danger">Category is required</div>
       </div>
-
-      <div class="form-group text-center">
-        <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="!roomForm.valid"
-        >
-          Update
-        </button>
-      </div>
+      <button type="submit" [disabled]="!editRoomForm">Update Room</button>
     </form>
-  </div>
-
-  <div *ngIf="!updateRoomDto.roomId">
-    <p class="text-center text-danger">Room not found.</p>
   </div>
 </div>

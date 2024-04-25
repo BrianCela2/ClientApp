@@ -2,19 +2,23 @@
   class="navbar navbar-expand-sm bg-light position-fixed w-100 z-1 d-flex justify-content-between"
 >
   <navbar class="w-100"></navbar>
+  <app-notification-list></app-notification-list>
 
 </nav>
 
-<ul class="notification-list" *ngIf="notifications.length > 0">
-  <li *ngFor="let item of notifications" class="notification-item">
-    <span class="notification-message"
-      >Notification: {{ item.messageContent }}</span
-    >
-  </li>
-</ul>
 <foo-toaster [position]="ToasterPosition.BOTTOM_RIGHT"></foo-toaster>
 <app-spinner></app-spinner>
+
 <div class="router-outlet">
+  <div class="notification-container">
+    <ul class="notification-list" *ngIf="notifications">
+      <div *ngFor="let notification of notifications" class="notification-item">
+        <a href="http://localhost:4200/Reservation/{{notification.contentId}}" style="text-decoration:none;">
+        <span class="notification-message">Notification: {{ notification.messageContent }}.     Click Here</span>
+      </a>
+    </div>
+    </ul>
+  </div>
   <router-outlet></router-outlet>
 </div>
 <app-footer></app-footer>

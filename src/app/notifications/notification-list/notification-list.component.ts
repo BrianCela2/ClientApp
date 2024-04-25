@@ -15,7 +15,7 @@ import { SignalRService } from '../../services/signal-rservice.service';
 export class NotificationListComponent implements OnInit {
   notifications: NotificationDTO[] = [];
   notification: NotificationDTO[] = [];
-  @Output() notificationsChanged: EventEmitter<NotificationDTO[]> = new EventEmitter<NotificationDTO[]>();
+  @Output() notificationData: EventEmitter<any> = new EventEmitter<any>();
 
     unreadCount: number = 0;
     userId: string;
@@ -39,21 +39,17 @@ export class NotificationListComponent implements OnInit {
       this.signalRService.getHubConnection().on('SendNotificationAll', (result: NotificationDTO) => {
         this.addNotification(result);
         this.unreadCount++;
-        console.log(result);
       });
       this.signalRService.getHubConnection().on('SendNotification', (result: NotificationDTO) => {
         this.addNotification(result);
         this.unreadCount++;
-        console.log(result);
       });
   
       const receiverId = this.authService.getUserIdFromToken();
       if(this.authService.isLoggedIn()){
       this.notificationService.getNotifications(receiverId).subscribe(data => {
-        console.log(receiverId)
         this.notifications = data;
         this.unreadCount = this.notifications.filter(notification => !notification.isSeen).length;
-        console.log(this.notifications);
         this.cdr.detectChanges();
       });
     }
@@ -85,11 +81,8 @@ export class NotificationListComponent implements OnInit {
       this.notificationService.NotificationsAsSeen(this.userId).subscribe({
         next: () => {
           this.unreadCount=0;
-          console.log('All notifications marked as seen');
         },
         error: (error) => {
-          console.log(this.userId);
-          console.error('Error marking notifications as seen:', error);
         }
       });
     }
