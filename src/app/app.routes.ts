@@ -19,6 +19,7 @@ import { UserHistoryComponent } from './components/tables/user-history/user-hist
 import { ReservationDetailsComponent } from './components/pages/reservation-details/reservation-details.component';
 import { AdminGuard } from './guards/admin.guard';
 import { OpeartorGuard } from './guards/operator.guard';
+import { RoomsComponent } from './components/pages/rooms/rooms.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'HomePage', pathMatch: 'full' },
@@ -40,6 +41,8 @@ export const routes: Routes = [
     canActivate: [OpeartorGuard],
   },
   { path: 'Room/GetAll', component: RoomListComponent, title: 'All Rooms',canActivate: [OpeartorGuard] },
+  { path: 'Rooms', component: RoomsComponent, title: 'Rooms'},
+
   {
     path: 'NotificationAllUsers',
     component: SendNotificationsComponent,
@@ -75,7 +78,7 @@ export const routes: Routes = [
     title: 'Profile ',
     canActivate: [AuthGuard],
   },
-  {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History'},
+  {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History',canActivate: [AdminGuard],},
   {path:'Reservation/:id',component:ReservationDetailsComponent,title:'Reservation'},
   {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History',canActivate: [AdminGuard],}
 ];
