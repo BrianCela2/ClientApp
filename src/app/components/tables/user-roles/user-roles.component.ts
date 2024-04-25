@@ -18,27 +18,36 @@ import { SearchComponent } from '../../tablePagination/search/search.component';
   standalone: true,
   templateUrl: './user-roles.component.html',
   styleUrl: './user-roles.component.css',
-  imports: [CommonModule, FormsModule,PaginationComponent,SortingComponent,SearchComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    PaginationComponent,
+    SortingComponent,
+    SearchComponent,
+  ],
 })
 export class UserRolesComponent implements OnInit {
-  public userRoles:any;
+  public userRoles: any;
   public activeUserRole: any = null;
-  public newUserRole: NewUserRole={userId:""};
-  public totalPages!:number ;
+  public newUserRole: NewUserRole = { userId: '' };
+  public totalPages!: number;
   public currentPage: number = 1;
   public pageSize: number = 10;
-  public sortField: string = "FirstName";
-  public sortOrder: string = "asc";
-  public searchString: string = "";
-  sortOptions: { value: string, label: string }[] = [
+  public sortField: string = 'FirstName';
+  public sortOrder: string = 'asc';
+  public searchString: string = '';
+  sortOptions: { value: string; label: string }[] = [
     { value: 'FirstName', label: 'First Name' },
-    { value: 'LastName', label: 'Last Name' }
+    { value: 'LastName', label: 'Last Name' },
   ];
   public get userRoleEnum(): typeof Roles {
     return Roles;
   }
 
-  constructor(private userRoleService: UserRoleService,private _toasterService: PopupService) {}
+  constructor(
+    private userRoleService: UserRoleService,
+    private _toasterService: PopupService
+  ) {}
 
   ngOnInit() {
     this.getUserRoles();
@@ -48,11 +57,19 @@ export class UserRolesComponent implements OnInit {
     this.activeUserRole = this.activeUserRole === userRole ? null : userRole;
   }
   getUserRoles() {
-    this.userRoleService.getUserRoleDetails(this.currentPage, this.pageSize, this.sortField, this.sortOrder, this.searchString).subscribe((res: any) => {
-      console.log('res',res)
-      this.userRoles = res.users;
-      this.totalPages =res.totalPages;
-    });
+    this.userRoleService
+      .getUserRoleDetails(
+        this.currentPage,
+        this.pageSize,
+        this.sortField,
+        this.sortOrder,
+        this.searchString
+      )
+      .subscribe((res: any) => {
+        console.log('res', res);
+        this.userRoles = res.users;
+        this.totalPages = res.totalPages;
+      });
   }
   addRoleToUser(userId: string, role: Roles) {
     this.userRoleService.addRoleToUser(userId, role).subscribe(
@@ -62,7 +79,8 @@ export class UserRolesComponent implements OnInit {
         this.activeUserRole = null;
       },
       (error: HttpErrorResponse) => {
-        const errorMessage = error.error?.message || 'User already has this role';
+        const errorMessage =
+          error.error?.message || 'User already has this role';
         this._toasterService.warning(errorMessage);
       }
     );
@@ -72,6 +90,7 @@ export class UserRolesComponent implements OnInit {
     const userId = userRole.userId;
     const role = userRole.roles;
     this.userRoleService.removeRoleFromUser(userId, role).subscribe((res) => {
+      this._toasterService.success('Role deleted successfully');
       this.getUserRoles();
     });
   }
@@ -80,7 +99,7 @@ export class UserRolesComponent implements OnInit {
     this.getUserRoles();
   }
 
-  onSortChange(sort: { field: string, order: string }) {
+  onSortChange(sort: { field: string; order: string }) {
     this.sortField = sort.field;
     this.sortOrder = sort.order;
     this.getUserRoles();
@@ -90,5 +109,4 @@ export class UserRolesComponent implements OnInit {
     this.searchString = searchString;
     this.getUserRoles();
   }
-
 }
