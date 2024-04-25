@@ -21,16 +21,18 @@
           <td>{{ service.openTime }}</td>
           <td>
             <button
-              class="btn btn-danger btn-sm m-1"
-              (click)="removeService(i)"
-            >
-              Remove
-            </button>
-            <button
               class="btn btn-success btn-sm m-1"
+              [disabled]="isServiceSelected(service.serviceID)"
               (click)="addService(service.serviceID)"
             >
               Add
+            </button>
+            <button
+              class="btn btn-danger btn-sm m-1"
+              [disabled]="!isServiceSelected(service.serviceID)"
+              (click)="removeService(service.serviceID)"
+            >
+              Remove
             </button>
           </td>
         </tr>

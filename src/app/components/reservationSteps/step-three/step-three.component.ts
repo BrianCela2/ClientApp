@@ -29,6 +29,10 @@ export class StepThreeComponent implements OnInit {
     this.onStepCompleted.emit();
   }
 
+  isServiceSelected(serviceId: any): boolean {
+    console.log(this.selectedServices);
+    return this.selectedServices.some((s: any) => s.serviceId === serviceId);
+  }
   addService(serviceId: any) {
     const selectedService = {
       serviceId: serviceId,
@@ -37,11 +41,10 @@ export class StepThreeComponent implements OnInit {
     this.selectedServices.push(selectedService);
   }
 
-  removeService(service: any) {
-    const index = this.services.indexOf(service);
-    if (index !== -1) {
-      this.services.splice(index, 1);
-    }
+  removeService(serviceId: any) {
+    this.selectedServices = this.selectedServices.filter(
+      (s: any) => s.serviceId !== serviceId
+    );
   }
 
   addServicesToReservation() {
