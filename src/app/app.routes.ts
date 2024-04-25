@@ -15,7 +15,6 @@ import { EditReservationComponent } from './components/forms/edit-reservation/ed
 import { UserReservationsComponent } from './components/tables/user-reservations/user-reservations.component';
 import { HomepageComponent } from './components/homepage/homepage.component';
 import { UserHistoryComponent } from './components/tables/user-history/user-history.component';
-import { ProfileComponent } from './components/tables/profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from "@angular/core";
 import { HotelServiceListComponent } from "./hotel-services/hotel-service-list/hotel-service-list.component";
