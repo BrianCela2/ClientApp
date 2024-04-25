@@ -29,15 +29,6 @@ export class EditUserComponent implements OnInit {
   public actualUser!: User;
 
   ngOnInit(): void {
-    this.UpdateForm = this.fb.group({
-      FirstName: ['', Validators.required],
-      LastName: ['', Validators.required],
-      Email: ['', [Validators.required, Validators.email]],
-      PhoneNumber: [''],
-      Birthday: [''],
-      Country: [''],
-      City: [''],
-    });
     this.fetchuser();
   }
 
@@ -45,7 +36,20 @@ export class EditUserComponent implements OnInit {
     this.user.getActualUserById().subscribe({
       next: (res) => {
         this.actualUser = res;
-        console.log(res)
+        console.log(res);
+
+        this.UpdateForm = this.fb.group({
+          FirstName: [this.actualUser.firstName, Validators.required],
+          LastName: [this.actualUser.lastName, Validators.required],
+          Email: [
+            this.actualUser.email,
+            [Validators.required, Validators.email],
+          ],
+          PhoneNumber: [this.actualUser.phoneNumber],
+          Birthday: [this.actualUser.birthday],
+          Country: [this.actualUser.country],
+          City: [this.actualUser.city],
+        });
       },
       error: (error) => {
         console.error('There was an error!', error);
