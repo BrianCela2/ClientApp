@@ -59,7 +59,7 @@ export class EditReservationComponent {
       .updateReservation(this.reservationId, this.reservationDTO)
       .subscribe({
         next: (response) => {
-          console.log('Room updated successfully', response);
+          console.log('Reservation updated successfully', response);
           this.getServicesReservation(
             this.reservationDTO.reservationId
           ).subscribe((response) => {

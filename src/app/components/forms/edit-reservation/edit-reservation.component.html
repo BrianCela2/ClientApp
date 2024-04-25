@@ -66,13 +66,13 @@
             <td>{{ service.openTime }}</td>
             <td>
               <button
-                class="btn btn-primary"
+                class="btn btn-success"
                 (click)="removeService(i, $event)"
               >
                 Remove
               </button>
               <button
-                class="btn btn-primary"
+                class="btn btn-danger"
                 (click)="addService(service.serviceID, $event)"
               >
                 Add
@@ -81,17 +81,17 @@
           </tr>
         </tbody>
       </table>
-      <button class="btn btn-primary" (click)="addServices($event)">
+      <button class="btn btn-success" (click)="addServices($event)">
         Add Service
       </button>
       <button
         type="submit"
-        class="btn btn-primary"
+        class="btn btn-danger"
         [disabled]="!reservationForm.valid"
       >
         Update
       </button>
-      <button class="btn btn-primary" (click)="cancelReservation($event)">
+      <button class="btn btn-warning" (click)="cancelReservation($event)">
         Cancel
       </button>
     </form>
