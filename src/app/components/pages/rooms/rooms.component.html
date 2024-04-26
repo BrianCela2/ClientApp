@@ -16,7 +16,7 @@
   </div>
     <div class="container">
       <div class="row">
-        <div class="col-lg-4 col-md-6" *ngFor="let room of rooms; let roomIndex = index">
+        <div class="col-lg-3 col-md-6" *ngFor="let room of rooms; let roomIndex = index">
           <div class="room-item">
             <div id="carousel-{{ roomIndex }}" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-inner">
@@ -55,19 +55,23 @@
               <table>
                 <tbody>
                   <tr>
-                    <td class="r-o">Capacity:</td>
-                    <td>{{ room.capacity }}</td>
+                    <td class="r-o">Size:</td>
+                    <td>30 ft</td>
                   </tr>
                   <tr>
-                    <td class="r-o">Price:</td>
-                    <td>{{ room.price }}</td>
+                    <td class="r-o">Capacity:</td>
+                    <td>Max {{ room.capacity }} persons</td>
+                  </tr>
+                  <tr>
+                    <td class="r-o">Services:</td>
+                    <td>Wifi, Television, Bathroom,...</td>
                   </tr>
                 </tbody>
               </table>
             </div>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   </section>
   

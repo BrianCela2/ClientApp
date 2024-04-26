@@ -29,6 +29,6 @@ export const AdminGuard: CanActivateFn = (
   if (isAdmin) {
     return true;
   } else {
-    return router.createUrlTree(['/unauthorized']);
+    return router.createUrlTree(['/HomePage']);
   }
 };

@@ -27,7 +27,7 @@ export class UserService {
     return this.http.put<any>(`${this.baseUrl}`, request);
   }
 
-  getActualUserById() {
+  getActualUserById():Observable<any> {
     const userId = this.authService.getUserIdFromToken();
     console.log(userId)
     return this.http.get<User>(`${this.baseUrl}${userId}`);

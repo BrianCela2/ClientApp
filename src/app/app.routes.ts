@@ -47,7 +47,7 @@ export const routes: Routes = [
     path: 'NotificationAllUsers',
     component: SendNotificationsComponent,
     title: 'Notification',
-    canActivate: [AuthGuard],
+    canActivate: [AdminGuard],
   },
   {
     path: 'Reservations',
@@ -80,5 +80,4 @@ export const routes: Routes = [
   },
   {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History',canActivate: [AdminGuard],},
   {path:'Reservation/:id',component:ReservationDetailsComponent,title:'Reservation'},
-  {path: 'UsersHistory', component: UserHistoryComponent, title: 'Users History',canActivate: [AdminGuard],}
 ];

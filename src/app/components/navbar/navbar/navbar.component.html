@@ -52,6 +52,16 @@
             >
           </li>
           <li class="nav-item nav-dropdown" *ngIf="isLoggedIn() && isAdmin()">
+            <a class="nav-link dropdown-border" href="#" routerLink="/Room"
+              >Create Room</a
+            >
+          </li>
+          <li class="nav-item nav-dropdown" *ngIf="isLoggedIn() && isAdmin()">
+            <a class="nav-link dropdown-border" href="#" routerLink="/NotificationAllUsers"
+              >Send Notification</a
+            >
+          </li>
+          <li class="nav-item nav-dropdown" *ngIf="isLoggedIn() && isAdmin()">
             <a class="nav-link dropdown-border" routerLink="/UsersHistory"
               >User History</a
             >
