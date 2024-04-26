@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RoomService } from '../../services/room.service';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CreateRoomComponent } from '../create-room/create-room.component';
+import { CreateRoomComponent } from '../../components/forms/create-room/create-room.component';
 import { PopupService } from '../../services/popup.service';
 
 @Component({
@@ -28,14 +28,14 @@ export class EditRoomComponent implements OnInit {
   ngOnInit(): void {
     this.roomId = this.route.snapshot.paramMap.get('id');
 
-    this.roomService.getRoomById(this.roomId).subscribe(
-      (room: any) => {
+    this.roomService.getRoomById(this.roomId).subscribe({
+      next: (room: any) => {
         this.editRoomForm = room; 
       },
-      (error) => {
+      error: (error) => {
         this.handleError();
       }
-    );
+    });
   }
 
   onSubmit(): void {

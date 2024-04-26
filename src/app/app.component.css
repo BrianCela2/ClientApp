@@ -1,48 +1,45 @@
 .dropdown-menu .dropdown-item.unread {
-    font-weight: bold;
-    color: #000; 
-  }
+  font-weight: bold;
+  color: #000; 
+}
 
-  .notification-container {
-    position: fixed;
-    top: 100px; 
-    right: 20px;
-    z-index: 1000;
-    width: 300px; 
-  }
-  .notification-list {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .notification-item {
-    background-color: #f0f8ff; 
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .notification-message {
-    font-size: 16px;
-    color: #333;
-  }
+.notification-container {
+  position: fixed;
+  top: 100px; 
+  right: 20px;
+  z-index: 1000;
+  width: 300px; 
+}
+.notification-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.notification-item {
+  background-color: #f0f8ff; 
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification-message {
+  font-size: 16px;
+  color: #333;
+}
 
 :host {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 }
 
 .router-outlet {
-  margin-top: 100px;
+margin-top: 100px;
 }
 
 footer {
-  background-color: #ffffff;
-  text-align: center;
-  padding: 10px;
-  border-top: 1px solid #ddd;
+background-color: #ffffff;
+text-align: center;
+padding: 10px;
+border-top: 1px solid #ddd;
 }
-
-
-

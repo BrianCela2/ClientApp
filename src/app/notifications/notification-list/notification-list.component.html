@@ -1,17 +1,19 @@
 <div class="dropdown" (click)="NotificationsToSeen()">
-    <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-      <span class="fa fa-bell fa-lg p-2"> </span>
-      <span class="badge bg-danger p-1 position-absolute notification">{{ unreadCount }}</span>
-    </button>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-      <li *ngFor="let notification of notifications" [class.unread]="!notification.isSeen">
-        <a class="dropdown-item" href="http://localhost:4200/Reservation/{{notification.contentId}}">
-                  {{ notification.messageContent }} 
-        </a>
-      </li>
-      <li *ngIf="!notifications || notifications.length === 0">
-        <span class="dropdown-item">No notifications</span>
-      </li>
-    </ul>
-  </div>
-  
+  <button class="btn btn-light" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-bell fa-lg p-2"></span>
+    <span class="badge bg-danger p-1 position-absolute notification">{{ unreadCount }}</span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+    <li *ngFor="let notification of notifications" [class.unread]="!notification.isSeen">
+      <a class="dropdown-item" [href]="notification.contentId ? 'http://localhost:4200/Reservation/' + notification.contentId : 'http://localhost:4200/YourReservations'">
+        <div class="notification-content">
+          <span class="message">{{ notification.messageContent }}</span>
+          <span class="notification-time">{{ calculateTimeDifference(notification.sendDateTime) }}</span>
+        </div>
+      </a>
+    </li>
+    <li *ngIf="!notifications || notifications.length === 0">
+      <span class="dropdown-item">No notifications</span>
+    </li>
+  </ul>
+</div>

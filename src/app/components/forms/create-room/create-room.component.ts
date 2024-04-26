@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { RoomService } from '../../services/room.service';
+import { RoomService } from '../../../services/room.service';
 import {FormBuilder,FormsModule,FormGroup,ReactiveFormsModule,Validators} from '@angular/forms';import { Route, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PopupService } from '../../services/popup.service';
+import { PopupService } from '../../../services/popup.service';
 
 @Component({
   selector: 'app-create-room',
@@ -14,7 +14,6 @@ import { PopupService } from '../../services/popup.service';
 })
 export class CreateRoomComponent implements OnInit {
   roomForm: FormGroup;
-  private roomsSubscription: Subscription | undefined;
 
   constructor(
     private router: Router,
@@ -78,9 +77,5 @@ export class CreateRoomComponent implements OnInit {
     }
   }
 
-  ngOnDestroy(): void {
-    if (this.roomsSubscription) {
-      this.roomsSubscription.unsubscribe();
-    }
-  }
+  
 }

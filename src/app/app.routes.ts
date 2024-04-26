@@ -4,7 +4,7 @@ import { SignupComponent } from './components/forms/signup/signup.component';
 import { DashboardComponent } from './components/tables/dashboard/dashboard.component';
 import { AuthGuard } from './guards/auth.guard';
 import { EditUserComponent } from './components/forms/edit-user/edit-user.component';
-import { CreateRoomComponent } from './rooms/create-room/create-room.component';
+import { CreateRoomComponent } from './components/forms/create-room/create-room.component';
 import { EditRoomComponent } from './rooms/edit-room/edit-room.component';
 import { RoomDetailsComponent } from './rooms/room-details/room-details.component';
 import { RoomListComponent } from './rooms/room-list/room-list.component';

@@ -31,9 +31,9 @@ export class RoomListComponent implements OnInit {
    ) {}
 
    ngOnInit(): void {
-     this.fetchRooms()
+     this.GetRooms()
    }
-   fetchRooms() {
+   GetRooms() {
     this.roomService.getRooms(this.currentPage, this.pageSize, this.sortField, this.sortOrder).subscribe(data => {
       this.rooms = data.rooms.map((room: any) => ({ ...room, activePhotoIndex: 0 }));
       this.totalPages =data.totalPages;
@@ -58,7 +58,7 @@ export class RoomListComponent implements OnInit {
    statusUpdate(roomId: string, status: number) {
      this.roomService.updateRoomStatus(roomId, status).subscribe({
        next: (response) => {
-        this.fetchRooms()
+        this.GetRooms()
         this._toasterService.success('Room updated successfully');
        },
        error: (error) => {
@@ -70,13 +70,13 @@ export class RoomListComponent implements OnInit {
 
    onPageChange(page: number) {
     this.currentPage = page;
-    this.fetchRooms();
+    this.GetRooms();
   }
 
   onSortChange(sort: { field: string, order: string }) {
     this.sortField = sort.field;
     this.sortOrder = sort.order;
-    this.fetchRooms();
+    this.GetRooms();
   }
  }
  

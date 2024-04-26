@@ -51,7 +51,7 @@
           </div>
           <div class="ri-text">
             <h4>{{ room.category }}</h4>
-            <h3>{{ room.price }}$<span>/Pernight</span></h3>
+            <h3>{{ room.price }}$<span>/Per Night</span></h3>
             <table>
               <tbody>
                 <tr>
@@ -59,17 +59,17 @@
                   <td>{{ room.roomNumber }}</td>
                 </tr>
                 <tr>
-                  <td class="r-o">Price:</td>
+                  <td class="r-o">Room Status:</td>
                   <td>{{ room.roomStatus }}</td>
-                </tr>
-                <tr>
-                  <td class="r-o">Capacity:</td>
-                  <td>{{ room.capacity }}</td>
                 </tr>
                 <tr>
                   <td class="r-o">Price:</td>
                   <td>{{ room.price }}</td>
                 </tr>
+                <tr>
+                  <td class="r-o">Capacity:</td>
+                  <td>{{ room.capacity }}</td>
+                </tr>   
               </tbody>
             </table>
             <a (click)="navigateToGet(room.roomId)"  style="cursor: pointer;">More Details</a>

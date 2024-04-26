@@ -59,7 +59,24 @@ export class NotificationListComponent implements OnInit {
       this.destroy$.next();
       this.destroy$.complete();
     }
+    calculateTimeDifference(sendDateTime: Date): string {
+      const now = new Date();
+      const notificationTime = new Date(sendDateTime);
+      const differenceInSeconds = Math.floor((now.getTime() - notificationTime.getTime()) / 1000);
+      let result: string;
   
+      if (differenceInSeconds < 60) {
+        result = `${differenceInSeconds} seconds ago`;
+      } else if (differenceInSeconds < 3600) {
+        result = `${Math.floor(differenceInSeconds / 60)} minutes ago`;
+      } else if (differenceInSeconds < 86400) {
+        result = `${Math.floor(differenceInSeconds / 3600)} hours ago`;
+      } else {
+        result = `${Math.floor(differenceInSeconds / 86400)} days ago`;
+      }
+  
+      return result;
+    }
     addNotification(notification: any): void {
       this.notification.unshift(notification);
       timer(7000)
