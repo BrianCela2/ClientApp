@@ -23,7 +23,6 @@ export class SignalRService {
     this.hubConnection
       .start()
       .then(() => {
-        console.log('SignalR connection started.');
         this.getConnection(); 
       })
       .catch(err => console.error('Error while connecting to SignalR:', err));
@@ -32,7 +31,6 @@ export class SignalRService {
    getConnection(): void {
     this.connectionId = this.hubConnection.invoke('getconnectionid',this.authService.getUserIdFromToken()) 
       .then((data: string) => {
-        console.log('Connection ID:', data);
         return data; 
       })
       .catch(error => {

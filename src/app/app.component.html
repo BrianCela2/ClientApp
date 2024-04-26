@@ -13,8 +13,8 @@
   <div class="notification-container">
     <ul class="notification-list" *ngIf="notifications">
       <div *ngFor="let notification of notifications" class="notification-item">
-        <a href="http://localhost:4200/Reservation/{{notification.contentId}}" style="text-decoration:none;">
-        <span class="notification-message">Notification: {{ notification.messageContent }}.     Click Here</span>
+        <a class="dropdown-item" [href]="notification.contentId ? 'http://localhost:4200/Reservation/' + notification.contentId : 'http://localhost:4200/YourReservations'">
+          <span class="notification-message">{{ notification.messageContent }}.</span>
       </a>
     </div>
     </ul>

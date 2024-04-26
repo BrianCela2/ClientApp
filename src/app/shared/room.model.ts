@@ -20,14 +20,14 @@ export interface CreateRoomDTO {
   export enum RoomCategory {
     Suit = 1,
     Presidential = 2,
-    Mini = 3
+    Mini = 3,
+    Standard=4
   }
   
   export enum RoomStatus {
     Available = 1,
     Busy = 2,
-    Working = 3,
-    Cleaning = 4
+    Cleaning = 3
   }
 
     export interface RoomDTO
@@ -38,8 +38,7 @@ export interface CreateRoomDTO {
          price :number,
          roomStatus : RoomStatus ,
          category: RoomCategory,
-         roomPhotos:RoomPhotoDTO[],
-         activePhotoIndex?:number;
+         roomPhotos:RoomPhotoDTO[]
     }
 
 

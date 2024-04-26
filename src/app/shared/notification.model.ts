@@ -7,6 +7,7 @@ export interface NotificationDTO {
     notificationId:string
     receiverId:string;
     senderId:string;
+    sendDateTime:Date;
     messageContent:string;
     isSeen:boolean;
     contentId:string;

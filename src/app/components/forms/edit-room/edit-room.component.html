@@ -22,7 +22,6 @@
         <select id="roomStatus" [(ngModel)]="editRoomForm.roomStatus" name="roomStatus" required>
           <option value="Available">Available</option>
           <option value="Busy">Busy</option>
-          <option value="Working">Working</option>
           <option value="Cleaning">Cleaning</option>
         </select>
         <div *ngIf="!editRoomForm.roomStatus" class="text-danger">Room Status is required</div>
@@ -33,6 +32,7 @@
           <option value="Suit">Suit</option>
           <option value="Presidential">Presidential</option>
           <option value="Mini">Mini</option>
+          <option value="Standard">Standard</option>
         </select>
         <div *ngIf="!editRoomForm.category" class="text-danger">Category is required</div>
       </div>

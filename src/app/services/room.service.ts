@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable} from 'rxjs';
 import { CreateRoomDTO,RoomDTO,UpdateRoomDTO } from '../shared/room.model';
 @Injectable({
   providedIn: 'root'
@@ -18,22 +18,9 @@ export class RoomService {
   getRoomsReservation(id:string) {
     return this.httpClient.get<any[]>('https://localhost:7006/api/ReservationRoom/GetRoomsReservation/'+id);
   }
-  createRoom(room: CreateRoomDTO): Observable<any> {
-    const formData = new FormData();
-    formData.append('roomNumber', room.roomNumber.toString());
-    formData.append('capacity', room.capacity ? room.capacity.toString() : '');
-    formData.append('price', room.price.toString());
-    formData.append('roomStatus', room.roomStatus ? room.roomStatus.toString() : '');
-    formData.append('category', room.category ? room.category.toString() : '');
-    if (room.photos) {
-      for (let i = 0; i < room.photos.length; i++) {
-        formData.append('photos', room.photos[i]);
-      }
-    }
-    return this.httpClient.post<any>(this.url+'/AddRoom', formData);
+  createRoom(formData: FormData): Observable<any> {
+    return this.httpClient.post<any>(`${this.url}/AddRoom`, formData);
   }
- 
-  
   updateRoom(id: string, updateRoomDto: UpdateRoomDTO): Observable<any> {
     return this.httpClient.put(`${this.url}/UpdateRoom/${id}`, updateRoomDto);
   }
@@ -44,11 +31,6 @@ export class RoomService {
     return this.httpClient.get<RoomDTO>(this.url+'/GetById/'+id);
   }
   RoomDelete (id:string):Observable<number>{
-    let httpheaders=new HttpHeaders()
-    .set('Content-type','application/Json');
-    let options={
-      headers:httpheaders
-    };
     return this.httpClient.delete<number>(this.url+"/DeleteRoom/"+id);
   }
   updateRoomStatus(id: string, status: number): Observable<any> {

@@ -73,7 +73,6 @@ export class ReservationsComponent {
         this.searchString
       )
       .subscribe((res) => {
-        console.log(res);
         this.reservations = res.reservations;
         this.totalPages = res.totalPages;
       });
@@ -106,7 +105,6 @@ export class ReservationsComponent {
       .updateReservationStatus(reservationId, status)
       .subscribe({
         next: (response) => {
-          console.log('Reservation Status has updated successfully');
           this._toasterService.success('Reservation Status has updated successfully');
           const index = this.reservations.findIndex(
             (reservation: { reservationId: string }) =>
@@ -123,7 +121,6 @@ export class ReservationsComponent {
           }
         },
         error: (error) => {
-          console.error('Error updating Reservation:', error);
           this._toasterService.danger('Error updating reservation');
         },
       });
@@ -144,11 +141,9 @@ export class ReservationsComponent {
       next: (data) => {
         this.cdr.detectChanges();
         this._toasterService.success('Reservation deleted successfully');
-        console.log('Delete successful');
         this.fetchReservations();
       },
       error: (error) => {
-        console.error('There was an error!', error);
         this._toasterService.danger('Something went wrong');
       },
     });
