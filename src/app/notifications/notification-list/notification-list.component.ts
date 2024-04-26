@@ -32,7 +32,7 @@ export class NotificationListComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    console.log('Initializing SignalR connection...');
+    console.log('SignalR connection');
       this.signalRService.startConnection();
       this.signalRService.getConnectionId();
   

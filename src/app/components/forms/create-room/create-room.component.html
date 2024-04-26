@@ -1,55 +1,46 @@
 <div class="container">
   <div class="form-container">
-<form [formGroup]="roomForm" (ngSubmit)="onSubmit()" class="custom-form">
-    <div class="mb-3">
-      <label for="roomNumber" class="form-label">Room Number:</label>
-      <input type="number" class="form-control" id="roomNumber" formControlName="roomNumber">
-      <div *ngIf="roomForm.get('roomNumber')?.invalid && roomForm.get('roomNumber')?.touched">
-        <small class="text-danger">Room Number is required</small>
+    <form [formGroup]="roomForm" (ngSubmit)="onSubmit()" class="custom-form">
+      <div class="mb-3">
+        <label for="roomNumber" class="form-label">Room Number:</label>
+        <input type="number" class="form-control" id="roomNumber" formControlName="roomNumber">
+        <div *ngIf="getError('roomNumber')" class="text-danger">{{ getError('roomNumber') }}</div>
       </div>
-    </div>
-    <div class="mb-3">
-      <label for="capacity" class="form-label">Capacity:</label>
-      <input type="number" class="form-control" id="capacity" formControlName="capacity">
-      <div *ngIf="roomForm.get('capacity')?.invalid && roomForm.get('capacity')?.touched">
-        <small class="text-danger">Capacity is required</small>
+      <div class="mb-3">
+        <label for="capacity" class="form-label">Capacity:</label>
+        <input type="number" class="form-control" id="capacity" formControlName="capacity">
+        <div *ngIf="getError('capacity')" class="text-danger">{{ getError('capacity') }}</div>
       </div>
-    </div>
-    <div class="mb-3">
-      <label for="price" class="form-label">Price:</label>
-      <input type="number" class="form-control" id="price" formControlName="price">
-      <div *ngIf="roomForm.get('price')?.invalid && roomForm.get('price')?.touched">
-        <small class="text-danger">Price is required</small>
+      <div class="mb-3">
+        <label for="price" class="form-label">Price:</label>
+        <input type="number" class="form-control" id="price" formControlName="price">
+        <div *ngIf="getError('price')" class="text-danger">{{ getError('price') }}</div>
       </div>
-    </div>
-    <div class="mb-3">
-      <label for="roomStatus" class="form-label">Room Status:</label>
-      <select class="form-select" id="roomStatus" formControlName="roomStatus">
-        <option value="1">Available</option>
-        <option value="2">Busy</option>
-        <option value="3">Cleaning</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="category" class="form-label">Category:</label>
-      <select class="form-select" id="category" formControlName="category">
-        <option value="1">Suit</option>
-        <option value="2">Presidential</option>
-        <option value="3">Mini</option>
-        <option value="4">Standard</option>
-      </select>
-    </div>
-    <div class="mb-3">
-      <label for="photos" class="form-label">Upload Image:</label>
-      <input type="file" class="form-control" id="photos" multiple (change)="onFileChange($event)">
-      <div *ngIf="roomForm.get('photos')?.invalid && roomForm.get('photos')?.touched">
-         <small class="text-danger">Photos are required</small> 
+      <div class="mb-3">
+        <label for="roomStatus" class="form-label">Room Status:</label>
+        <select class="form-select" id="roomStatus" formControlName="roomStatus">
+          <option value="1">Available</option>
+          <option value="2">Busy</option>
+          <option value="3">Cleaning</option>
+        </select>
       </div>
-    </div>
-    <div class="mb-3">
-      <button type="submit" class="btn btn-primary" [disabled]="!roomForm.valid">Create Room</button>
-    </div>
-  </form>
+      <div class="mb-3">
+        <label for="category" class="form-label">Category:</label>
+        <select class="form-select" id="category" formControlName="category">
+          <option value="1">Suit</option>
+          <option value="2">Presidential</option>
+          <option value="3">Mini</option>
+          <option value="4">Standard</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="photos" class="form-label">Upload Image:</label>
+        <input type="file" class="form-control" id="photos" multiple (change)="onFileChange($event)">
+        <div *ngIf="getError('photos')" class="text-danger">{{ getError('photos') }}</div>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary" [disabled]="!roomForm.valid">Create Room</button>
+      </div>
+    </form>
+  </div>
 </div>
-</div>
-  

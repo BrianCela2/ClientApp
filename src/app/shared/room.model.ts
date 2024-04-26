@@ -38,8 +38,7 @@ export interface CreateRoomDTO {
          price :number,
          roomStatus : RoomStatus ,
          category: RoomCategory,
-         roomPhotos:RoomPhotoDTO[],
-         activePhotoIndex?:number;
+         roomPhotos:RoomPhotoDTO[]
     }
 
 

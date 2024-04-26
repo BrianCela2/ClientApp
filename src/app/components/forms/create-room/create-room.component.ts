@@ -22,9 +22,9 @@ export class CreateRoomComponent implements OnInit {
     private _toasterService: PopupService
   ) {
     this.roomForm = this.formBuilder.group({
-      roomNumber: [null, Validators.required],
-      capacity: [null, Validators.required],
-      price: [null, Validators.required],
+      roomNumber: [null, [Validators.required,Validators.min(1)]],
+      capacity: [null, [Validators.required, Validators.min(1)]], 
+      price: [null, [Validators.required, Validators.min(1)]], 
       roomStatus: [null, Validators.required],
       category: [null, Validators.required],
       photos: [null ,Validators.required]
@@ -77,5 +77,15 @@ export class CreateRoomComponent implements OnInit {
     }
   }
 
-  
+  getError(controlName: string): string {
+    const control = this.roomForm.get(controlName);
+    if (control && control.touched && control.invalid) {
+      if (control.errors?.['required']) {
+        return `${controlName.charAt(0).toUpperCase() + controlName.slice(1)} is required`;
+      } else if (control.errors?.['min']) {
+        return `${controlName.charAt(0).toUpperCase() + controlName.slice(1)} cannot be negative`;
+      }
+    }
+    return '';
+  }
 }

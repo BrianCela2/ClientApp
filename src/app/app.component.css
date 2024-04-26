@@ -10,6 +10,7 @@
   z-index: 1000;
   width: 300px; 
 }
+
 .notification-list {
   list-style-type: none;
   padding: 0;
@@ -26,20 +27,23 @@
 .notification-message {
   font-size: 16px;
   color: #333;
+  max-width: 100%; 
+  overflow-wrap: break-word; 
 }
 
+
 :host {
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .router-outlet {
-margin-top: 100px;
+  margin-top: 100px;
 }
 
 footer {
-background-color: #ffffff;
-text-align: center;
-padding: 10px;
-border-top: 1px solid #ddd;
+  background-color: #ffffff;
+  text-align: center;
+  padding: 10px;
+  border-top: 1px solid #ddd;
 }

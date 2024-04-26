@@ -32,7 +32,6 @@ import { FooterComponent } from './components/footer/footer.component';
 export class AppComponent {
   name = 'ClientApp';
   notifications: NotificationDTO[] = [];
-  unreadCount: number = 0;
   userId: string;
   @ViewChild(NotificationListComponent)notificationList!: NotificationListComponent;
   public ToasterPosition = ToasterPosition;

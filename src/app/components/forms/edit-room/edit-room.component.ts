@@ -1,10 +1,10 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { RoomService } from '../../services/room.service';
+import { RoomService } from '../../../services/room.service';
 import { FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CreateRoomComponent } from '../../components/forms/create-room/create-room.component';
-import { PopupService } from '../../services/popup.service';
+import { CreateRoomComponent } from '../create-room/create-room.component';
+import { PopupService } from '../../../services/popup.service';
 
 @Component({
   selector: 'app-edit-room',
