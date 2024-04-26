@@ -2,7 +2,7 @@
   class=" bg-light position-fixed w-100 z-1 d-flex justify-content-between"
 >
   <navbar class="w-100"></navbar>
-  <app-notification-list class="notifications"></app-notification-list>
+  <app-notification-list class="notifications" *ngIf="isLoggedIn()"></app-notification-list>
 
 </nav>
 

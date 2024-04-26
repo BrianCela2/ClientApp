@@ -47,10 +47,14 @@ export class AppComponent {
     this.updateNotificationView();
   }
 
+
   updateNotificationView(): void {
     if (this.notificationList && this.notificationList.notification) {
               this.notifications = this.notificationList.notification;
         this.cdr.detectChanges();
     }
+  }
+  isLoggedIn(): boolean {
+    return this.authService.isLoggedIn(); 
   }
 }
