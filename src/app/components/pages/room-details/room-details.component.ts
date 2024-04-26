@@ -1,14 +1,14 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RoomService } from '../../services/room.service';
+import { RoomService } from '../../../services/room.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RoomPhotosService } from '../../services/roomphotos.service';
-import { UserRoleService } from '../../services/user-role.service';
-import { AuthService } from '../../services/auth.service';
-import { RoomCategory, RoomDTO, RoomStatus } from '../../shared/room.model';
-import { RoomPhotoDTO } from '../../shared/room-photos.model';
-import { PopupService } from '../../services/popup.service';
+import { RoomPhotosService } from '../../../services/roomphotos.service';
+import { UserRoleService } from '../../../services/user-role.service';
+import { AuthService } from '../../../services/auth.service';
+import { RoomCategory, RoomDTO, RoomStatus } from '../../../shared/room.model';
+import { RoomPhotoDTO } from '../../../shared/room-photos.model';
+import { PopupService } from '../../../services/popup.service';
 @Component({
   selector: 'app-room-details',
   standalone: true,

@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { RoomService } from '../../services/room.service';
+import { RoomService } from '../../../services/room.service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { SortingComponent } from '../../components/tablePagination/sorting/sorting.component';
-import { PaginationComponent } from '../../components/tablePagination/pagination/pagination.component';
-import { RoomDTO } from '../../shared/room.model';
-import { PopupService } from '../../services/popup.service';
+import { SortingComponent } from '../../tablePagination/sorting/sorting.component';
+import { PaginationComponent } from '../../tablePagination/pagination/pagination.component';
+import { RoomDTO } from '../../../shared/room.model';
+import { PopupService } from '../../../services/popup.service';
 
 @Component({
   selector: 'app-room-list',

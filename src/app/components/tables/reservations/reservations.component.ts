@@ -4,7 +4,7 @@ import { ReservationService } from '../../../services/reservation.service';
 import { UserRoleService } from '../../../services/user-role.service';
 import { AuthService } from '../../../services/auth.service';
 import { RoomService } from '../../../services/room.service';
-import { RoomDetailsComponent } from '../../../rooms/room-details/room-details.component';
+import { RoomDetailsComponent } from '../../pages/room-details/room-details.component';
 import { Observable } from 'rxjs';
 import { HotelServicesService } from '../../../services/hotel-services.service';
 import { SortingComponent } from '../../tablePagination/sorting/sorting.component';
