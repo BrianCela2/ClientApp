@@ -61,8 +61,7 @@ export class LoginComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
-          this._toasterService.danger('User doesnt exist');
-
+          this._toasterService.danger('Wrong email or password');
         },
       });
     } else {

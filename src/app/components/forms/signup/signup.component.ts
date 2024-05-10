@@ -50,7 +50,7 @@ export class SignupComponent implements OnInit {
         },
         error: (err) => {
           console.log(err);
-          this._toasterService.danger('Something went wrong. Please try again');
+          this._toasterService.danger('User with that email already exists');
         },
       });
     } else {
